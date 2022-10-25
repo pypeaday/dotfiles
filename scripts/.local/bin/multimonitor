@@ -1,0 +1,19 @@
+#!/bin/bash
+if [ $POLYBAR_BAR == "work" ]; then 
+    turn_off_laptop_screen
+    # start picom
+#    bash $HOME/.config/picom/launch_picom
+    # For no dock but connected to external monitors
+    # xrandr --output HDMI-0 --auto --left-of DP-2 --output DP-2 --auto
+
+    # For being docked at home
+    # xrandr --output DP-1-5 --auto --right-of DP-1-6 --output DP-1-6 --auto
+    #xrandr --output DP-1-1-2 --auto --right-of DP-1-1-3 --output DP-1-1-3 --auto
+
+    xrandr --output DP-1 --auto --right-of DP-2 --output eDP-1 --auto --left-of DP-2
+    bash $HOME/.fehbg
+
+else
+  xrandr --output HDMI-0 --auto --left-of DP-0 --output DP-0 --auto
+fi
+

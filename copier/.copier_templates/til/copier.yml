@@ -1,0 +1,42 @@
+_min_copier_version: v6.0.0b0
+title:
+  type: str
+slug:
+  type: str
+  default: "{{  title.lower().replace(' ', '-')  }}"
+
+body:
+  type: str
+  default: "TODO: Write a description"
+
+tag1:
+  type: str
+  choices:
+    - python
+    - homelab
+    - zfs
+    - linux
+    - kedro
+    - bash
+    - cli
+    - tmux
+    - webdev
+    - vim
+    - catalytic
+    - data
+
+tag2:
+  type: str
+  choices:
+    - python
+    - homelab
+    - zfs
+    - linux
+    - kedro
+    - bash
+    - cli
+    - tmux
+    - webdev
+    - vim
+    - catalytic
+    - data

@@ -1,0 +1,18 @@
+[user]
+    name = Pypeaday 
+    email = pypeaday@pm.me
+
+[credential]
+    helper = store
+
+[core]
+    editor = nvim
+
+[includeIf "gitdir:~/work/"]
+        path = ~/.gitconfig-work
+[includeIf "gitdir:~/personal/"]
+        path = ~/.gitconfig-personal
+[init]
+    defaultBranch = main
+[push]
+    default = current

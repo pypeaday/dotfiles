@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+pushd $DOTFILES
+if [[ $USER == "paynen3" ]]
+then
+    echo "Stowing stuff for work"
+    stow -D work
+    stow work
+else
+    echo "Stowing stuff for home"
+    stow -D personal
+    stow personal
+fi
+
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+    stow -D $folder
+    stow $folder
+done
+# eval ./shortcuts/.local/bin/multimonitor
+eval $HOME/dotfiles/polybar/launch.sh
+
+popd

@@ -1,0 +1,11 @@
+key
+.alias.local
+**/.venv/
+**/.venv3/
+**/.venv2/
+ipython/.ipython/profile_default/history.sqlite
+
+*.sqlite
+
+
+work/.caterpillar/emails

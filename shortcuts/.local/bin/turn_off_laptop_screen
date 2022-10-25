@@ -1,0 +1,3 @@
+#!/bin/bash
+# for work laptop
+xrandr --output eDP-1-1 --off 
