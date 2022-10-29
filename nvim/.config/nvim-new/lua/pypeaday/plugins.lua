@@ -41,6 +41,8 @@ use('wbthomason/packer.nvim') -- Let packer manage itself
 use('tpope/vim-commentary')
 -- use('tpope/vim-repeat')
 use('tpope/vim-surround')
+use('tpope/vim-dispatch')
+use('tpope/vim-repeat')
 -- use('tpope/vim-eunuch') -- Adds :Rename, :SudoWrite
 -- use('tpope/vim-unimpaired') -- Adds [b and other handy mappings
 -- use('tpope/vim-sleuth') -- Indent autodetection with editorconfig support
@@ -55,6 +57,10 @@ use('tpope/vim-surround')
 --     require('user.plugins.projectionist')
 --   end,
 -- })
+--
+use({
+    'jim-at-jibba/ariake-vim-colors',
+})
 
 -- use({
 --   'jessarcher/onedark.nvim',
@@ -147,6 +153,10 @@ use({
 --     require('user.plugins.lualine')
 --   end,
 -- })
+use({
+    'vim-airline/vim-airline',
+    requires = 'vim-airline/vim-airline-themes'
+})
 
 use({
   'kyazdani42/nvim-tree.lua',
@@ -165,10 +175,13 @@ use({
 
 use({
   'vim-test/vim-test',
+  requires = 'nvim-neotest/neotest',
   config = function()
     require('user.plugins.vim-test')
   end,
 })
+
+use({'mgedmin/coverage-highlight.vim'})
 
 -- use({
 --   'voldikss/vim-floaterm',
@@ -176,6 +189,8 @@ use({
 --     require('user.plugins.floaterm')
 --   end,
 -- })
+
+use({ 'ThePrimeagen/harpoon' })
 
 use({
   'nvim-telescope/telescope.nvim',
@@ -193,15 +208,20 @@ use({
 use({
   'nvim-treesitter/nvim-treesitter',
   run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-  -- requires = {
-  --   'nvim-treesitter/playground',
-  --   'nvim-treesitter/nvim-treesitter-textobjects',
-  --   'JoosepAlviste/nvim-ts-context-commentstring',
-  -- },
+  requires = {
+    'nvim-treesitter/playground',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    -- 'JoosepAlviste/nvim-ts-context-commentstring',
+  },
   config = function()
     require('pypeaday.plugins.treesitter')
   end,
 })
+
+-- TODO: explore this to replace my individual black, flake8, etc stuff
+use({ 'sbdchd/neoformat', })
+
+use({'wellle/targets.vim'})
 
 use({
   'tpope/vim-fugitive',
@@ -227,12 +247,18 @@ use({
   'neovim/nvim-lspconfig',
   requires = {
   --   'b0o/schemastore.nvim',
-  --   'folke/lsp-colors.nvim',
+  --
+    'nvim-lua/lsp_extensions.nvim',
+    'folke/lsp-colors.nvim',
   },
   config = function()
     require('pypeaday.plugins.lspconfig')
   end,
 })
+
+use({'glepnir/lspsaga.nvim'})
+
+use({'itchyny/vim-gitbranch'})
 
 -- use({
 --   'weilbith/nvim-code-action-menu',
@@ -267,15 +293,18 @@ use({
 use({
   'hrsh7th/nvim-cmp',
   requires = {
-    'L3MON4D3/LuaSnip',
+    'SirVer/ultisnips',
+    'quangnguyen30192/cmp-nvim-ultisnips',
+    'honza/vim-snippets',
+    -- 'L3MON4D3/LuaSnip',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lua',
-    'jessarcher/cmp-path',
     'onsails/lspkind-nvim',
-    'saadparwaiz1/cmp_luasnip',
+    'f3fora/cmp-spell',
+    -- 'saadparwaiz1/cmp_luasnip',
   },
   config = function()
     require('pypeaday.plugins.cmp')
@@ -292,7 +321,33 @@ use({
 --   end,
 -- })
 
+-- LaTex
+use ({'lervag/vimtex'})
+
+-- Python Specific
+-- Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+use ({
+    'heavenshell/vim-pydocstring',
+    run = 'make install',
+    ft = {'python'},
+})
+
 -- Experimental
+
+use({'godlygeek/tabular'})
+
+use({'waylonwalker/Telegraph.nvim'})
+
+use({'laytan/cloak.nvim'})
+
+use({'APZelos/blamer.nvim'})
+
+use({'lfv89/vim-interestingwords'})
+
+use({
+    'amrbashir/nvim-docs-view', 
+    cmd={'DocsViewToggle'},
+})
 
 -- use({
 --   'luukvbaal/stabilize.nvim',
@@ -330,13 +385,18 @@ use({
 --   end,
 -- })
 
--- use({
---   'folke/trouble.nvim',
---   requires = 'kyazdani42/nvim-web-devicons',
---   config = function()
---     require('trouble').setup()
---   end,
--- })
+use({
+  'folke/trouble.nvim',
+  requires = 'kyazdani42/nvim-web-devicons',
+  config = function()
+    require('trouble').setup()
+  end,
+})
+
+-- :TZNarrow for focusing only on visual block -> useful for driving meetings
+use({'Pocco81/TrueZen.nvim'})
+
+use({'AndrewRadev/diffurcate.vim'})
 
 use({
   'antoinemadec/FixCursorHold.nvim',
@@ -344,6 +404,8 @@ use({
     vim.g.cursorhold_updatetime = 100
   end,
 })
+
+use({'ThePrimeagen/vim-be-good'})
 
 -- Automatically install plugins on first run
 if packer_bootstrap then
