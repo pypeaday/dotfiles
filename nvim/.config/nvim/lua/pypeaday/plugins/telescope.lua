@@ -58,7 +58,7 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 --require("telescope").load_extension("live_grep_args")
 
-nnoremap("gen", "lua require'telescope.builtin'.find_files({cwd=~/.config/nvim<CR>})")
+nnoremap("gen", "<cmd>Telescope find_files cwd=~/.config/nvim <CR>")
 nnoremap("<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>")  
 nnoremap("<Leader>pf", "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>")  
 nnoremap("<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")  
