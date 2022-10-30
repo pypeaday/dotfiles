@@ -8,6 +8,41 @@
 --"                           |___/                       
 --"―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
 
+set rtp+=~/.local/share/nvim/plugged/fzf/bin/fzf
+
+-- General VIM
+-- show line numbers
+set number relativenumber
+
+-- set tabs to have 4 spaces
+set ts=4
+
+-- indent when moving to the next line while writing code
+set autoindent
+
+-- expand tabs into spaces
+set expandtab
+
+-- when using the >> or << commands, shift lines by 4 spaces
+set shiftwidth=4
+
+-- show a visual line under the cursor's current line
+set cursorline
+
+-- show the matching part of the pair for [] {} and ()
+set showmatch
+
+-- cmp
+set completeopt=menu,menuone,noselect
+
+-- Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+syntax enable
+set statusline+=%#warningmsg#
+set statusline+=%*
+set laststatus=2
 set scrolloff=30
 set nowrap
 set colorcolumn=88
@@ -23,6 +58,7 @@ set wildignore+=**/.venv/*
 
 set clipboard+=unnamedplus
 
+set runtimepath+=~/.config/nvim/my-snippets/UltiSnips/
 let g:python_lint_config = '~/pylint.rc'
 let g:python3_host_prog = '~/dotfiles/.venv/nvim/bin/python'
 
@@ -51,7 +87,6 @@ let g:vsnip_filetypes = {}
 
 -- Try ultisnip
 -- Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
-set runtimepath+=~/.config/nvim/my-snippets/UltiSnips/
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-e>"
 let g:UltiSnipsJumpBackwardTrigger="<C-i>"
@@ -60,16 +95,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-i>"
 let g:UltiSnipsEditSplit="vertical"
 
 -- Add fzf to vim
-set rtp+=~/.local/share/nvim/plugged/fzf/bin/fzf
-
--- Enable folding
-set foldmethod=indent
-set foldlevel=99
-
-syntax enable
-set statusline+=%#warningmsg#
-set statusline+=%*
-set laststatus=2
 
 let g:airline_theme="night_owl"
 let g:airline_powerline_fonts = 1
@@ -77,31 +102,6 @@ let g:airline_powerline_fonts = 1
 -- doq for pydocstring
 let g:pydocstring_formatter='google'
 let g:pydocstring_doq_path = '$HOME/.local/bin/doq'
-
--- General VIM
--- show line numbers
-set number relativenumber
-
--- set tabs to have 4 spaces
-set ts=4
-
--- indent when moving to the next line while writing code
-set autoindent
-
--- expand tabs into spaces
-set expandtab
-
--- when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
-
--- show a visual line under the cursor's current line
-set cursorline
-
--- show the matching part of the pair for [] {} and ()
-set showmatch
-
--- cmp
-set completeopt=menu,menuone,noselect
 
 -- set python style line folding
 let g:vim_markdown_folding_style_pythonic = 1
