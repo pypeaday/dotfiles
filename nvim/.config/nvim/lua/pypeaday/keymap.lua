@@ -104,15 +104,17 @@ vnoremap("<Leader>Y", "gg'+yG")
 -- " edit things
 -- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
 -- " sourceconfig 
-nnoremap("gsv ", "<cmd>source ~/.config/nvim/init.vim<CR>") 
+nnoremap("gsv", "<cmd>source ~/.config/nvim/init.vim<CR>") 
 
 -- " source current file
-nnoremap(" gso", "<cmd>source %<CR>")
+nnoremap("gso", "<cmd>source %<CR>")
 -- " edit nvim dotfiles
-nnoremap("gek", "<cmd>e ~/.config/nvim/keymap.vim<CR>")  
-nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/lsp-config.lua<CR>")  
-nnoremap("gep", "<cmd>e ~/.config/nvim/plugins.vim<CR>")  
-nnoremap("ges", "<cmd>e ~/.config/nvim/settings.vim<CR>")  
+nnoremap("gek", "<cmd>e ~/.config/nvim/lua/pypeaday/keymap.lua<CR>")  
+nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/lua/pypeaday/plugins/lspconfig.lua<CR>")  
+nnoremap("gep", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins.lua<CR>")  
+nnoremap("ges", "<cmd>e ~/.config/nvim/lua/pypeaday/settings.lua<CR>")  
+nnoremap("geo", "<cmd>e ~/.config/nvim/lua/pypeaday/options.lua<CR>")  
+nnoremap("gem", "<cmd>e ~/.config/nvim/lua/pypeaday/misc.lua<CR>")  
 
 -- " edit tmuux config
 nnoremap("get", "<cmd>e ~/.tmux.conf.local<CR>")
