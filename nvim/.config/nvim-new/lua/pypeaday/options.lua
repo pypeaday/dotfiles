@@ -1,71 +1,8 @@
--- like my settings file
---
---"           _   _   _                       _           
---"  ___  ___| |_| |_(_)_ __   __ _ _____   _(_)_ __ ___  
---" / __|/ _ \ __| __| | '_ \ / _` / __\ \ / / | '_ ` _ \ 
---" \__ \  __/ |_| |_| | | | | (_| \__ \\ V /| | | | | | |
---" |___/\___|\__|\__|_|_| |_|\__, |___(_)_/ |_|_| |_| |_|
---"                           |___/                       
---"―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
-
-set rtp+=~/.local/share/nvim/plugged/fzf/bin/fzf
-
--- General VIM
--- show line numbers
-set number relativenumber
-
--- set tabs to have 4 spaces
-set ts=4
-
--- indent when moving to the next line while writing code
-set autoindent
-
--- expand tabs into spaces
-set expandtab
-
--- when using the >> or << commands, shift lines by 4 spaces
-set shiftwidth=4
-
--- show a visual line under the cursor's current line
-set cursorline
-
--- show the matching part of the pair for [] {} and ()
-set showmatch
-
--- cmp
-set completeopt=menu,menuone,noselect
-
--- Enable folding
-set foldmethod=indent
-set foldlevel=99
-
-syntax enable
-set statusline+=%#warningmsg#
-set statusline+=%*
-set laststatus=2
-set scrolloff=30
-set nowrap
-set colorcolumn=88
-set list
-set listchars=tab:▸\ ,trail:·
-
--- Ignore files
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/.git/*
-set wildignore+=**/.venv/*
-
-set clipboard+=unnamedplus
-
-set runtimepath+=~/.config/nvim/my-snippets/UltiSnips/
+vim.cmd([[
 let g:python_lint_config = '~/pylint.rc'
 let g:python3_host_prog = '~/dotfiles/.venv/nvim/bin/python'
-
---LSP
---flake8
+" flake8
 let g:flake8_cmd='flake8'
- --  show (default)
 let g:flake8_show_quickfix=1 
 let g:flake8_quickfix_location="top-left"
 let g:flake8_quickfix_height=3
@@ -74,6 +11,17 @@ let g:flake8_warning_marker='WW'
 let g:flake8_pyflake_marker=''   
 let g:flake8_complexity_marker=''
 let g:flake8_naming_marker=''   
+
+let g:pydocstring_formatter='google'
+let g:pydocstring_doq_path = '$HOME/.local/bin/doq'
+
+let g:vim_markdown_folding_style_pythonic = 1
+let g:markdown_fenced_languages = ['python', 'bash=sh', 'json', 'yaml']
+let g:SimpylFold_docstring_preview=1
+
+let g:indent_guides_enable_on_vim_startup = 1
+    ]])
+
 
 
 
@@ -94,26 +42,14 @@ let g:UltiSnipsJumpBackwardTrigger="<C-i>"
 -- If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
--- Add fzf to vim
-
-let g:airline_theme="night_owl"
-let g:airline_powerline_fonts = 1
 
 -- doq for pydocstring
-let g:pydocstring_formatter='google'
-let g:pydocstring_doq_path = '$HOME/.local/bin/doq'
 
 -- set python style line folding
-let g:vim_markdown_folding_style_pythonic = 1
 
 -- syntax
-let g:markdown_fenced_languages = ['python', 'bash=sh', 'json', 'yaml']
 
 -- show docstring for folded code
-let g:SimpylFold_docstring_preview=1
-
--- indent guide
-let g:indent_guides_enable_on_vim_startup = 1
 
 
 -- nerdtree
@@ -147,22 +83,8 @@ let g:vimtex_compiler_method = 'latexmk'
 -- following line. The default is usually fine and is the symbol "\".
 let maplocalleader = ","
 
--- testing
-let test#python#runner = 'pytest'
-let test#python#pytest#options = "--color=yes"
-let g:ultest_use_pty = 1
-
 
 -- not for me
 let g:loaded_ruby_provider = 0
 let g:loaded_perl_provider = 0
 
--- git blame (git lens)
-let g:blamer_enabled = 1
-let g:blamer_prefix = ' > '
-let g:blamer_show_in_visual_modes = 0
-let g:blamer_show_in_insert_modes = 0
-let g:blamer_delay = 500
--- Available options: <author>, <author-mail>, <author-time>, <committer>, <committer-mail>, <committer-time>, <summary>, <commit-short>, <commit-long>
-let g:blamer_template = '<committer>, <committer-time>, <summary>'
-let g:blamer_relative_time = 0 

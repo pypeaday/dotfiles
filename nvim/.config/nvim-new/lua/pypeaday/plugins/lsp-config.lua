@@ -1,6 +1,10 @@
-local function on_attach()
-end
+local nnoremap = require('pypeaday.keymap_function').nnoremap
+local util = require('lspconfig.util')
 
+vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
 local border = {
       {"🭽", "FloatBorder"},
@@ -19,7 +23,73 @@ local handlers =  {
   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
 }
 
-require 'lspconfig.configs'.kedro = {
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    source = true,
+    focus = false,
+    format = function(diagnostic)
+      if diagnostic.user_data ~= nil and diagnostic.user_data.lsp.code ~= nil then
+        return string.format('%s: %s', diagnostic.user_data.lsp.code, diagnostic.message)
+      end
+      return diagnostic.message
+    end,
+  },
+})
+
+local on_attach = function(_, bufnr)
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- " nnoremap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
+    nnoremap("<silent> (( ", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>")
+    nnoremap("<silent> )) ", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>")
+
+    nnoremap("<leader>vd", "<cmd>lua vim.lsp.buf.definition()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vh", "<cmd>lua vim.lsp.buf.hover()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vsh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", { buffer = bufnr })
+    -- nnoremap("<leader>vrr", "<cmd>lua vim.lsp.buf.references()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vrr", ":Telescope lsp_references<CR>", { buffer = bufnr })
+    nnoremap("<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", { buffer = bufnr })
+    nnoremap("<leader>vca", "<cmd>lua vim.lsp.buf.code_action()<CR>", { buffer = bufnr })
+    -- " show_line_diagnostics deprecated for open_float
+    nnoremap("<leader>vsd", " vim.diagnostic.open_float()<CR>  ", { buffer = bufnr })
+    nnoremap("<leader>vsl", "<cmd> lua vim.diagnostic.setloclist({open=false})<CR>", { buffer = bufnr })
+    nnoremap("<leader>vn", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { buffer = bufnr })
+end
+
+-- nvim-cmp supports additional completion capabilities
+local capabilities = capabilities
+
+equire('lspconfig').bashls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+require('lspconfig').dockerls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+require('lspconfig').html.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+
+
+require('lspconfig').jsonls.setup({
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    json = {
+      schemas = require('schemastore').json.schemas(),
+    },
+  },
+})
+
+require('lspconfig.configs').kedro = {
     default_config = {
         cmd = {"kedro-lsp"};
         filetypes = {"python"};
@@ -31,13 +101,13 @@ require 'lspconfig.configs'.kedro = {
 
 require'lspconfig'.kedro.setup{
         on_attach=on_attach,
-        -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    }
+        capabilities = capabilities,
+}
 
 
 require'lspconfig'.pylsp.setup{
         enable = true,
-        -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities,
         handlers=handlers,
         settings = {
             pylsp = {
@@ -61,26 +131,16 @@ require'lspconfig'.pylsp.setup{
         on_attach = on_attach
     }
 
--- require'lspconfig'.jedi_language_server.setup{
---         on_attach=on_attach,
---         capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
---     }
-
-require'lspconfig'.bashls.setup{on_attach=on_attach, filetypes={"sh"},
-        handlers=handlers,
-        -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}
-
-require'lspconfig'.jsonls.setup{on_attach=on_attach,
-        handlers=handlers,
-        -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-}
+require'lspconfig'.jedi_language_server.setup{
+        on_attach=on_attach,
+        capabilities = capabilities,
+    }
 
 require'lspconfig'.yamlls.setup{
     on_attach=on_attach,
     handlers=handlers,
     filetypes={"yml", "yaml"},
-    -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
     settings = {
         yaml = {
             format = {enable = true},
@@ -130,6 +190,7 @@ require'lspconfig'.yamlls.setup{
         }
     }
 }
+
 require('lspconfig').texlab.setup{
     cmd = {"texlab"},
     handlers=handlers,
@@ -137,9 +198,7 @@ require('lspconfig').texlab.setup{
     settings = {
         texlab = {
             rootDirectory = nil,
-            --      ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
             build = _G.TeXMagicBuildConfig,
-            --      ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑
             forwardSearch = {
                 executable = "evince",
                 args = {"%p"}
@@ -152,5 +211,6 @@ require('lspconfig').texlab.setup{
 require('lspconfig').terraformls.setup{
     handlers=handlers,
     on_attach=on_attach,
-    -- capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
+
 }
