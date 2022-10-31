@@ -5,6 +5,8 @@
 -- let g:NERDTreeExtensionHighlightColor['py'] = "689FB6"
 -- vim.g.nvim_tree_indent_markers = 1
 -- vim.g.nvim_tree_git_hl = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 require('nvim-tree').setup({
   git = {
@@ -15,7 +17,7 @@ require('nvim-tree').setup({
     group_empty = true,
     icons = {
       show = {
-        folder_arrow = false,
+        folder_arrow = true,
       },
     },
     indent_markers = {
