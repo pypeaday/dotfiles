@@ -175,17 +175,18 @@ use({
 --   end,
 -- })
 
--- use({
---   'nvim-lualine/lualine.nvim',
---   requires = 'kyazdani42/nvim-web-devicons',
---   config = function()
---     require('user.plugins.lualine')
---   end,
--- })
 use({
-    'vim-airline/vim-airline',
-    requires = 'vim-airline/vim-airline-themes'
+  'nvim-lualine/lualine.nvim',
+  requires = 'kyazdani42/nvim-web-devicons',
+  config = function()
+    require('pypeaday.plugins.lualine')
+  end,
 })
+
+-- use({
+--     'vim-airline/vim-airline',
+--     requires = 'vim-airline/vim-airline-themes'
+-- })
 
 use({
   'kyazdani42/nvim-tree.lua',
