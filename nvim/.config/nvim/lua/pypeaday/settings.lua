@@ -45,7 +45,7 @@ vim.cmd(":set scrolloff=30")
 vim.cmd(":set nowrap")
 vim.cmd(":set colorcolumn=88")
 vim.cmd(":set list")
-vim.cmd(":set listchars=tab:▸\ ,trail:·")
+-- vim.cmd(":set listchars=tab:▸\ ,trail:·")
 
 -- Ignore files
 vim.cmd(":set wildignore+=*.pyc")
