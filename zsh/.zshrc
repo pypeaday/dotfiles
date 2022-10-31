@@ -14,7 +14,8 @@ export PATH="$APP_IMAGE_ROOT:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # make sure npm packages are on path
-export NPM_PACKAGES="$HOME/.local/.npm-global"
+export NPM_PACKAGES_ROOT="$HOME/.local/.npm-global"
+export NPM_PACKAGES="$NPM_PACKAGES_ROOT/bin"
 export PATH="$NPM_PACKAGES:$PATH"
 
 # make sure brew is on path
