@@ -104,7 +104,7 @@ vnoremap("<Leader>Y", "gg'+yG")
 -- " edit things
 -- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
 -- " sourceconfig 
-nnoremap("gsv", "<cmd>source ~/.config/nvim/init.vim<CR>") 
+nnoremap("gsv", "<cmd>luafile ~/.config/nvim/init.lua<CR>") 
 
 -- " source current file
 nnoremap("gso", "<cmd>source %<CR>")
