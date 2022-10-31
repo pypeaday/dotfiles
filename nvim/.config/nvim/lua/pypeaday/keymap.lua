@@ -110,7 +110,7 @@ nnoremap("gsv", "<cmd>luafile ~/.config/nvim/init.lua<CR>")
 nnoremap("gso", "<cmd>source %<CR>")
 -- " edit nvim dotfiles
 nnoremap("gek", "<cmd>e ~/.config/nvim/lua/pypeaday/keymap.lua<CR>")  
-nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/lua/pypeaday/plugins/lspconfig.lua<CR>")  
+nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins/lspconfig.lua<CR>")  
 nnoremap("gep", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins.lua<CR>")  
 nnoremap("ges", "<cmd>e ~/.config/nvim/lua/pypeaday/settings.lua<CR>")  
 nnoremap("geo", "<cmd>e ~/.config/nvim/lua/pypeaday/options.lua<CR>")  
