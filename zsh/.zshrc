@@ -142,6 +142,7 @@ eval "typeset -U path"
 # motd
 hello() { clear && ~/dotfiles/scripts/login.sh }
 bindkey -s '^k' 'hello \n'
+bindkey -s '^l' 'clear \n'
 
 hello \n
 
