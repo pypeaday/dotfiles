@@ -448,7 +448,7 @@ bind C-n popup -E ~/.local/bin/ta
 bind C-k display-popup -h 95% -w 95% -d '#{pane_current_path}' -E 'gitui'
 bind C-p display-popup -E -h 60% -w 60% "tmux new-session -A -s prompt 'cd && zsh'"
 # /* todo */
-bind C-t display-popup -E -h 95% -w 95%  "tmux new-session -A -s todos 'cd $HOME/$STOW_FOLDERS/todos  && zsh'"
+bind C-t display-popup -E -h 95% -w 95%  "tmux new-session -A -s todos 'cd $HOME/$WHEREAMI/todos  && zsh'"
 bind-key -n M-t if-shell -F '#{==:#{pane_start_command},todo}' {kill-pane} {split-window -bf -l 10 -c '#{pane_current_path}' "todo"}
 
 # overwrite .tmux.conf binding
