@@ -20,6 +20,8 @@ elif [[ "$template" = "bible-project" ]]; then
     save_dir="$HOME/personal/pype.dev/pages/bible-project/"
 elif [[ "$template" = "faith" ]]; then
     save_dir="$HOME/personal/pype.dev/pages/faith/"
+elif [[ "$template" = "olivet-lyrics" ]]; then
+    save_dir="$HOME/personal/olivet-davinci-resolve-automation/lyrics/01-raw/"
 else
     save_dir="."
 
