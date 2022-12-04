@@ -292,7 +292,7 @@ use({
     'hrsh7th/cmp-nvim-lua',
     'onsails/lspkind-nvim',
     'f3fora/cmp-spell',
-    -- 'saadparwaiz1/cmp_luasnip',
+    'saadparwaiz1/cmp_luasnip',
   },
   config = function()
     require('pypeaday.plugins.cmp')
