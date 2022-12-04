@@ -12,8 +12,6 @@ vim.cmd([[
     let g:flake8_complexity_marker=''
     let g:flake8_naming_marker=''   
 
-    let g:pydocstring_formatter='google'
-
     let g:vim_markdown_folding_style_pythonic = 1
     let g:markdown_fenced_languages = ['python', 'bash=sh', 'json', 'yaml']
     let g:SimpylFold_docstring_preview=1
