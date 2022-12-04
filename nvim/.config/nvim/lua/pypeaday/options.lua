@@ -13,7 +13,6 @@ vim.cmd([[
     let g:flake8_naming_marker=''   
 
     let g:pydocstring_formatter='google'
-    let g:pydocstring_doq_path = '$HOME/.local/bin/doq'
 
     let g:vim_markdown_folding_style_pythonic = 1
     let g:markdown_fenced_languages = ['python', 'bash=sh', 'json', 'yaml']
