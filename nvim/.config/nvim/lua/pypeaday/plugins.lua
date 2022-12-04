@@ -318,11 +318,13 @@ use ({
 })
 
 -- Python Specific
--- Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 use ({
     'heavenshell/vim-pydocstring',
     run = 'make install',
     ft = {'python'},
+    config = function()
+        require('pypeaday.plugins.vim-pydocstring')
+    end,
 })
 
 -- Experimental
