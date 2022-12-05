@@ -10,7 +10,7 @@ There is a lot of overlap but also some key distinctions -> see notes on each to
 * i3-gaps (work: Tiling window manager)
 * pop_os! 22.04 (home: OS and DE)
 * picom (work: compositor for i3 )
-* OBS (streaming/virtual cam)
+* OBS (streaming/virtual cam, note: I use the `snap` since virtual-cam support seems broken in the .deb and flatpak on Pop_OS! 22.04... see [install instructions](https://snapcraft.io/obs-studio))
 * polybar (work: productivity tool bar)
 * stow (dotfiles management)
 * starship (beautiful prompt)

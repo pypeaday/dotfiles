@@ -60,64 +60,12 @@ use('tpope/vim-repeat')
 --
 
 use({
-    'jim-at-jibba/ariake-vim-colors',
-    config = function()
-        vim.cmd("set termguicolors")
-        vim.cmd("colorscheme ariake")
-	
-        -- Transparency
-        vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
-	-- comments had big blocks like visual selection - turn it off
-        vim.cmd [[hi clear Comment]]
- 	-- need to set fg for comments after turning off the weird highlights
-        vim.cmd [[hi Comment ctermbg=NONE guifg=gray ctermfg=gray]]
-	-- Had annoying function highlighting in python
-        vim.cmd [[hi clear Function]]
-        vim.cmd [[hi LineNR guibg=None guifg=gray ctermfg=gray]]
-        vim.cmd [[hi clear SignColumn ]]
-        vim.cmd [[hi ColorColumn ctermbg=darkgrey guibg=darkgrey]]
-
-        -- vim.cmd[[hi FoldColumn guibg=blue guifg=white ctermbg=red ctermfg=black]]  -- code folds
-        vim.cmd [[hi Folded ctermfg=darkgray]]
-        vim.cmd [[hi clear CursorLine]]
-        vim.cmd [[hi CursorLine guifg=none guibg=black ]]
-        vim.cmd [[hi Search guifg=red guibg=none ]]
-        vim.cmd [[hi TSConstant  guifg=lightmagenta ]]
-
-        -- for windows
-        vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=None]])
-        vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=purple guibg=None]])
-        vim.cmd([[hi Blamer guifg=lightgray]])	
-    end,
+    "catppuccin/nvim",
+  config = function()
+    require('pypeaday.plugins.catppuccin')
+  end,
 })
 
--- use({
---   'jessarcher/onedark.nvim',
---   config = function()
---     vim.cmd('colorscheme onedark')
-
---     -- Hide the characters in FloatBorder
---     vim.api.nvim_set_hl(0, 'FloatBorder', {
---       fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
---       bg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
---     })
-
---     -- Make the StatusLineNonText background the same as StatusLine
---     vim.api.nvim_set_hl(0, 'StatusLineNonText', {
---       fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
---       bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
---     })
-
---     -- Hide the characters in CursorLineBg
---     vim.api.nvim_set_hl(0, 'CursorLineBg', {
---       fg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
---       bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
---     })
-
---     vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
---     vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = '#2F313C' })
---   end,
--- })
 
 -- use({
 --   'tommcdo/vim-lion',
@@ -267,15 +215,15 @@ use({
 use({
   'lewis6991/gitsigns.nvim',
   requires = 'nvim-lua/plenary.nvim',
-  -- config = function()
-  --   require('gitsigns').setup({
-  --     sign_priority = 20,
-  --     on_attach = function(bufnr)
-  --       vim.keymap.set('n', ']h', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, buffer = bufnr })
-  --       vim.keymap.set('n', '[h', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, buffer = bufnr })
-  --     end,
-  --   })
-  -- end,
+  config = function()
+    require('gitsigns').setup({
+      -- sign_priority = 20,
+      -- on_attach = function(bufnr)
+      --   vim.keymap.set('n', ']h', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, buffer = bufnr })
+      --   vim.keymap.set('n', '[h', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true, buffer = bufnr })
+      -- end,
+    })
+  end,
 })
 
 use({
@@ -344,7 +292,7 @@ use({
     'hrsh7th/cmp-nvim-lua',
     'onsails/lspkind-nvim',
     'f3fora/cmp-spell',
-    -- 'saadparwaiz1/cmp_luasnip',
+    'saadparwaiz1/cmp_luasnip',
   },
   config = function()
     require('pypeaday.plugins.cmp')
@@ -362,14 +310,21 @@ use({
 -- })
 
 -- LaTex
-use ({'lervag/vimtex'})
+use ({
+    'lervag/vimtex',
+    config = function()
+        require('pypeaday.plugins.vimtex')
+    end,
+})
 
 -- Python Specific
--- Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 use ({
     'heavenshell/vim-pydocstring',
     run = 'make install',
     ft = {'python'},
+    config = function()
+        require('pypeaday.plugins.vim-pydocstring')
+    end,
 })
 
 -- Experimental
@@ -429,7 +384,7 @@ use({
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
-    require('trouble').setup()
+    require('pypeaday.plugins.trouble')
   end,
 })
 

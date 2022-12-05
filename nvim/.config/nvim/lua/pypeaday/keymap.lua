@@ -31,6 +31,9 @@ nnoremap("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 nnoremap("J", "mzJ`z")
 
+nnoremap("<c-d>","<c-d>zz")
+nnoremap("<c-u","<c-u>zz")
+
 -- " Undo Breakpoints
 inoremap(",", ",<c-g>u") 
 inoremap(".", ".<c-g>u") 
