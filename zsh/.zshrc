@@ -21,7 +21,7 @@ export PATH="$NPM_PACKAGES:$PATH"
 # make sure brew is on path
 
 export PYFLYBY_PATH="$HOME/dotfiles/pyflyby/.pyflyby"
-export STOW_FOLDERS="$STOW_FOLDERS,bash,direnv,git,nvim,tmux,starship,ipython,pip,i3,scripts,polybar,picom,gitui,visidata,rofi,qutebrowser,copier"
+export STOW_FOLDERS="$WHEREAMI,bash,direnv,git,nvim,tmux,starship,ipython,pip,i3,scripts,polybar,picom,gitui,visidata,rofi,qutebrowser,copier"
 export EDITOR=nvim
 
 # use pyenv global python for pipx
@@ -142,6 +142,7 @@ eval "typeset -U path"
 # motd
 hello() { clear && ~/dotfiles/scripts/login.sh }
 bindkey -s '^k' 'hello \n'
+bindkey -s '^l' 'clear \n'
 
 hello \n
 
