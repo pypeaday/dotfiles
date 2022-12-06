@@ -336,14 +336,14 @@ use({
     cmd={'DocsViewToggle'},
 })
 
-
--- use({
---   'danymat/neogen',
---   config = function()
---     require('neogen').setup({})
---   end,
---   requires = 'nvim-treesitter/nvim-treesitter',
--- })
+-- TODO: setup neogen for python docstring generation
+use({
+  'danymat/neogen',
+  config = function()
+    require('neogen').setup({})
+  end,
+  requires = 'nvim-treesitter/nvim-treesitter',
+})
 
 use({
   'sheerun/vim-polyglot',
