@@ -1,4 +1,5 @@
 vim.cmd([[
+    " TODO: make this a flake8 config?
     let g:python_lint_config = '~/pylint.rc'
     let g:python3_host_prog = '~/dotfiles/.venv/nvim/bin/python'
     " flake8
