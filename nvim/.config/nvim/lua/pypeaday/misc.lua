@@ -13,7 +13,7 @@ vim.cmd([[
     augroup pypeaday
         autocmd!
         " remove trailing whitespace before python autocmd to keep newline at end of file
-        autocmd bufwritepost * :%s/\s\+$//e
+        " autocmd bufwritepost * :%s/\s\+$//e
         "-- autocmd BufWritePost *.py call flake8#Flake8()
         autocmd bufwritepost *.py execute 'PyPostSave'
         autocmd bufwritepost .tmux.conf execute ':!tmux source-file %'
