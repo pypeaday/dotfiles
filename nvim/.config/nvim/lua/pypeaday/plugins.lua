@@ -299,15 +299,6 @@ use({
   end,
 })
 
--- use({
---   'phpactor/phpactor',
---   branch = 'master',
---   ft = 'php',
---   run = 'composer install --no-dev -o',
---   config = function()
---     require('user.plugins.phpactor')
---   end,
--- })
 
 -- LaTex
 use ({
@@ -343,13 +334,6 @@ use({
     'amrbashir/nvim-docs-view', 
     cmd={'DocsViewToggle'},
 })
-
--- use({
---   'luukvbaal/stabilize.nvim',
---   config = function()
---     require('stabilize').setup()
---   end,
--- })
 
 -- use({
 --   'glepnir/dashboard-nvim',
