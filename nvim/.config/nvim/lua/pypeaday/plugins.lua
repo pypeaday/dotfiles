@@ -336,12 +336,6 @@ use({
     cmd={'DocsViewToggle'},
 })
 
--- use({
---   'glepnir/dashboard-nvim',
---   config = function()
---     require('user.plugins.dashboard')
---   end,
--- })
 
 -- use({
 --   'danymat/neogen',
@@ -354,16 +348,6 @@ use({
 use({
   'sheerun/vim-polyglot',
 })
-
--- Rename in a popup window
--- use({
---   'hood/popui.nvim',
---   requires = 'RishabhRD/popfix',
---   config = function()
---     vim.ui.select = require('popui.ui-overrider')
---     vim.ui.input = require('popui.input-overrider')
---   end,
--- })
 
 use({
   'folke/trouble.nvim',
