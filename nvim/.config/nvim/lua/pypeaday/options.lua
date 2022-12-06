@@ -45,4 +45,9 @@ vim.cmd([[
     let g:loaded_ruby_provider = 0
     let g:loaded_perl_provider = 0
 
+    " vim-docstring for python
+    let g:pydocstring_doq_path='$HOME/.local/bin/doq'
+    let g:pydocstring_templates_path = '$HOME/dotfiles/doq/'
+    "let g:pydocstring_formatter = 'numpy'
+
 ]])
