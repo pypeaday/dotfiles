@@ -309,13 +309,14 @@ use ({
 })
 
 -- Python Specific
+-- settings in options.lua for now
 use ({
     'heavenshell/vim-pydocstring',
     run = 'make install',
     ft = {'python'},
-    config = function()
-        require('pypeaday.plugins.vim-pydocstring')
-    end,
+    -- config = function()
+    --     require('pypeaday.plugins.vim-pydocstring')
+    -- end,
 })
 
 -- Experimental
