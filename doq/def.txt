@@ -2,7 +2,7 @@
 {% if params %}
 Args:
 {%- for p in params %}
-    {{ p.argument }}: Description of {{ p.argument }}.{% endif -%}{% if p.default %} Default to {{ p.default }}{% endif -%}
+    {{ p.argument }}: Description of {{ p.argument }}.{% if p.default %} Default to {{ p.default }}{% endif -%}
 {% endfor %}
 {% endif -%}
 {% if return_type %}
