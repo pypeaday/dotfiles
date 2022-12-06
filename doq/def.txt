@@ -5,10 +5,6 @@ Args:
     {{ p.argument }}: Description of {{ p.argument }}.{% if p.default %} Default to {{ p.default }}{% endif -%}
 {% endfor %}
 {% endif -%}
-{% if return_type %}
-Returns:
-    {{ return_type }}: Description of return value
-{% endif -%}
 {% if yields %}
 Yields:
 {%- for y in yields %}
