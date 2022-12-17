@@ -15,11 +15,10 @@ echo "Syncing nic@hogwarts:tank/nas!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/nas tank/encrypted/nas
 
 echo "Syncing nic@hogwarts:tank/vms!" >> /home/nic/mycron.log
-syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
+syncoid --skip-parent --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
 
 echo "Syncing nic@hogwarts:tank/10Fold!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/10Fold tank/encrypted/10Fold
 
 echo "Syncing nic@hogwarts:tank/docker!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/docker tank/encrypted/docker
-
