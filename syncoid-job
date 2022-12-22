@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # echo "Syncing nic@hogwarts:tank/nas!" >> /home/nic/mycron.log
-syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/nas tank/encrypted/nas
+syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/nas tank/encrypted/nas
 
 # echo "Syncing nic@hogwarts:tank/vms!" >> /home/nic/mycron.log
 syncoid --skip-parent --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
