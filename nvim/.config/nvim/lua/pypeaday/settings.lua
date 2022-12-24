@@ -6,54 +6,47 @@
 --" |___/\___|\__|\__|_|_| |_|\__, |___(_)_/ |_|_| |_| |_|
 --"                           |___/                       
 --"―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
-vim.cmd(":set rtp+=~/.local/share/nvim/plugged/fzf/bin/fzf")
+vim.opt.rtp:append("~/.local/share/nvim/plugged/fzf/bin/fzf")
 
 -- General VIM
 -- show line numbers
-vim.cmd(":set number relativenumber")
+vim.opt.relativenumber = true
 
 -- vim.cmd(":set tabs to have 4 spaces
-vim.cmd(":set ts=4")
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
 
 -- indent when moving to the next line while writing code
-vim.cmd(":set autoindent")
-
--- expand tabs into spaces
-vim.cmd(":set expandtab")
-
--- when using the >> or << commands, shift lines by 4 spaces
-vim.cmd(":set shiftwidth=4")
+vim.opt.autoindent = true
 
 -- show a visual line under the cursor's current line
-vim.cmd(":set cursorline")
+vim.opt.cursorline = true
 
 -- show the matching part of the pair for [] {} and ()
-vim.cmd(":set showmatch")
+vim.opt.showmatch = true
 
 -- cmp
-vim.cmd(":set completeopt=menu,menuone,noselect")
+vim.opt.completeopt = "menu,menuone,noselect"
 
 -- Enable folding
-vim.cmd(":set foldmethod=indent")
-vim.cmd(":set foldlevel=99")
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevel = 99
 
-vim.cmd("syntax enable")
-vim.cmd(":set statusline+=%#warningmsg#")
-vim.cmd(":set statusline+=%*")
-vim.cmd(":set laststatus=2")
-vim.cmd(":set scrolloff=30")
-vim.cmd(":set nowrap")
-vim.cmd(":set colorcolumn=88")
-vim.cmd(":set list")
+vim.opt.syntax = "yes"
+vim.opt.statusline:append("%#warningmsg#")
+vim.opt.statusline:append("%*")
+vim.opt.laststatus = 2
+vim.opt.scrolloff = 8
+vim.opt.wrap = false
+vim.opt.colorcolumn = "88"
+vim.opt.list = true
 
 -- Ignore files
-vim.cmd(":set wildignore+=*.pyc")
-vim.cmd(":set wildignore+=*_build/*")
-vim.cmd(":set wildignore+=**/coverage/*")
-vim.cmd(":set wildignore+=**/.git/*")
-vim.cmd(":set wildignore+=**/.venv/*")
-
-vim.cmd(":set clipboard+=unnamedplus")
-
-vim.cmd(":set runtimepath+=~/.config/nvim/snippets/UltiSnips/")
-vim.cmd(":set runtimepath+=~/.config/nvim/snippets/")
+vim.opt.wildignore:append("*.pyc")
+vim.opt.wildignore:append("*_build/*")
+vim.opt.wildignore:append("**/coverage/*")
+vim.opt.wildignore:append("**/.git/*")
+vim.opt.wildignore:append("**/.venv/*")
+vim.opt.clipboard:append("unnamedplus")
