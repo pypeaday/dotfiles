@@ -85,7 +85,6 @@ nnoremap("<C-L>", "<C-W><C-L>")
 nnoremap("<C-H>", "<C-W><C-H>")
 
 -- " Python
-nnoremap("<leader>ad", "<cmd>Pydocstring<CR>")
 
 -- " fzf searching until Telescope has better grep
 -- function! s:ag_with_opts(arg, bang)

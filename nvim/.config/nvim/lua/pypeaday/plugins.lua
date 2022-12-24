@@ -314,6 +314,10 @@ use ({
     'heavenshell/vim-pydocstring',
     run = 'make install',
     ft = {'python'},
+    config = function()
+      local nnoremap = require('pypeaday.keymap_function').nnoremap
+      nnoremap("<leader>ad", "<cmd>Pydocstring<CR>")
+    end,
 })
 
 -- Experimental
