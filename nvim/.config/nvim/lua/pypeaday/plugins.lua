@@ -374,17 +374,17 @@ use({
 
 use({'ThePrimeagen/vim-be-good'})
 
-use({ 
-  'fgheng/winbar.nvim',
-  config = function()
-    require('pypeaday.plugins.winbar')
-  end,
-  requires = {
-    "SmiteshP/nvim-navic",
-    "neovim/nvim-lspconfig",
-    "nvim-tree/nvim-web-devicons"
-  },
-}) 
+-- use({ 
+--   'fgheng/winbar.nvim',
+--   config = function()
+--     require('pypeaday.plugins.winbar')
+--   end,
+--   requires = {
+--     "SmiteshP/nvim-navic",
+--     "neovim/nvim-lspconfig",
+--     "nvim-tree/nvim-web-devicons"
+--   },
+-- }) 
 use {
   'lambdalisue/suda.vim'
 }
