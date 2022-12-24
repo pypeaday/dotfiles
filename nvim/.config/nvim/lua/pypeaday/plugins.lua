@@ -385,6 +385,9 @@ use({
     "nvim-tree/nvim-web-devicons"
   },
 }) 
+use {
+  'lambdalisue/suda.vim'
+}
 
 -- Automatically install plugins on first run
 if packer_bootstrap then
