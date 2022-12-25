@@ -152,10 +152,25 @@ use({
 -- })
 
 use({
-  'vim-test/vim-test',
-  requires = 'nvim-neotest/neotest',
+  'nvim-neotest/neotest',
+  requires = {
+    'nvim-neotest/neotest-python',
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "antoinemadec/FixCursorHold.nvim"
+  },
   config = function()
-    require('pypeaday.plugins.vim-test')
+    require("neotest").setup({
+    adapters = {
+      require("neotest-python")({
+        -- Extra arguments for nvim-dap configuration
+        dap = { justMyCode = false },
+        args = {"--log-level", "DEBUG"},
+        runner = "pytest",
+      }),
+      require("neotest-plenary"),
+    },
+  })
   end,
 })
 
