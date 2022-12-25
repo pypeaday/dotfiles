@@ -152,8 +152,12 @@ use({
 -- })
 
 use({
-  'vim-test/vim-test',
-  requires = 'nvim-neotest/neotest',
+  'rcarriga/vim-ultest',
+  requires = {
+    'nvim-neotest/neotest',
+    'vim-test/vim-test',
+    },
+  run = ":UpdateRemotePlugins",
   config = function()
     require('pypeaday.plugins.vim-test')
   end,
