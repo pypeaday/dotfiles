@@ -144,13 +144,6 @@ use({
   end,
 })
 
--- use({
---   'karb94/neoscroll.nvim',
---   config = function()
---     require('user.plugins.neoscroll')
---   end,
--- })
-
 use({
   'rcarriga/vim-ultest',
   requires = {
