@@ -9,11 +9,7 @@ vim.g.maplocalleader=" "
 
 -- " Be faster
 vim.cmd(":command W w")
--- " Enable folding with space f
-nnoremap("<leader>", "za" )
 
--- " navigation
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
 -- " Behave Vim
 --
 nnoremap("Y","y$" )
@@ -30,6 +26,9 @@ inoremap("jk", "<esc>")
 nnoremap("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 nnoremap("J", "mzJ`z")
+
+nnoremap("<c-d>","<c-d>zz")
+nnoremap("<c-u","<c-u>zz")
 
 -- " Undo Breakpoints
 inoremap(",", ",<c-g>u") 
@@ -81,29 +80,10 @@ nnoremap("<C-J>", "<C-W><C-J>")
 nnoremap("<C-L>", "<C-W><C-L>")
 nnoremap("<C-H>", "<C-W><C-H>")
 
--- " Python
-nnoremap("<leader>ad", "<cmd>Pydocstring<CR>")
-
--- " fzf searching until Telescope has better grep
--- function! s:ag_with_opts(arg, bang)
---       let tokens  = split(a:arg)
---         let ag_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
---           let query   = join(filter(copy(tokens), 'v:val !~ "^-"'))
---             call fzf#vim#ag(query, ag_opts, a:bang ? {} : {'down': '100%'})
---         endfunction
-
---         autocmd VimEnter * command! -nargs=* -bang Ag call s:ag_with_opts(<q-args>, <bang>0)
-
--- nnoremap("<Leader>s", "<cmd>Ag --hidden<CR>")
-
 -- " copy to clipbord
 vnoremap("<Leader>y", ' "+y')
--- " Copy whole file to system clipboard
-vnoremap("<Leader>Y", "gg'+yG")
 
--- " edit things
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
--- " sourceconfig 
+-- sourceconfig 
 nnoremap("gsv", "<cmd>luafile ~/.config/nvim/init.lua<CR>") 
 
 -- " source current file
@@ -116,23 +96,8 @@ nnoremap("ges", "<cmd>e ~/.config/nvim/lua/pypeaday/settings.lua<CR>")
 nnoremap("geo", "<cmd>e ~/.config/nvim/lua/pypeaday/options.lua<CR>")  
 nnoremap("gem", "<cmd>e ~/.config/nvim/lua/pypeaday/misc.lua<CR>")  
 
--- " edit tmuux config
 nnoremap("get", "<cmd>e ~/.tmux.conf.local<CR>")
---(" "", " edit zshrc")
 nnoremap("gez", "<cmd>e ~/.zshrc<CR>")
-
--- " Plug
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
--- nnoremap("gpi", "<cmd>PlugInstall<CR>")
--- nnoremap(" gpc", "<cmd>PlugClean<CR>")
-
--- " formatting
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
-nnoremap("<leader>f8", "<cmd>! flake8 %<CR>")
-nnoremap("<leader>fb", "<cmd>Black<CR>")
-
--- " LSP
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
 
 nnoremap("<leader>x", "<cmd>!chmod +x %<CR>")
 
