@@ -104,37 +104,37 @@ require('lspconfig').jsonls.setup({
 --         capabilities = capabilities,
 -- }
 
-
--- require'lspconfig'.pylsp.setup{
---         enable = true,
+-- require'lspconfig'.jedi_language_server.setup{
+--         on_attach=on_attach,
 --         capabilities = capabilities,
---         handlers=handlers,
---         settings = {
---             pylsp = {
---                 configurationSources = {"flake8"},
---                 plugins = {
---                     pycodestyle = {enabled = false},
---                     flake8 = {enabled = true},
---                     mypy = {
---                         enabled = true,
---                         live_mode =true,
---                         strict = true
---                     },
---                     jedi_completion = {fuzzy = true, enabled=true},
---                     jedi_hover = {enabled = true},
---                     jedi_references = {enabled = true},
---                     jedi_signature_help = {enabled = true},
---                     jedi_symbols = {enabled = true, all_scopes = true},
---                 }
---             }
---         },
---         on_attach = on_attach
 --     }
 
-require'lspconfig'.jedi_language_server.setup{
-        on_attach=on_attach,
+require'lspconfig'.pylsp.setup{
+        enable = true,
         capabilities = capabilities,
+        handlers=handlers,
+        settings = {
+            pylsp = {
+                configurationSources = {"flake8"},
+                plugins = {
+                    pycodestyle = {enabled = false},
+                    flake8 = {enabled = true},
+                    -- pyls_mypy = {
+                    --     enabled = true,
+                    --     -- live_mode = true,
+                    --     -- strict = false,
+                    -- },
+                    jedi_completion = {fuzzy = true, enabled=true},
+                    jedi_hover = {enabled = true},
+                    jedi_references = {enabled = true},
+                    jedi_signature_help = {enabled = true},
+                    jedi_symbols = {enabled = true, all_scopes = true},
+                }
+            }
+        },
+        on_attach = on_attach
     }
+
 
 require'lspconfig'.yamlls.setup{
     on_attach=on_attach,
