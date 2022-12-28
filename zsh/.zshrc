@@ -112,9 +112,9 @@ if [ $POLYBAR_BAR=="work" ]; then
     eval source auto_proxy
 fi
 # Jump into a tmux session
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach -t base || tmux new -s base
-fi
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#     tmux attach -t base || tmux new -s base
+# fi
 
 eval "$(pyenv init --path)"
 # eval "$(pyenv init -)"
