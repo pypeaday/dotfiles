@@ -471,3 +471,6 @@ bind-key c-b popup -w 80% -E -d '#{pane_current_path}' "copier-gallery"
 
 # last session
 bind -n M-b switch-client -l
+
+# Give me a new tmux-window for doing ssh sessions from a client inside of
+bind C-s "tmux new-session -A -s ssh-sessions 'cd $HOME && zsh'"
