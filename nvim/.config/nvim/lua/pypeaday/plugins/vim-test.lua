@@ -3,8 +3,10 @@ local nmap = require('pypeaday.keymap_function').nmap
 vim.cmd([[
     let test#python#runner = 'pytest'
     let test#python#pytest#options = "--color=yes"
-    let g:ultest_use_pty = 1
 ]])
+
+vim.g.ultest_use_pty = 1
+vim.g.ultest_deprecation_notice = 0
 
 -- nnoremap('<leader>tn', '<cmd>TestNearest<CR>')
 nnoremap('<leader>tn', '<cmd>UltestNearest<CR>')
