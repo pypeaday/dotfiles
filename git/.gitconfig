@@ -12,6 +12,8 @@
         path = ~/.gitconfig-work
 [includeIf "gitdir:~/personal/"]
         path = ~/.gitconfig-personal
+[includeIf "gitdir:~/minionai/"]
+        path = ~/.gitconfig-minionai
 [init]
     defaultBranch = main
 [push]
