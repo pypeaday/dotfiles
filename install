@@ -6,6 +6,10 @@ then
     echo "Stowing stuff for work"
     stow -D work
     stow work
+
+    eval $HOME/dotfiles/scripts/.local/bin/triple-monitor
+    eval $HOME/dotfiles/polybar/launch.sh
+    eval $HOME/dotfiles/picom/.config/picom/launch_picom
 else
     echo "Stowing stuff for home"
     stow -D personal
@@ -17,7 +21,5 @@ do
     stow -D $folder
     stow $folder
 done
-# eval ./shortcuts/.local/bin/multimonitor
-eval $HOME/dotfiles/polybar/launch.sh
 
 popd
