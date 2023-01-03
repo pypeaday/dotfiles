@@ -58,7 +58,7 @@ deleted = "  ×${count}"
 style = "bright-white"
 
 [hostname]
-ssh_only = false
+ssh_only = true
 ssh_symbol = '🌐 '
 format = '[$ssh_symbol$hostname]($style) in '
 trim_at = "-"
