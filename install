@@ -7,7 +7,7 @@ then
     stow -D work
     stow work
 
-    eval $HOME/dotfiles/scripts/.local/bin/triple-monitor
+    eval $HOME/dotfiles/work/.local/bin/triple-monitor
     eval $HOME/dotfiles/polybar/launch.sh
     eval $HOME/dotfiles/picom/.config/picom/launch_picom
 else
