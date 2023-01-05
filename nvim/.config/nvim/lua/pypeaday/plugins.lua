@@ -27,37 +27,12 @@ local use = require('packer').use
 
 use('wbthomason/packer.nvim') -- Let packer manage itself
 
--- use({
---   'airblade/vim-rooter',
---   setup = function()
---     vim.g.rooter_manual_only = 1
---   end,
---   config = function()
---     vim.cmd('Rooter')
---   end,
--- })
--- use('christoomey/vim-tmux-navigator')
--- use('farmergreg/vim-lastplace')
 use('tpope/vim-commentary')
 -- use('tpope/vim-repeat')
 use('tpope/vim-surround')
 use('tpope/vim-dispatch')
 use('tpope/vim-repeat')
--- use('tpope/vim-eunuch') -- Adds :Rename, :SudoWrite
--- use('tpope/vim-unimpaired') -- Adds [b and other handy mappings
--- use('tpope/vim-sleuth') -- Indent autodetection with editorconfig support
--- use('jessarcher/vim-heritage') -- Automatically create parent dirs when saving
 -- use('nelstrom/vim-visual-star-search')
--- use { 'posva/vim-vue' }
-
--- use({
---   'tpope/vim-projectionist',
---   requires = 'tpope/vim-dispatch',
---   config = function()
---     require('user.plugins.projectionist')
---   end,
--- })
---
 
 use({
     "catppuccin/nvim",
@@ -67,46 +42,6 @@ use({
 })
 
 
--- use({
---   'tommcdo/vim-lion',
---   config = function()
---     require('user.plugins.lion')
---   end,
--- })
-
--- use({
---   'whatyouhide/vim-textobj-xmlattr',
---   requires = 'kana/vim-textobj-user',
--- })
-
--- use({
---   'sickill/vim-pasta',
---   config = function()
---     require('user.plugins.pasta')
---   end,
--- })
-
--- use({
---   'famiu/bufdelete.nvim',
---   config = function()
---     vim.keymap.set('n', '<Leader>q', ':Bdelete<CR>')
---   end,
--- })
-
--- use({
---   'lukas-reineke/indent-blankline.nvim',
---   config = function()
---     require('user.plugins.indent-blankline')
---   end,
--- })
-
--- use({
---   'AndrewRadev/splitjoin.vim',
---   config = function()
---     require('user.plugins.splitjoin')
---   end,
--- })
-
 use({
   'windwp/nvim-autopairs',
   config = function()
@@ -114,14 +49,6 @@ use({
   end,
 })
 
--- use({
---   'akinsho/bufferline.nvim',
---   requires = 'kyazdani42/nvim-web-devicons',
---   after = 'onedark.nvim',
---   config = function()
---     require('user.plugins.bufferline')
---   end,
--- })
 
 use({
   'nvim-lualine/lualine.nvim',
@@ -131,10 +58,6 @@ use({
   end,
 })
 
--- use({
---     'vim-airline/vim-airline',
---     requires = 'vim-airline/vim-airline-themes'
--- })
 
 use({
   'kyazdani42/nvim-tree.lua',
@@ -244,28 +167,6 @@ use({
 
 use({'itchyny/vim-gitbranch'})
 
--- use({
---   'weilbith/nvim-code-action-menu',
---   cmd = 'CodeActionMenu',
--- })
-
--- use({
---   'jose-elias-alvarez/null-ls.nvim',
---   config = function()
---     require('user.plugins.null-ls')
---   end,
--- })
-
--- use {
---   'j-hui/fidget.nvim',
---   config = function()
---     require('fidget').setup{
---       align = {
---         bottom = false
---       }
---     }
---   end,
--- }
 
 use({
   'L3MON4D3/LuaSnip',
