@@ -190,7 +190,10 @@ use({
       wants = "friendly-snippets",
       requires = {
         "rafamadriz/friendly-snippets",
-      }
+      },
+      config = function()
+        require('pypeaday.plugins.luasnip')
+      end,
     },
     {'hrsh7th/cmp-buffer'},
     {'hrsh7th/cmp-path'},
