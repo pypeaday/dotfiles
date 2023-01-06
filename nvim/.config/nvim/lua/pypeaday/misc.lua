@@ -20,6 +20,7 @@ vim.cmd([[
         autocmd bufwritepost *.py execute 'PyPostSave'
         "autocmd bufwritepost .tmux.conf execute ':!tmux source-file %'
         "autocmd bufwritepost .tmux.local.conf execute ':!tmux source-file %'
+        autocmd bufwritepost *.prisma execute ':! prisma validate'
         autocmd BufWritePre *.tf lua vim.lsp.buf.formatting_sync()
         autocmd TextChanged,TextChangedI *qutebrowser-editor* silent write
     augroup end
