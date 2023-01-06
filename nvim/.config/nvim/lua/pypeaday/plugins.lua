@@ -170,6 +170,9 @@ use({'itchyny/vim-gitbranch'})
 
 use({
   'L3MON4D3/LuaSnip',
+  requires = {
+    "rafamadriz/friendly-snippets",
+  },
   config = function()
     require('pypeaday.plugins.luasnip')
   end,
@@ -181,17 +184,25 @@ use({
     -- 'SirVer/ultisnips',
     -- 'quangnguyen30192/cmp-nvim-ultisnips',
     -- 'honza/vim-snippets',
-    'L3MON4D3/LuaSnip',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
-    'hrsh7th/cmp-nvim-lua',
-    'onsails/lspkind-nvim',
-    'f3fora/cmp-spell',
-    'saadparwaiz1/cmp_luasnip',
+    {
+      'L3MON4D3/LuaSnip',
+      event = "BufReadPre",
+      wants = "friendly-snippets",
+      requires = {
+        "rafamadriz/friendly-snippets",
+      }
+    },
+    {'hrsh7th/cmp-buffer'},
+    {'hrsh7th/cmp-path'},
+    {'hrsh7th/cmp-cmdline'},
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/cmp-nvim-lsp-signature-help'},
+    {'hrsh7th/cmp-nvim-lua'},
+    {'onsails/lspkind-nvim'},
+    {'f3fora/cmp-spell'},
+    {'saadparwaiz1/cmp_luasnip'},
   },
+  wants = { "LuaSnip"},
   config = function()
     require('pypeaday.plugins.cmp')
   end,

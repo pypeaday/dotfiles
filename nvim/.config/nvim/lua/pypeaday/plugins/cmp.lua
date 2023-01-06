@@ -4,16 +4,10 @@ local lspkind = require('lspkind')
 
 cmp.setup({
   snippet = {
-    -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- For `vsnip` user.
-      -- vim.fn["vsnip#anonymous"](args.body)
-
       -- For `luasnip` user.
-      -- require('luasnip').lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
 
-      -- For `ultisnips` user.
-      vim.fn["UltiSnips#Anon"](args.body)
     end,
   },
   window = {
@@ -35,12 +29,11 @@ cmp.setup({
     })
   },
   sources = cmp.config.sources({
+    { name = "luasnip" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lua' },
     { name = 'treesitter' },
-    -- For ultisnips user.
-    { name = 'ultisnips' },
     { name = 'buffer' },
     { name = 'path' },
     { name = 'tmux' },
