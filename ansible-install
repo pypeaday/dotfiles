@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+mv ~/.zshrc ~/.zshrc-before-ansible-install || echo "no existing zsh"
+
+stow -D zsh
+stow zsh  zsh
+
