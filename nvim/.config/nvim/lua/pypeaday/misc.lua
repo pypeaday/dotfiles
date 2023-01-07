@@ -2,9 +2,7 @@
 vim.cmd([[
     function! s:PyPostSave()
         execute 'silent !$HOME/.local/bin/tidy-imports --quiet --replace-star-imports --action REPLACE --separate-from-imports ' . bufname("%")
-        " -lbt is --lines-between-types which defualts to 0. Change to 1 to be
-        " in line with Anthony's reorder_python_imports pre-commit hook
-        "execute 'silent !isort -lbt 1' . bufname("%")
+        execute 'silent !reorder-python-imports ' . bufname("%")
         execute 'silent !black ' . bufname("%")
         execute 'silent lua vim.diagnostic.setloclist({open=false})'
     endfunction
