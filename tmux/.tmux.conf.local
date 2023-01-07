@@ -66,12 +66,6 @@ tmux_conf_theme_colour_15="#282c34"   # gui_black  # time/date ribbon bg
 tmux_conf_theme_colour_16="#484e5a"    # light gray  # username bg
 tmux_conf_theme_colour_17="#83DCC8"    # gui_cyan  # hostname
 
-# Set the value of the 'my_variable' variable based on the hostname of the machine
-set -g @hostname `hostname`
-#if-shell "hostname | grep 'babyblue'" "set -g @tmux_conf_theme_colour_17 #83DCC8" "set -g @tmux_conf_theme_colour_17 #484e5a"
-# Bind a key to display the value of the 'tmux_conf_theme_colour_17' variable in a notification
-bind -n C-M display-message "#{@tmux_conf_theme_colour_17}"
-
 # default theme
 # tmux_conf_theme_colour_1="#080808"    # dark gray
 # tmux_conf_theme_colour_2="#303030"    # gray

@@ -26,9 +26,6 @@ format = " took [$duration]($style)"
 truncation_length = 10
 format = "[$path]($style)[$lock_symbol]($lock_style) "
 
-[conda]
-format = "[$symbol$environment${version}](dimmed green) "
-
 [docker_context]
 format = "via [🐋 $context](blue bold)"
 
@@ -61,11 +58,12 @@ deleted = "  ×${count}"
 style = "bright-white"
 
 [hostname]
-ssh_only = false
-format = "<[$hostname]($style)>"
+ssh_only = true
+ssh_symbol = '🌐 '
+format = '[$ssh_symbol$hostname]($style) in '
 trim_at = "-"
 style = "bold dimmed white"
-disabled = true
+disabled = false
 
 [golang]
 format = "via [$symbol($version )]($style)"
@@ -92,7 +90,7 @@ style = "bold green"
 
 [username]
 style_user = "bold dimmed blue"
-show_always = false
+show_always = true
 
 [custom.zsh]
 when = '[[ ! -n "${VIRTUAL_ENV}" ]]'
