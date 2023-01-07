@@ -36,6 +36,10 @@ use('tpope/vim-repeat')
 
 use({
     "catppuccin/nvim",
+    as = "catpuccin",
+    config = function()
+      vim.cmd.colorscheme "catppuccin-mocha"
+    end
 })
 
 
