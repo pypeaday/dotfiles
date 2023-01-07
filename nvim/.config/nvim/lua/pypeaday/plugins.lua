@@ -36,9 +36,10 @@ use('tpope/vim-repeat')
 
 use({
     "catppuccin/nvim",
-  config = function()
-    require('pypeaday.plugins.catppuccin')
-  end,
+    as = "catpuccin",
+    config = function()
+      vim.cmd.colorscheme "catppuccin-mocha"
+    end
 })
 
 
@@ -53,18 +54,12 @@ use({
 use({
   'nvim-lualine/lualine.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('pypeaday.plugins.lualine')
-  end,
 })
 
 
 use({
   'kyazdani42/nvim-tree.lua',
   requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('pypeaday.plugins.nvim-tree')
-  end,
 })
 
 use({
@@ -74,16 +69,10 @@ use({
     'vim-test/vim-test',
     },
   run = ":UpdateRemotePlugins",
-  config = function()
-    require('pypeaday.plugins.vim-test')
-  end,
 })
 
 -- use({
 --   'mgedmin/coverage-highlight.vim',
---   config = function()
---     require('pypeaday.coverage-highlight')
---   end,
 -- })
 
 -- use({
@@ -103,9 +92,6 @@ use({
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
     { 'nvim-telescope/telescope-live-grep-args.nvim' },
   },
-  config = function()
-    require('pypeaday.plugins.telescope')
-  end,
 })
 
 use({
@@ -116,9 +102,6 @@ use({
     'nvim-treesitter/nvim-treesitter-textobjects',
     -- 'JoosepAlviste/nvim-ts-context-commentstring',
   },
-  config = function()
-    require('pypeaday.plugins.treesitter')
-  end,
 })
 
 -- TODO: explore this to replace my individual black, flake8, etc stuff
@@ -146,24 +129,31 @@ use({
   end,
 })
 
-use({
-  'neovim/nvim-lspconfig',
-  requires = {
-    'b0o/schemastore.nvim',
-    -- 'nvim-lua/lsp_extensions.nvim',
-    'folke/lsp-colors.nvim',
-  },
-  config = function()
-    require('pypeaday.plugins.lspconfig')
-  end,
-})
+ use {
+	  'VonHeikemen/lsp-zero.nvim',
+	  requires = {
+		  -- LSP Support
+		  {'neovim/nvim-lspconfig'},
+		  {'williamboman/mason.nvim'},
+		  {'williamboman/mason-lspconfig.nvim'},
 
-use({
-  'glepnir/lspsaga.nvim',
-  config = function()
-    require('pypeaday.plugins.lspsaga')
-  end,
-})
+		  -- Autocompletion
+		  {'hrsh7th/nvim-cmp'},
+		  {'hrsh7th/cmp-buffer'},
+		  {'hrsh7th/cmp-path'},
+		  {'saadparwaiz1/cmp_luasnip'},
+		  {'hrsh7th/cmp-nvim-lsp'},
+		  {'hrsh7th/cmp-nvim-lua'},
+
+		  -- Snippets
+		  {'L3MON4D3/LuaSnip'},
+		  {'rafamadriz/friendly-snippets'},
+	  }
+  }
+
+-- use({
+--   'glepnir/lspsaga.nvim',
+-- })
 
 use({'itchyny/vim-gitbranch'})
 
@@ -173,51 +163,12 @@ use({
   requires = {
     "rafamadriz/friendly-snippets",
   },
-  config = function()
-    require('pypeaday.plugins.luasnip')
-  end,
-})
-
-use({
-  'hrsh7th/nvim-cmp',
-  requires = {
-    -- 'SirVer/ultisnips',
-    -- 'quangnguyen30192/cmp-nvim-ultisnips',
-    -- 'honza/vim-snippets',
-    {
-      'L3MON4D3/LuaSnip',
-      event = "BufReadPre",
-      wants = "friendly-snippets",
-      requires = {
-        "rafamadriz/friendly-snippets",
-      },
-      config = function()
-        require('pypeaday.plugins.luasnip')
-      end,
-    },
-    {'hrsh7th/cmp-buffer'},
-    {'hrsh7th/cmp-path'},
-    {'hrsh7th/cmp-cmdline'},
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/cmp-nvim-lsp-signature-help'},
-    {'hrsh7th/cmp-nvim-lua'},
-    {'onsails/lspkind-nvim'},
-    {'f3fora/cmp-spell'},
-    {'saadparwaiz1/cmp_luasnip'},
-  },
-  wants = { "LuaSnip"},
-  config = function()
-    require('pypeaday.plugins.cmp')
-  end,
 })
 
 
 -- LaTex
 use ({
     'lervag/vimtex',
-    config = function()
-        require('pypeaday.plugins.vimtex')
-    end,
 })
 
 -- Python Specific
@@ -235,6 +186,9 @@ use ({
 })
 
 -- Experimental
+use {
+  "folke/which-key.nvim",
+}
 
 use({'godlygeek/tabular'})
 
@@ -267,9 +221,6 @@ use({
 use({
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
-  config = function()
-    require('pypeaday.plugins.trouble')
-  end,
 })
 
 -- :TZNarrow for focusing only on visual block -> useful for driving meetings
@@ -288,18 +239,26 @@ use({'ThePrimeagen/vim-be-good'})
 
 -- use({ 
 --   'fgheng/winbar.nvim',
---   config = function()
---     require('pypeaday.plugins.winbar')
---   end,
 --   requires = {
 --     "SmiteshP/nvim-navic",
 --     "neovim/nvim-lspconfig",
 --     "nvim-tree/nvim-web-devicons"
 --   },
 -- }) 
+
+-- Like Git Graph in VS C**e
+use {
+  'junegunn/gv.vim'
+}
+
 use {
   'lambdalisue/suda.vim'
 }
+
+-- use {
+--   'kkoomen/vim-doge',
+--   run = ':call doge#install()'
+-- }
 
 -- Automatically install plugins on first run
 if packer_bootstrap then

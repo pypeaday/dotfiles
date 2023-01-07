@@ -1,3 +1,8 @@
+require('pypeaday.options')
+require('pypeaday.keymap')
+require('pypeaday.settings')
+require('pypeaday.plugins')
+
 
 vim.cmd([[
     function! s:PyPostSave()
@@ -23,3 +28,7 @@ vim.cmd([[
         autocmd TextChanged,TextChangedI *qutebrowser-editor* silent write
     augroup end
 ]])
+
+function R(name)
+    require("plenary.reload").reload_module(name)
+end

@@ -1,7 +1,3 @@
-require('pypeaday.options')
-require('pypeaday.keymap')
-require('pypeaday.settings')
-require('pypeaday.misc')
-require('pypeaday.plugins')
+require('pypeaday')
 
 -- vim: nospell
