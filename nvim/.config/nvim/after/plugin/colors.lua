@@ -40,20 +40,25 @@ require("catppuccin").setup({
     },
 })
 
+function ColorMeBaby(color)
+    color = color or "catpuccin-mocha"
 
-vim.cmd("set termguicolors")
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin-mocha"
---
--- Transparency
-vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
-vim.cmd [[hi Folded ctermfg=darkgray]]
-vim.cmd [[hi clear CursorLine]]
-vim.cmd [[hi CursorLine guifg=none guibg=black ]]
-vim.cmd [[hi Search guifg=red guibg=none ]]
-vim.cmd [[hi TSConstant  guifg=lightmagenta ]]
+    vim.cmd("set termguicolors")
+    -- setup must be called before loading
+    vim.cmd.colorscheme "catppuccin-mocha"
+    --
+    -- Transparency
+    vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
+    vim.cmd [[hi Folded ctermfg=darkgray]]
+    vim.cmd [[hi clear CursorLine]]
+    vim.cmd [[hi CursorLine guifg=none guibg=black ]]
+    vim.cmd [[hi Search guifg=red guibg=none ]]
+    vim.cmd [[hi TSConstant  guifg=lightmagenta ]]
 
--- for windows
-vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=None]])
-vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=purple guibg=None]])
-vim.cmd([[hi Blamer guifg=lightgray]])	
+    -- for windows
+    vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=None]])
+    vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=purple guibg=None]])
+    vim.cmd([[hi Blamer guifg=lightgray]])	
+end 
+
+ColorMeBaby()
