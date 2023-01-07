@@ -255,11 +255,33 @@ use {
   'lambdalisue/suda.vim'
 }
 
--- use {
---   'kkoomen/vim-doge',
---   run = ':call doge#install()'
--- }
+use {
+  "zbirenbaum/copilot.lua",
+  event = "VimEnter",
+  config = function ()
+    vim.defer_fn(function()
+      require("copilot").setup {
+        server_opts_overrides = {
+          trace = "verbose",
+          settings = {
+            advanced = {
+              listCount = 10, -- #completions for panel
+              inlineSuggestCount = 3, -- #completions for getCompletions
+            }
+          },
+        }
+      } 
+      end, 100)
+    end,
+}
 
+use {
+  "zbirenbaum/copilot-cmp",
+  after = { "copilot.lua" },
+  config = function ()
+    require("copilot_cmp").setup()
+  end
+}
 -- Automatically install plugins on first run
 if packer_bootstrap then
   require('packer').sync()
