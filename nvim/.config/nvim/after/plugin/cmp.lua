@@ -1,6 +1,6 @@
   -- Setup nvim-cmp.
 local cmp = require'cmp'
-local lspkind = require('lspkind')
+-- local lspkind = require('lspkind')
 
 cmp.setup({
   snippet = {
@@ -40,9 +40,9 @@ cmp.setup({
     { name = 'spell' },
     -- { name = 'cmp_tabnine' }
     }),
-  formatting = {
-    format = lspkind.cmp_format({with_text = false, maxwidth = 50})
-  },
+  -- formatting = {
+  --   format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+  -- },
     -- formatting = {
     --         format = function(entry, vim_item)
     --             vim_item.kind = lspkind.presets.default[vim_item.kind]
