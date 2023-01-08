@@ -22,7 +22,3 @@ end
 
 -- remove when I switch to neotest
 vim.g.ultest_deprecation_notice = 0
-
--- spelling
-vim.g.opt_spell = true
-vim.g.opt_spelllang = { 'en_us' }
