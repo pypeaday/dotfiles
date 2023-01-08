@@ -151,9 +151,12 @@ use({
 	  }
   }
 
--- use({
---   'glepnir/lspsaga.nvim',
--- })
+use({
+  'glepnir/lspsaga.nvim',
+  -- config = function()
+  --   require('pypeaday.lspsaga')
+  -- end,
+})
 
 use({'itchyny/vim-gitbranch'})
 
