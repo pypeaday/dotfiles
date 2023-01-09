@@ -129,6 +129,8 @@ use({
   end,
 })
 
+use {'onsails/lspkind.nvim'}
+
  use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
