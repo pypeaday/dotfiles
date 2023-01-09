@@ -129,6 +129,8 @@ use({
   end,
 })
 
+use {'onsails/lspkind.nvim'}
+
  use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  requires = {
@@ -151,9 +153,12 @@ use({
 	  }
   }
 
--- use({
---   'glepnir/lspsaga.nvim',
--- })
+use({
+  'glepnir/lspsaga.nvim',
+  -- config = function()
+  --   require('pypeaday.lspsaga')
+  -- end,
+})
 
 use({'itchyny/vim-gitbranch'})
 

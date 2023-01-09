@@ -6,7 +6,6 @@ vim.cmd([[
 ]])
 
 vim.g.ultest_use_pty = 1
-vim.g.ultest_deprecation_notice = 0
 
 -- nnoremap('<leader>tn', '<cmd>TestNearest<CR>')
 nnoremap('<leader>tn', '<cmd>UltestNearest<CR>')
