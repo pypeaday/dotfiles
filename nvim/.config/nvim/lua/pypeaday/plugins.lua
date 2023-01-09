@@ -148,6 +148,12 @@ use {
   },
 }
 
+        -- Snippets
+        {'L3MON4D3/LuaSnip'},
+        {'rafamadriz/friendly-snippets'},
+    }
+}
+
 use({
   "williamboman/mason.nvim",
   "jose-elias-alvarez/null-ls.nvim",
