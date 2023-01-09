@@ -27,6 +27,28 @@ lsp.configure('sumneko_lua', {
     }
 })
 
+lsp.configure('pylsp', {
+    settings = {
+      pylsp = {
+          configurationSources = {"flake8"},
+          plugins = {
+              pycodestyle = {enabled = false},
+              flake8 = {enabled = true},
+              mypy = {
+                  enabled = true,
+                  live_mode =true,
+                  strict = true
+              },
+              jedi_completion = {fuzzy = true, enabled=true},
+              jedi_hover = {enabled = true},
+              jedi_references = {enabled = true},
+              jedi_signature_help = {enabled = true},
+              jedi_symbols = {enabled = true, all_scopes = true},
+          }
+      }
+    }
+  })
+
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
