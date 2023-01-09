@@ -147,12 +147,11 @@ use {
         {'hrsh7th/cmp-nvim-lsp'},
         {'hrsh7th/cmp-nvim-lua'},
 
-use({
-  'glepnir/lspsaga.nvim',
-  -- config = function()
-  --   require('pypeaday.lspsaga')
-  -- end,
-})
+        -- Snippets
+        {'L3MON4D3/LuaSnip'},
+        {'rafamadriz/friendly-snippets'},
+    },
+}
 
 use({
   'glepnir/lspsaga.nvim',
