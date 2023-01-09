@@ -131,14 +131,6 @@ use({
 
 use {'onsails/lspkind.nvim'}
 
- use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},
-		  {'williamboman/mason.nvim'},
-		  {'williamboman/mason-lspconfig.nvim'},
-
 use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
@@ -158,7 +150,7 @@ use {
         -- Snippets
         {'L3MON4D3/LuaSnip'},
         {'rafamadriz/friendly-snippets'},
-    }
+    },
 }
 
 use({
