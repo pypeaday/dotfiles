@@ -14,6 +14,7 @@ lsp.ensure_installed({
   'html',
   'terraformls',
   'sumneko_lua',
+  'marksman',
 })
 
 -- Fix Undefined global 'vim'
