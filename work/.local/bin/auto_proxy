@@ -26,7 +26,7 @@ echo_proxy () {
     echo NO_PROXY $NO_PROXY
 }
 auto_proxy() {
-    timeout 0.5 ping catatwork.cat.com -c 1 -w 1 > /dev/null && set_proxy || no_proxy
+    timeout 0.5 ping ra.cat.com -c 1 -w 1 > /dev/null && set_proxy || no_proxy
 }
 auto_proxy
 
