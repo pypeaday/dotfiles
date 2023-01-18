@@ -18,7 +18,6 @@ null_ls.builtins.formatting.tidy_import = h.make_builtin({
     generator_opts = {
         command = "tidy-imports",
         args = {
-            "--black",
             "--quiet",
             "--replace-star-imports",
             "--add-missing",
@@ -38,9 +37,9 @@ null_ls.setup({
     sources = {
         -- formatting
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.reorder_python_imports,
         null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
         null_ls.builtins.formatting.tidy_import,
-        null_ls.builtins.formatting.reorder_python_imports,
         null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.yamlfmt,
         null_ls.builtins.formatting.sqlformat,
@@ -55,7 +54,7 @@ null_ls.setup({
         -- null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.diagnostics.markdownlint,
         -- do I need flake8 config in pylsp setup?
-        null_ls.builtins.diagnostics.flake8,
+        -- null_ls.builtins.diagnostics.flake8,
 
         -- completions
         null_ls.builtins.completion.spell,
