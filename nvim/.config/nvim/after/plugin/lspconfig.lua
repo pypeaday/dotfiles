@@ -137,6 +137,7 @@ local cmp_sources = {
     { name = 'path' },
     { name = 'tmux' },
     { name = 'spell' },
+    { name = 'git' },
 }
 local lspkind = require('lspkind')
 local cmp_formatting = {
