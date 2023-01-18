@@ -49,6 +49,7 @@ null_ls.setup({
         null_ls.builtins.formatting.trim_newlines,
         null_ls.builtins.formatting.markdownlint,
         null_ls.builtins.formatting.json_tool,
+        null_ls.builtins.diagnostics.hadolint,
 
         -- diagnostics
         -- null_ls.builtins.diagnostics.eslint,
