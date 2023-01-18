@@ -146,12 +146,19 @@ use {
         {'saadparwaiz1/cmp_luasnip'},
         {'hrsh7th/cmp-nvim-lsp'},
         {'hrsh7th/cmp-nvim-lua'},
+        {'petertriho/cmp-git'},
 
         -- Snippets
         {'L3MON4D3/LuaSnip'},
         {'rafamadriz/friendly-snippets'},
     },
 }
+
+use({
+    "williamboman/mason.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+    "jay-babu/mason-null-ls.nvim",
+})
 
 use({
   'glepnir/lspsaga.nvim',
