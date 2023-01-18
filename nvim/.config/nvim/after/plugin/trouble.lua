@@ -49,6 +49,6 @@
 
 local nnoremap = require('pypeaday.keymap_function').nnoremap
 nnoremap(
-    "<leader>aa", "<cmd>TroubleToggle<CR>", 
+    "<leader>aa", "<cmd>TroubleToggle<CR>",
     {silent=true, noremap=true}
 )
