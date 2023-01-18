@@ -249,14 +249,14 @@ use({
 
 use({'ThePrimeagen/vim-be-good'})
 
--- use({ 
---   'fgheng/winbar.nvim',
---   requires = {
---     "SmiteshP/nvim-navic",
---     "neovim/nvim-lspconfig",
---     "nvim-tree/nvim-web-devicons"
---   },
--- }) 
+use({ 
+  'fgheng/winbar.nvim',
+  requires = {
+    "SmiteshP/nvim-navic",
+    "neovim/nvim-lspconfig",
+    "nvim-tree/nvim-web-devicons"
+  },
+})
 
 -- Like Git Graph in VS C**e
 use {
