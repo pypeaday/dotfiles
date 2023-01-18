@@ -37,7 +37,6 @@ null_ls.setup({
     sources = {
         -- formatting
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.reorder_python_imports,
         null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
         null_ls.builtins.formatting.tidy_import,
         null_ls.builtins.formatting.prettier,
@@ -49,6 +48,7 @@ null_ls.setup({
         null_ls.builtins.formatting.markdownlint,
         null_ls.builtins.formatting.json_tool,
         null_ls.builtins.diagnostics.hadolint,
+        null_ls.builtins.formatting.reorder_python_imports,
 
         -- diagnostics
         -- null_ls.builtins.diagnostics.eslint,
