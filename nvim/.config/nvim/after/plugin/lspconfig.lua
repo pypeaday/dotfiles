@@ -177,6 +177,9 @@ local has_words_before = function()
 end
 
 cmp.setup({
+  performance = {
+    trigger_debounce_time = 1000
+  },
   snippet = {
     expand = function(args)
       -- For `luasnip` user.
@@ -228,3 +231,5 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+require("cmp_git").setup()
