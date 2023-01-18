@@ -54,7 +54,8 @@ null_ls.setup({
         -- diagnostics
         -- null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.diagnostics.markdownlint,
-        -- null_ls.builtins.diagnostics.pydocstyle,
+        -- do I need flake8 config in pylsp setup?
+        null_ls.builtins.diagnostics.flake8,
 
         -- completions
         null_ls.builtins.completion.spell,
