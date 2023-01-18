@@ -34,10 +34,7 @@ use('tpope/vim-dispatch')
 use('tpope/vim-repeat')
 -- use('nelstrom/vim-visual-star-search')
 
-use({
-    "catppuccin/nvim",
-    as = "catpuccin",
-})
+use { "catppuccin/nvim", as = "catppuccin" }
 
 
 use({

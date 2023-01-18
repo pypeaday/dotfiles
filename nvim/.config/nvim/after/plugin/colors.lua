@@ -41,11 +41,11 @@ require("catppuccin").setup({
 })
 
 function ColorMeBaby(color)
-    color = color or "catpuccin-mocha"
+    color = color or "catppuccin"
 
     vim.cmd("set termguicolors")
     -- setup must be called before loading
-    vim.cmd.colorscheme "catppuccin-mocha"
+    vim.cmd.colorscheme(color)
     --
     -- Transparency
     vim.cmd [[hi Normal guibg=NONE ctermbg=NONE]]
@@ -58,7 +58,7 @@ function ColorMeBaby(color)
     -- for windows
     vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=None]])
     vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=purple guibg=None]])
-    vim.cmd([[hi Blamer guifg=lightgray]])	
-end 
+    vim.cmd([[hi Blamer guifg=lightgray]])
+end
 
 ColorMeBaby()
