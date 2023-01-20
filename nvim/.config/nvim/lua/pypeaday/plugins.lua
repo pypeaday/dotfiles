@@ -1,20 +1,20 @@
 -- Install packer
-local ensure_packer = function ()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-        vim.cmd [[packadd packer.nvim]]
-        return true
-    end
-    return false
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
 local packer_bootstrap = ensure_packer()
 
 -- Initialize packer
 require('packer').init({
-  compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
+  compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
   display = {
     open_fn = function()
       return require('packer.util').float({ border = 'solid' })
@@ -34,13 +34,7 @@ use('tpope/vim-dispatch')
 use('tpope/vim-repeat')
 -- use('nelstrom/vim-visual-star-search')
 
-use({
-    "catppuccin/nvim",
-    as = "catpuccin",
-    config = function()
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
-})
+use { "catppuccin/nvim", as = "catppuccin" }
 
 
 use({
@@ -67,7 +61,7 @@ use({
   requires = {
     'nvim-neotest/neotest',
     'vim-test/vim-test',
-    },
+  },
   run = ":UpdateRemotePlugins",
 })
 
@@ -107,7 +101,7 @@ use({
 -- TODO: explore this to replace my individual black, flake8, etc stuff
 use({ 'sbdchd/neoformat', })
 
-use({'wellle/targets.vim'})
+use({ 'wellle/targets.vim' })
 
 use({
   'tpope/vim-fugitive',
@@ -129,24 +123,30 @@ use({
   end,
 })
 
-use {'onsails/lspkind.nvim'}
+use { 'onsails/lspkind.nvim' }
 
 use {
-    'VonHeikemen/lsp-zero.nvim',
-    requires = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},
-        {'williamboman/mason.nvim'},
-        {'williamboman/mason-lspconfig.nvim'},
+  'VonHeikemen/lsp-zero.nvim',
+  requires = {
+    -- LSP Support
+    { 'neovim/nvim-lspconfig' },
+    { 'williamboman/mason.nvim' },
+    { 'williamboman/mason-lspconfig.nvim' },
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},
-        {'hrsh7th/cmp-buffer'},
-        {'hrsh7th/cmp-path'},
-        {'saadparwaiz1/cmp_luasnip'},
-        {'hrsh7th/cmp-nvim-lsp'},
-        {'hrsh7th/cmp-nvim-lua'},
-        {'petertriho/cmp-git'},
+    -- Autocompletion
+    { 'hrsh7th/nvim-cmp' },
+    { 'hrsh7th/cmp-buffer' },
+    { 'hrsh7th/cmp-path' },
+    { 'saadparwaiz1/cmp_luasnip' },
+    { 'hrsh7th/cmp-nvim-lsp' },
+    { 'hrsh7th/cmp-nvim-lua' },
+    { 'petertriho/cmp-git' },
+
+    -- Snippets
+    { 'L3MON4D3/LuaSnip' },
+    { 'rafamadriz/friendly-snippets' },
+  },
+}
 
         -- Snippets
         {'L3MON4D3/LuaSnip'},
@@ -155,9 +155,9 @@ use {
 }
 
 use({
-    "williamboman/mason.nvim",
-    "jose-elias-alvarez/null-ls.nvim",
-    "jay-babu/mason-null-ls.nvim",
+  "williamboman/mason.nvim",
+  "jose-elias-alvarez/null-ls.nvim",
+  "jay-babu/mason-null-ls.nvim",
 })
 
 use({
@@ -167,7 +167,7 @@ use({
   -- end,
 })
 
-use({'itchyny/vim-gitbranch'})
+use({ 'itchyny/vim-gitbranch' })
 
 
 use({
@@ -179,22 +179,22 @@ use({
 
 
 -- LaTex
-use ({
-    'lervag/vimtex',
+use({
+  'lervag/vimtex',
 })
 
 -- Python Specific
 -- settings in options.lua for now
-use ({
-    'heavenshell/vim-pydocstring',
-    run = 'make install',
-    ft = {'python'},
-    -- config = function()
-    --   local nnoremap = require('pypeaday.keymap_function').nnoremap
+use({
+  'heavenshell/vim-pydocstring',
+  run = 'make install',
+  ft = { 'python' },
+  -- config = function()
+  --   local nnoremap = require('pypeaday.keymap_function').nnoremap
 
-    --   -- for python... needs to get figured out
-    --   nnoremap("<leader>ad", "<cmd>Pydocstring<CR>")
-    -- end,
+  --   -- for python... needs to get figured out
+  --   nnoremap("<leader>ad", "<cmd>Pydocstring<CR>")
+  -- end,
 })
 
 -- Experimental
@@ -202,19 +202,19 @@ use {
   "folke/which-key.nvim",
 }
 
-use({'godlygeek/tabular'})
+use({ 'godlygeek/tabular' })
 
-use({'waylonwalker/Telegraph.nvim'})
+use({ 'waylonwalker/Telegraph.nvim' })
 
-use({'laytan/cloak.nvim'})
+use({ 'laytan/cloak.nvim' })
 
-use({'APZelos/blamer.nvim'})
+use({ 'APZelos/blamer.nvim' })
 
-use({'lfv89/vim-interestingwords'})
+use({ 'lfv89/vim-interestingwords' })
 
 use({
-    'amrbashir/nvim-docs-view', 
-    cmd={'DocsViewToggle'},
+  'amrbashir/nvim-docs-view',
+  cmd = { 'DocsViewToggle' },
 })
 
 -- TODO: setup neogen for python docstring generation
@@ -236,9 +236,9 @@ use({
 })
 
 -- :TZNarrow for focusing only on visual block -> useful for driving meetings
-use({'Pocco81/TrueZen.nvim'})
+use({ 'Pocco81/TrueZen.nvim' })
 
-use({'AndrewRadev/diffurcate.vim'})
+use({ 'AndrewRadev/diffurcate.vim' })
 
 use({
   'antoinemadec/FixCursorHold.nvim',
@@ -247,9 +247,9 @@ use({
   end,
 })
 
-use({'ThePrimeagen/vim-be-good'})
+use({ 'ThePrimeagen/vim-be-good' })
 
-use({ 
+use({
   'fgheng/winbar.nvim',
   requires = {
     "SmiteshP/nvim-navic",
