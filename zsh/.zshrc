@@ -72,7 +72,7 @@ alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
 
 # interactively destroy tmux sessions
-destroy() { 
+destroy() {
     tmux list-sessions -F '#{session_name}' | fzf -m | xargs -d $'\n' sh -c 'echo "killing $0"; tmux kill-session -t "$0"; for arg;do echo "killing $arg";tmux kill-session -t "$arg"; done'
 }
 bindkey -s '^d' 'destroy \n'
@@ -98,9 +98,16 @@ eval "$(starship init zsh)"
 # direnv
 eval "$(direnv hook zsh)"
 # homebrew
-eval "$($HOME/.linuxbrew/bin/brew shellenv)"
+if [ -d "$HOME/.linuxbrew" ]; then
+  export HOMEBREW_PREFIX="$HOME/.linuxbrew"
+  export PATH="$HOME/.linuxbrew/bin:$PATH"
+else
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+  export PATH="home/linuxbrew/.linuxbrew/bin:$PATH"
+fi
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
-# rust 
+# rust
 source "$HOME/.cargo/env"
 
 # fzf
