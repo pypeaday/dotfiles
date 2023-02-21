@@ -90,19 +90,7 @@ lsp.ensure_installed({
     "jsonls",
     "html",
     "terraformls",
-    "sumneko_lua",
     "marksman",
-})
-
--- Fix Undefined global 'vim'
-lsp.configure("sumneko_lua", {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
-            },
-        },
-    },
 })
 
 lsp.configure("pylsp", {
