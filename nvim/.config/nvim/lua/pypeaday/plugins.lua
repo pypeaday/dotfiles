@@ -1,10 +1,10 @@
 -- Install packer
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
-    vim.cmd [[packadd packer.nvim]]
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    vim.cmd([[packadd packer.nvim]])
     return true
   end
   return false
@@ -13,54 +13,51 @@ end
 local packer_bootstrap = ensure_packer()
 
 -- Initialize packer
-require('packer').init({
-  compile_path = vim.fn.stdpath('data') .. '/site/plugin/packer_compiled.lua',
+require("packer").init({
+  compile_path = vim.fn.stdpath("data") .. "/site/plugin/packer_compiled.lua",
   display = {
     open_fn = function()
-      return require('packer.util').float({ border = 'solid' })
+      return require("packer.util").float({ border = "solid" })
     end,
   },
 })
 
 -- Install plugins
-local use = require('packer').use
+local use = require("packer").use
 
-use('wbthomason/packer.nvim') -- Let packer manage itself
+use("wbthomason/packer.nvim") -- Let packer manage itself
 
-use('tpope/vim-commentary')
+use("tpope/vim-commentary")
 -- use('tpope/vim-repeat')
-use('tpope/vim-surround')
-use('tpope/vim-dispatch')
-use('tpope/vim-repeat')
+use("tpope/vim-surround")
+use("tpope/vim-dispatch")
+use("tpope/vim-repeat")
 -- use('nelstrom/vim-visual-star-search')
 
-use { "catppuccin/nvim", as = "catppuccin" }
-
+use({ "catppuccin/nvim", as = "catppuccin" })
 
 use({
-  'windwp/nvim-autopairs',
+  "windwp/nvim-autopairs",
   config = function()
-    require('nvim-autopairs').setup()
+    require("nvim-autopairs").setup()
   end,
 })
 
-
 use({
-  'nvim-lualine/lualine.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
-})
-
-
-use({
-  'kyazdani42/nvim-tree.lua',
-  requires = 'kyazdani42/nvim-web-devicons',
+  "nvim-lualine/lualine.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
 })
 
 use({
-  'rcarriga/vim-ultest',
+  "kyazdani42/nvim-tree.lua",
+  requires = "kyazdani42/nvim-web-devicons",
+})
+
+use({
+  "rcarriga/vim-ultest",
   requires = {
-    'nvim-neotest/neotest',
-    'vim-test/vim-test',
+    "nvim-neotest/neotest",
+    "vim-test/vim-test",
   },
   run = ":UpdateRemotePlugins",
 })
@@ -76,44 +73,44 @@ use({
 --   end,
 -- })
 
-use({ 'ThePrimeagen/harpoon' })
+use({ "ThePrimeagen/harpoon" })
 
 use({
-  'nvim-telescope/telescope.nvim',
+  "nvim-telescope/telescope.nvim",
   requires = {
-    { 'nvim-lua/plenary.nvim' },
-    { 'kyazdani42/nvim-web-devicons' },
-    { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-    { 'nvim-telescope/telescope-live-grep-args.nvim' },
+    { "nvim-lua/plenary.nvim" },
+    { "kyazdani42/nvim-web-devicons" },
+    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    { "nvim-telescope/telescope-live-grep-args.nvim" },
   },
 })
 
 use({
-  'nvim-treesitter/nvim-treesitter',
+  "nvim-treesitter/nvim-treesitter",
   run = ":TSUpdate",
   requires = {
-    'nvim-treesitter/playground',
-    'nvim-treesitter/nvim-treesitter-textobjects',
+    "nvim-treesitter/playground",
+    "nvim-treesitter/nvim-treesitter-textobjects",
     -- 'JoosepAlviste/nvim-ts-context-commentstring',
   },
 })
 
 -- TODO: explore this to replace my individual black, flake8, etc stuff
-use({ 'sbdchd/neoformat', })
+use({ "sbdchd/neoformat" })
 
-use({ 'wellle/targets.vim' })
+use({ "wellle/targets.vim" })
 
 use({
-  'tpope/vim-fugitive',
-  requires = 'tpope/vim-rhubarb',
-  cmd = 'G',
+  "tpope/vim-fugitive",
+  requires = "tpope/vim-rhubarb",
+  cmd = "G",
 })
 
 use({
-  'lewis6991/gitsigns.nvim',
-  requires = 'nvim-lua/plenary.nvim',
+  "lewis6991/gitsigns.nvim",
+  requires = "nvim-lua/plenary.nvim",
   config = function()
-    require('gitsigns').setup({
+    require("gitsigns").setup({
       -- sign_priority = 20,
       -- on_attach = function(bufnr)
       --   vim.keymap.set('n', ']h', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true, buffer = bufnr })
@@ -123,30 +120,30 @@ use({
   end,
 })
 
-use { 'onsails/lspkind.nvim' }
+use({ "onsails/lspkind.nvim" })
 
-use {
-  'VonHeikemen/lsp-zero.nvim',
+use({
+  "VonHeikemen/lsp-zero.nvim",
   requires = {
     -- LSP Support
-    { 'neovim/nvim-lspconfig' },
-    { 'williamboman/mason.nvim' },
-    { 'williamboman/mason-lspconfig.nvim' },
+    { "neovim/nvim-lspconfig" },
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim" },
 
     -- Autocompletion
-    { 'hrsh7th/nvim-cmp' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-path' },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'hrsh7th/cmp-nvim-lua' },
-    { 'petertriho/cmp-git' },
+    { "hrsh7th/nvim-cmp" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-path" },
+    { "saadparwaiz1/cmp_luasnip" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "hrsh7th/cmp-nvim-lua" },
+    { "petertriho/cmp-git" },
 
     -- Snippets
-    { 'L3MON4D3/LuaSnip' },
-    { 'rafamadriz/friendly-snippets' },
+    { "L3MON4D3/LuaSnip" },
+    { "rafamadriz/friendly-snippets" },
   },
-}
+})
 
 use({
   "williamboman/mason.nvim",
@@ -155,34 +152,32 @@ use({
 })
 
 use({
-  'glepnir/lspsaga.nvim',
+  "glepnir/lspsaga.nvim",
   -- config = function()
   --   require('pypeaday.lspsaga')
   -- end,
 })
 
-use({ 'itchyny/vim-gitbranch' })
-
+use({ "itchyny/vim-gitbranch" })
 
 use({
-  'L3MON4D3/LuaSnip',
+  "L3MON4D3/LuaSnip",
   requires = {
     "rafamadriz/friendly-snippets",
   },
 })
 
-
 -- LaTex
 use({
-  'lervag/vimtex',
+  "lervag/vimtex",
 })
 
 -- Python Specific
 -- settings in options.lua for now
 use({
-  'heavenshell/vim-pydocstring',
-  run = 'make install',
-  ft = { 'python' },
+  "heavenshell/vim-pydocstring",
+  run = "make install",
+  ft = { "python" },
   -- config = function()
   --   local nnoremap = require('pypeaday.keymap_function').nnoremap
 
@@ -192,74 +187,74 @@ use({
 })
 
 -- Experimental
-use {
+use({
   "folke/which-key.nvim",
-}
+})
 
-use({ 'godlygeek/tabular' })
+use({ "godlygeek/tabular" })
 
-use({ 'waylonwalker/Telegraph.nvim' })
+use({ "waylonwalker/Telegraph.nvim" })
 
-use({ 'laytan/cloak.nvim' })
+use({ "laytan/cloak.nvim" })
 
-use({ 'APZelos/blamer.nvim' })
+use({ "APZelos/blamer.nvim" })
 
-use({ 'lfv89/vim-interestingwords' })
+use({ "lfv89/vim-interestingwords" })
 
 use({
-  'amrbashir/nvim-docs-view',
-  cmd = { 'DocsViewToggle' },
+  "amrbashir/nvim-docs-view",
+  cmd = { "DocsViewToggle" },
 })
 
 -- TODO: setup neogen for python docstring generation
 use({
-  'danymat/neogen',
+  "danymat/neogen",
   config = function()
-    require('neogen').setup({})
+    require("neogen").setup({})
   end,
-  requires = 'nvim-treesitter/nvim-treesitter',
+  requires = "nvim-treesitter/nvim-treesitter",
 })
 
 use({
-  'sheerun/vim-polyglot',
+  "sheerun/vim-polyglot",
 })
 
 use({
-  'folke/trouble.nvim',
-  requires = 'kyazdani42/nvim-web-devicons',
+  "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
 })
 
 -- :TZNarrow for focusing only on visual block -> useful for driving meetings
-use({ 'Pocco81/TrueZen.nvim' })
+use({ "Pocco81/TrueZen.nvim" })
 
-use({ 'AndrewRadev/diffurcate.vim' })
+use({ "AndrewRadev/diffurcate.vim" })
 
 use({
-  'antoinemadec/FixCursorHold.nvim',
+  "antoinemadec/FixCursorHold.nvim",
   config = function()
     vim.g.cursorhold_updatetime = 100
   end,
 })
 
-use({ 'ThePrimeagen/vim-be-good' })
+use({ "ThePrimeagen/vim-be-good" })
 
 use({
-  'fgheng/winbar.nvim',
+  "fgheng/winbar.nvim",
   requires = {
     "SmiteshP/nvim-navic",
     "neovim/nvim-lspconfig",
-    "nvim-tree/nvim-web-devicons"
+    "nvim-tree/nvim-web-devicons",
   },
 })
 
 -- Like Git Graph in VS C**e
-use {
-  'junegunn/gv.vim'
-}
+use({
+  "junegunn/gv.vim",
+})
 
-use {
-  'lambdalisue/suda.vim'
-}
+use({
+  "lambdalisue/suda.vim",
+})
 
 -- use {
 --   'kkoomen/vim-doge',
@@ -268,7 +263,7 @@ use {
 
 -- Automatically install plugins on first run
 if packer_bootstrap then
-  require('packer').sync()
+  require("packer").sync()
 end
 
 -- Automatically regenerate compiled loader file on save
