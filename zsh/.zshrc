@@ -70,6 +70,7 @@ alias azprojects="az repos list --project RA-Pipelines | vd -f json"
 alias awsrules="aws events list-rules | visidata -f json"
 alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
+alias set_openai='export OPENAI_API_KEY=$(cat ~/.openai/apikey)'
 
 # interactively destroy tmux sessions
 destroy() {

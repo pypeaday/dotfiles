@@ -278,3 +278,18 @@ vim.cmd([[
     autocmd BufWritePost plugins.lua source <afile>
   augroup end
 ]])
+
+-- Packer
+use({
+  "jackMort/ChatGPT.nvim",
+  config = function()
+    require("chatgpt").setup({
+      -- optional configuration
+    })
+  end,
+  requires = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
+})
