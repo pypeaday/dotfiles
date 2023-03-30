@@ -268,6 +268,20 @@ use({
   },
 })
 
+use({
+  "jackMort/ChatGPT.nvim",
+  config = function()
+    require("chatgpt").setup({
+      -- optional configuration
+    })
+  end,
+  requires = {
+    "MunifTanjim/nui.nvim",
+    "nvim-lua/plenary.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
+})
+
 -- use {
 --   'kkoomen/vim-doge',
 --   run = ':call doge#install()'
@@ -287,16 +301,3 @@ vim.cmd([[
 ]])
 
 -- Packer
-use({
-  "jackMort/ChatGPT.nvim",
-  config = function()
-    require("chatgpt").setup({
-      -- optional configuration
-    })
-  end,
-  requires = {
-    "MunifTanjim/nui.nvim",
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
-  },
-})
