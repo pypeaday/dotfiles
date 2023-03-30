@@ -256,6 +256,18 @@ use({
   "lambdalisue/suda.vim",
 })
 
+use({
+  "SmiteshP/nvim-navbuddy",
+  config = function()
+    require("navbuddy").setup({})
+  end,
+  requires = {
+    "neovim/nvim-lspconfig",
+    "SmiteshP/nvim-navic",
+    "MunifTanjim/nui.nvim",
+  },
+})
+
 -- use {
 --   'kkoomen/vim-doge',
 --   run = ':call doge#install()'
