@@ -10,3 +10,13 @@ vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.pydocstring_doq_path = "$HOME/.local/bin/doq"
 vim.g.pydocstring_templates_path = "$HOME/dotfiles/doq/"
+
+-- blamer
+vim.g.blamer_enabled = 1
+vim.g.blamer_prefix = ' > '
+vim.g.blamer_show_in_visual_modes = 0
+vim.g.blamer_show_in_insert_modes = 0
+vim.g.blamer_delay = 500
+--Available options: <author>, <author-mail>, <author-time>, <committer>, <committer-mail>, <committer-time>, <summary>, <commit-short>, <commit-long>
+vim.g.blamer_template = '<committer>, <committer-time>, <summary>'
+vim.g.blamer_relative_time = 0 
