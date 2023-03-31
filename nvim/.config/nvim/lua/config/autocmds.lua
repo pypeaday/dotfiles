@@ -59,9 +59,6 @@ null_ls.setup({
   sources = {
     -- formatting
     null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
-    -- null_ls.builtins.formatting.tidy_import,
-    null_ls.builtins.formatting.ruff,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.yamlfmt,
     null_ls.builtins.formatting.sqlformat,
@@ -69,14 +66,14 @@ null_ls.setup({
     null_ls.builtins.formatting.trim_whitespace,
     null_ls.builtins.formatting.trim_newlines,
     null_ls.builtins.formatting.json_tool,
-    null_ls.builtins.diagnostics.hadolint,
+    null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
+    -- null_ls.builtins.formatting.tidy_import,
+    null_ls.builtins.formatting.ruff,
     null_ls.builtins.formatting.isort.with({ extra_args = { "--sl" } }),
 
     -- diagnostics
-    -- null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.markdownlint,
-    -- do I need flake8 config in pylsp setup?
-    -- null_ls.builtins.diagnostics.flake8,
+    null_ls.builtins.diagnostics.hadolint,
 
     -- completions
     null_ls.builtins.completion.spell,
