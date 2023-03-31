@@ -32,11 +32,6 @@ vnoremap = bind("v")
 xnoremap = bind("x")
 inoremap = bind("i")
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
--- " Be faster
-vim.cmd(":command W w")
-
 -- " Behave Vim
 --
 nnoremap("Y", "y$")

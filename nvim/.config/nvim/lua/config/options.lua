@@ -11,6 +11,11 @@ vim.g.loaded_perl_provider = 0
 vim.g.pydocstring_doq_path = "$HOME/.local/bin/doq"
 vim.g.pydocstring_templates_path = "$HOME/dotfiles/doq/"
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+-- " Be faster
+vim.cmd(":command W w")
+
 -- blamer
 vim.g.blamer_enabled = 1
 vim.g.blamer_prefix = " > "
