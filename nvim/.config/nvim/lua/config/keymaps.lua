@@ -194,3 +194,11 @@ nnoremap("<leader>ch", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
 --   { noremap = true, desc = "" }
 -- )
 -- vim.keymap.set("n", "<leader>vn", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", { noremap = true, desc = "" })
+--
+-- Ultest, Neotest, ...
+
+nnoremap("<leader>tn", "<cmd>UltestNearest<CR>")
+nnoremap("<leader>ts", "<cmd>UltestSummary<CR>")
+nmap("ss", "<Plug>(ultest-output-jump)")
+nnoremap("<leader>tf", "<cmd>TestFile<CR>")
+nnoremap("<leader>tl", "<cmd>TestLast<CR>")
