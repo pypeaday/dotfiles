@@ -2,6 +2,9 @@
 export ZSH=$HOME/.oh-my-zsh
 export DOTFILES=$HOME/dotfiles
 
+# just placeholder for nvim chatgpt plugin
+export OPENAI_API_KEY="SETME"
+
 # add pyenv to path
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
