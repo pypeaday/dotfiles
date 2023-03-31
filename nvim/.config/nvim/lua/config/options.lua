@@ -30,8 +30,8 @@ vim.g.blamer_relative_time = 0
 vim.g.ultest_deprecation_notice = 0
 
 vim.cmd([[
-    let test#python#runner = 'pytest'
     let test#python#pytest#options = "--color=yes"
+    let test#python#runner = "pytest"
 ]])
 
 vim.g.ultest_use_pty = 1
