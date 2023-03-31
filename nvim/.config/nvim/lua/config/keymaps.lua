@@ -18,37 +18,33 @@ end
 local M = {}
 
 local function bind(op, outer_opts)
-    outer_opts = outer_opts or {noremap = true}
-    return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force",
-            outer_opts,
-            opts or {}
-        )
-        vim.keymap.set(op, lhs, rhs, opts)
-        -- vim.api.nvim_set_keymap(op, lhs, rhs, opts)
-    end
+  outer_opts = outer_opts or { noremap = true }
+  return function(lhs, rhs, opts)
+    opts = vim.tbl_extend("force", outer_opts, opts or {})
+    vim.keymap.set(op, lhs, rhs, opts)
+    -- vim.api.nvim_set_keymap(op, lhs, rhs, opts)
+  end
 end
 
-
-nmap = bind("n", {noremap = false})
+nmap = bind("n", { noremap = false })
 nnoremap = bind("n")
 vnoremap = bind("v")
 xnoremap = bind("x")
 inoremap = bind("i")
 
-vim.g.mapleader=" "
-vim.g.maplocalleader=" "
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 -- " Be faster
 vim.cmd(":command W w")
 
 -- " Behave Vim
 --
-nnoremap("Y","y$" )
+nnoremap("Y", "y$")
 vnoremap("<", "<gv")
 vnoremap(">", ">gv")
 -- " yank text to first regiter then when you paste it the yanked text is still first in the register
--- " vnoremap <Leader>p "_P 
-vnoremap("<leader>p", '"0p') 
+-- " vnoremap <Leader>p "_P
+vnoremap("<leader>p", '"0p')
 
 -- " ESC
 inoremap("jk", "<esc>")
@@ -58,15 +54,15 @@ nnoremap("n", "nzzzv")
 nnoremap("N", "Nzzzv")
 nnoremap("J", "mzJ`z")
 
-nnoremap("<c-d>","<c-d>zz")
-nnoremap("<c-u","<c-u>zz")
+nnoremap("<c-d>", "<c-d>zz")
+nnoremap("<c-u", "<c-u>zz")
 
 -- " Undo Breakpoints
-inoremap(",", ",<c-g>u") 
-inoremap(".", ".<c-g>u") 
-inoremap("!", "!<c-g>u") 
-inoremap("?", "?<c-g>u") 
-inoremap("[", "[<c-g>u") 
+inoremap(",", ",<c-g>u")
+inoremap(".", ".<c-g>u")
+inoremap("!", "!<c-g>u")
+inoremap("?", "?<c-g>u")
+inoremap("[", "[<c-g>u")
 
 -- " Jumplist
 nnoremap("<expr> k", "(v:count > 5 ? 'm'' . v:count : '') . 'k' ")
@@ -94,10 +90,10 @@ nnoremap("<expr> j", "(v:count > 5 ? 'm'' . v:count : '') . 'j' ")
 --     ]],
 --     true)
 
--- nnoremap("<Leader>qft", "<cmd>ToggleQuickFix<CR>") 
--- nnoremap("<Leader>qfc", "<cmd>cexpr []<CR>") 
+-- nnoremap("<Leader>qft", "<cmd>ToggleQuickFix<CR>")
+-- nnoremap("<Leader>qfc", "<cmd>cexpr []<CR>")
 -- nnoremap("<C-n>", "<cmd>cnext<CR>")
--- nnoremap("<C-p> ", "<cmd>cprev<CR>") 
+-- nnoremap("<C-p> ", "<cmd>cprev<CR>")
 
 -- " Moving text
 vnoremap("J", "<cmd>m '>+1<CR>gv=gv")
@@ -115,12 +111,12 @@ inoremap("<C-k>", "<esc><cmd>m .-2<CR>==")
 vnoremap("<Leader>y", ' "+y')
 
 -- " edit nvim dotfiles
-nnoremap("gek", "<cmd>e ~/.config/nvim/lua/pypeaday/keymap.lua<CR>")  
-nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins/lspconfig.lua<CR>")  
-nnoremap("gep", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins.lua<CR>")  
-nnoremap("ges", "<cmd>e ~/.config/nvim/lua/pypeaday/settings.lua<CR>")  
-nnoremap("geo", "<cmd>e ~/.config/nvim/lua/pypeaday/options.lua<CR>")  
-nnoremap("gem", "<cmd>e ~/.config/nvim/lua/pypeaday/misc.lua<CR>")  
+nnoremap("gek", "<cmd>e ~/.config/nvim/lua/pypeaday/keymap.lua<CR>")
+nnoremap("gel", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins/lspconfig.lua<CR>")
+nnoremap("gep", "<cmd>e ~/.config/nvim/lua/pypeaday/plugins.lua<CR>")
+nnoremap("ges", "<cmd>e ~/.config/nvim/lua/pypeaday/settings.lua<CR>")
+nnoremap("geo", "<cmd>e ~/.config/nvim/lua/pypeaday/options.lua<CR>")
+nnoremap("gem", "<cmd>e ~/.config/nvim/lua/pypeaday/misc.lua<CR>")
 
 nnoremap("get", "<cmd>e ~/.tmux.conf.local<CR>")
 nnoremap("gez", "<cmd>e ~/.zshrc<CR>")
@@ -136,13 +132,15 @@ nnoremap("[C", "<cmd><C-U>PrevUncovered<CR>")
 nnoremap("]C", "<cmd><C-U>NextUncovered<CR>")
 nnoremap("<leader>c", "<cmd>ToggleCoverage<CR>")
 
-
 -- " Testing things
--- "―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― 
+-- "――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
 -- " Work
 nnoremap("gec", "<cmd>e ~/.caterpillar/credentials.yml<CR>")
 -- " nnoremap <leader><leader>vd <cmd>lua require'telegraph'.telegraph({cmd='pipx run visidata {cWORD}', how='tmux'})<CR>
-nnoremap("<leader><leader>vd", "<cmd>lua require'telegraph'.telegraph({cmd='tmux display-popup  -h 95% -w 95% -E \"visidata {cWORD}\"', how='subprocess'})<CR>")
+nnoremap(
+  "<leader><leader>vd",
+  "<cmd>lua require'telegraph'.telegraph({cmd='tmux display-popup  -h 95% -w 95% -E \"visidata {cWORD}\"', how='subprocess'})<CR>"
+)
 -- " nnoremap <leader><leader>vd <cmd>lua require'telegraph'.telegraph({cmd='visidata {cWORD}', how='tmux_popup'})<CR>
 --
 -- might be unnecessary with neoformat
@@ -153,8 +151,10 @@ vim.cmd(":command Unformat :%!jq -c .")
 
 nnoremap("gen", "<cmd>Telescope find_files cwd=~/.config/nvim <CR>")
 nnoremap("<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>")
-nnoremap("<Leader>pf",
-    "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>")
+nnoremap(
+  "<Leader>pf",
+  "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>"
+)
 nnoremap("<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
 nnoremap("<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search =  vim.fn.expand(\"<cword>\") }<CR>")
 nnoremap("<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<CR>")

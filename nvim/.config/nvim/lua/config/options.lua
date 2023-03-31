@@ -13,17 +13,20 @@ vim.g.pydocstring_templates_path = "$HOME/dotfiles/doq/"
 
 -- blamer
 vim.g.blamer_enabled = 1
-vim.g.blamer_prefix = ' > '
+vim.g.blamer_prefix = " > "
 vim.g.blamer_show_in_visual_modes = 0
 vim.g.blamer_show_in_insert_modes = 0
 vim.g.blamer_delay = 500
 --Available options: <author>, <author-mail>, <author-time>, <committer>, <committer-mail>, <committer-time>, <summary>, <commit-short>, <commit-long>
-vim.g.blamer_template = '<committer>, <committer-time>, <summary>'
-vim.g.blamer_relative_time = 0 
+vim.g.blamer_template = "<committer>, <committer-time>, <summary>"
+vim.g.blamer_relative_time = 0
+
 -- ultest
 vim.g.ultest_deprecation_notice = 0
+
 vim.cmd([[
     let test#python#runner = 'pytest'
     let test#python#pytest#options = "--color=yes"
 ]])
+
 vim.g.ultest_use_pty = 1
