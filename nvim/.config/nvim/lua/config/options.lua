@@ -8,8 +8,6 @@ vim.g.indent_guides_enable_on_vim_startup = 1
 vim.g.ackprg = "ag --vimgrep --hidden"
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.pydocstring_doq_path = "$HOME/.local/bin/doq"
-vim.g.pydocstring_templates_path = "$HOME/dotfiles/doq/"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
