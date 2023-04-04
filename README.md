@@ -6,6 +6,7 @@ There is a lot of overlap but also some key distinctions -> see notes on each to
 ## Tools
 
 - nvim (PDE/IDE)
+- I use LazyVim as an nvim distro and customize it a bit more to my liking
 - tmux (session manager)
 - i3-gaps (work: Tiling window manager)
 - pop_os! 22.04 (home: OS and DE)
@@ -22,7 +23,7 @@ There is a lot of overlap but also some key distinctions -> see notes on each to
 - rofi (work: app launcher)
 - visidata (terminal-based data viewer)
 - zsh (shell)
-- [fancy-motdj](https://github.com/bcyran/fancy-motd)
+- [fancy-motd](https://github.com/bcyran/fancy-motd)
 
 ## Stow
 
@@ -30,12 +31,18 @@ Use `stow` since it's awesome!
 
 For a quick intro check out [ThePrimeagen's YT video](https://www.youtube.com/watch?v=tkUllCAGs3c)
 
-Caveats: fresh machine will need https://github.com/gpakosz/.tmux and https://github.com/ohmyzsh/ohmyzsh setup first
-Then using the OS script (`ubuntu` or `work` set the variables and let `stow` do the rest!)
+## Nvim
+
+I use [The freaking amazing LazyVim by @Folke](https://www.lazyvim.org/) as my vim experience. Checkout the getting started and feel free to rip my config.
+
+Setup looks like:
+
+1. Install [requirements](https://www.lazyvim.org/#%EF%B8%8F-requirements)
+2. Start nvim
+3. profit
 
 ## Notes
 
-- My tmux stuff jumps you right into `base` tmux session when you open a terminal that inits my `zshrc`
 - If starship is showing your environment twice set the following:
   `conda config --set changeps1 false` and then resource `zsh`
 - For polybar colorizing icons I just have polybar render the output through a font like this `content = "%{T4}%{F#5d3fd3}省%{F-}%{T-}"` Where a font is chosen (T4) then the color I want follows the `F#` with the icon placed after the brace. The font size can be huge for some icons depending on where they come from
