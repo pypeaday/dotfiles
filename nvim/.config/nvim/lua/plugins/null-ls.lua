@@ -20,8 +20,8 @@ return {
       filetypes = { "python" },
       generator_opts = {
         command = "tidy-imports",
+        "--quiet",
         args = {
-          "--quiet",
           "--replace-star-imports",
           "--add-missing",
           "--replace",
