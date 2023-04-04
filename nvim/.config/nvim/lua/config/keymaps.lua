@@ -16,7 +16,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local M = {}
-
 local function bind(op, outer_opts)
   outer_opts = outer_opts or { noremap = true }
   return function(lhs, rhs, opts)
@@ -157,8 +156,7 @@ nnoremap("<leader>pl", "<cmd>lua require('telescope.builtin').loclist()<CR>")
 nnoremap("<leader>ch", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
 
 --
--- -- lsp
--- vim.keymap.set("i", "jk", "<esc>", { desc = "Exit Insert Mode with jk" })
+-- I'm not using any of these anymore - trying to use whatever is in Lazyvim
 -- vim.keymap.set(
 --   "n",
 --   "<silent> (( ",
@@ -197,3 +195,24 @@ nnoremap("<leader>ts", "<cmd>UltestSummary<CR>")
 nmap("ss", "<Plug>(ultest-output-jump)")
 nnoremap("<leader>tf", "<cmd>TestFile<CR>")
 nnoremap("<leader>tl", "<cmd>TestLast<CR>")
+
+-- LspSaga
+-- I use Lspsaga mainly for the outline and peek definition. I replace hover since it's nicer
+local keymap = vim.keymap.set
+-- Lsp finder find the symbol definition implement reference
+-- if there is no implement it will hide
+-- when you use action in finder like open vsplit then you can
+-- use <C-t> to jump back
+keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+
+keymap("n", "<leader>gr", "<cmd>Lspsaga rename<CR>", { silent = true })
+keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+
+-- Peek Definition
+-- you can edit the definition file in this flaotwindow
+-- also support open/vsplit/etc operation check definition_action_keys
+-- support tagstack C-t jump back
+keymap("n", "<leader>pd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+
+-- Outline
+keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { silent = true })
