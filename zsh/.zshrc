@@ -2,6 +2,9 @@
 export ZSH=$HOME/.oh-my-zsh
 export DOTFILES=$HOME/dotfiles
 
+# just placeholder for nvim chatgpt plugin
+export OPENAI_API_KEY="SETME"
+
 # add pyenv to path
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -46,8 +49,8 @@ export LC_ALL=en_US.UTF-8
 
 # fuzzy find to directories with fzf
 c() {
-     cd && cd "$(find -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
- }
+    cd && cd "$(find -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
+}
 
 # Change backgrounds
 background() {
@@ -70,6 +73,7 @@ alias azprojects="az repos list --project RA-Pipelines | vd -f json"
 alias awsrules="aws events list-rules | visidata -f json"
 alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
+alias set_openai='export OPENAI_API_KEY=$(cat ~/.openai/apikey)'
 
 # interactively destroy tmux sessions
 destroy() {
@@ -99,11 +103,11 @@ eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 # homebrew
 if [ -d "$HOME/.linuxbrew" ]; then
-  export HOMEBREW_PREFIX="$HOME/.linuxbrew"
-  export PATH="$HOME/.linuxbrew/bin:$PATH"
+    export HOMEBREW_PREFIX="$HOME/.linuxbrew"
+    export PATH="$HOME/.linuxbrew/bin:$PATH"
 else
-  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-  export PATH="home/linuxbrew/.linuxbrew/bin:$PATH"
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+    export PATH="home/linuxbrew/.linuxbrew/bin:$PATH"
 fi
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
@@ -127,12 +131,12 @@ eval "$(pyenv init --path)"
 # eval "$(pyenv virtualenv-init -)"
 # BEGIN ANSIBLE MANAGED BLOCK: pyenv
 if [ -e "$HOME/.pyenv/.pyenvrc" ]; then
-  source $HOME/.pyenv/.pyenvrc
-  if [ -e "$HOME/.pyenv/completions/pyenv.zsh" ]; then
-    source $HOME/.pyenv/completions/pyenv.zsh
-  elif [ -e "/usr/local/opt/pyenv/completions/pyenv.zsh" ]; then
-    source /usr/local/opt/pyenv/completions/pyenv.zsh
-  fi
+    source $HOME/.pyenv/.pyenvrc
+    if [ -e "$HOME/.pyenv/completions/pyenv.zsh" ]; then
+        source $HOME/.pyenv/completions/pyenv.zsh
+    elif [ -e "/usr/local/opt/pyenv/completions/pyenv.zsh" ]; then
+        source /usr/local/opt/pyenv/completions/pyenv.zsh
+    fi
 fi
 # END ANSIBLE MANAGED BLOCK: pyenv
 
