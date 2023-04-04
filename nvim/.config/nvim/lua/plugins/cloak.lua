@@ -1,0 +1,19 @@
+return {
+ "laytan/cloak.nvim",
+  config = function ()
+    require('cloak').setup({
+      enabled = true,
+      patterns = {
+        {
+          -- Match any file starting with '.yml'.
+          file_pattern = {
+            'credentials.yml',
+            '.env'
+          },
+          -- Match a con: sign and any character after it.
+          cloak_pattern = ':.+'
+        },
+      },
+    })
+ end
+}
