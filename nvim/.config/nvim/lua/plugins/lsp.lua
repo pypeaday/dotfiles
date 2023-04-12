@@ -25,6 +25,7 @@ return {
 
       lsp.ensure_installed({
         "pylsp",
+        "ruff_lsp",
         -- "jedi_language_server",
         "dockerls",
         "bashls",
@@ -40,9 +41,13 @@ return {
           pylsp = {
             -- configurationSources = { "flake8" },
             plugins = {
+              ruff = {
+                enabled = true,
+                extendSelect = { "I" },
+              },
+              pyflakes = { enabled = false },
               pycodestyle = { enabled = false },
               flake8 = { enabled = false },
-              pyflakes = { enabled = false },
               mypy = {
                 enabled = true,
                 live_mode = true,
