@@ -29,21 +29,31 @@ return {
         -- "jedi_language_server",
         "dockerls",
         "bashls",
-        "yamlls",
+        -- "yamlls",
         "jsonls",
         "html",
         "terraformls",
         "marksman",
       })
+      -- lsp.configure("yamlls", {
+      --   settings = {
+      --     yaml = {
+      --       enabled = false,
+      --       keyOrdering = false,
+      --     },
+      --   },
+      -- })
 
       lsp.configure("pylsp", {
         settings = {
           pylsp = {
             -- configurationSources = { "flake8" },
+            enabled = { false },
             plugins = {
               ruff = {
-                enabled = true,
-                extendSelect = { "I" },
+                enabled = false,
+                Select = { "I" },
+                extendIgnore = { "E501" },
               },
               pyflakes = { enabled = false },
               pycodestyle = { enabled = false },
