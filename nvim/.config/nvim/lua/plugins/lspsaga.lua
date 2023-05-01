@@ -5,7 +5,15 @@ return {
   config = function()
     local saga = require("lspsaga")
 
-    saga.setup({})
+    saga.setup({
+      lightbulb = {
+        enable = false,
+        enable_in_insert = true,
+        sign = true,
+        sign_priority = 40,
+        virtual_text = true,
+      },
+    })
   end,
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
