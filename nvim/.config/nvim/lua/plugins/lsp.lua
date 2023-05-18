@@ -5,17 +5,22 @@ return {
     dependencies = {
       -- LSP Support
       { "neovim/nvim-lspconfig" }, -- Required
-      -- {                                      -- Optional
-      --   'williamboman/mason.nvim',
-      --   build = function()
-      --     pcall(vim.cmd, 'MasonUpdate')
-      --   end,
-      -- },
+      { -- Optional
+        "williamboman/mason.nvim",
+        build = function()
+          pcall(vim.cmd, "MasonUpdate")
+        end,
+      },
       { "williamboman/mason-lspconfig.nvim" }, -- Optional
 
       -- Autocompletion
       { "hrsh7th/nvim-cmp" }, -- Required
-      { "hrsh7th/cmp-nvim-lsp" }, -- Required
+      {
+        "hrsh7th/cmp-nvim-lsp",
+        cond = function()
+          return require("lazyvim.util").has("nvim-cmp")
+        end,
+      }, -- Required
       { "L3MON4D3/LuaSnip" }, -- Required
     },
     config = function()
