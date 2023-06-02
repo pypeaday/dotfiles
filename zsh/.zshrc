@@ -16,6 +16,11 @@ export PATH="$APP_IMAGE_ROOT:$PATH"
 # make sure .local/bin is on path
 export PATH="$HOME/.local/bin:$PATH"
 
+# make sure mason packages are on PATH
+
+export MASON_PATH=$HOME/.local/share/nvim/mason/bin
+export PATH="$PATH:$MASON_PATH"
+
 # make sure npm packages are on path
 export NPM_PACKAGES_ROOT="$HOME/.local/.npm-global"
 export NPM_PACKAGES="$NPM_PACKAGES_ROOT/bin"
