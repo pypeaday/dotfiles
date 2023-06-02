@@ -7,7 +7,7 @@ if true then
       servers = {
         pylsp = {
           -- configurationSources = { "flake8" },
-          enabled = { true },
+          -- enabled = { false },
           plugins = {
             ruff = {
               enabled = true,
