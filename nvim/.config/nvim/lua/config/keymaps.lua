@@ -104,6 +104,7 @@ nnoremap("<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ sear
 nnoremap(
   "<Leader>pf",
   "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>"
+  -- "<cmd>lua require'telescope.builtin'.find_files()<cr>"
 )
 nnoremap("<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
 nnoremap("<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search =  vim.fn.expand(\"<cword>\") }<CR>")

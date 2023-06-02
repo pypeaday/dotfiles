@@ -19,6 +19,7 @@ return {
             prompt_prefix = " >",
             color_devicons = true,
             file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+            -- find_command = { "rg", "--files", "--no-ignore", "--hidden", "--iglob", "!.venv", "-g", "!.git" },
             -- find_command = {
             --     'rg',
             --     '--no-ignore',
@@ -29,6 +30,8 @@ return {
             --     '-g',
             --     '!.git'
             -- },
+            -- using ag was a little slower than rg for me
+            -- vimgrep_arguments = { "ag", "--vimgrep", "--unrestricted", "--ignore", ".venv" },
             vimgrep_arguments = {
               "rg",
               "--no-ignore",
@@ -52,6 +55,7 @@ return {
               "mypy_cache",
               "htmlcov",
               "pytest_cache",
+              ".null-ls*.py",
             },
             mappings = {
               i = {
