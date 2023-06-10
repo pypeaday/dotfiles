@@ -45,8 +45,9 @@ return {
       method = FORMATTING,
       filetypes = { "python" },
       generator_opts = {
-        command = "ruff check",
+        command = "ruff",
         args = {
+          "check",
           "$FILENAME",
           "--fix",
         },
