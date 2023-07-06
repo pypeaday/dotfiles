@@ -1,13 +1,21 @@
 #!/bin/bash
 
-# echo "Syncing nic@hogwarts:tank/nas!" >> /home/nic/mycron.log
-syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/nas tank/encrypted/nas
+echo "Syncing nic@hogwarts:tank/encrypted!" >> /home/nic/mycron.log
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted tank/encrypted
 
-# echo "Syncing nic@hogwarts:tank/vms!" >> /home/nic/mycron.log
-syncoid --skip-parent --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
-
-# echo "Syncing nic@hogwarts:tank/10Fold!" >> /home/nic/mycron.log
+echo "Syncing nic@hogwarts:tank/encrypted/10Fold!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/10Fold tank/encrypted/10Fold
 
-# echo "Syncing nic@hogwarts:tank/docker!" >> /home/nic/mycron.log
+echo "Syncing nic@hogwarts:tank/encrypted/nas! excluding tank/encrypted/nas/media" >> /home/nic/mycron.log
+syncoid --no-sync-snap --sendoptions=w -r --exclude tank/encrypted/nas/media --no-privilege-elevation nic@hogwarts:tank/encrypted/nas tank/encrypted/nas
+
+echo "Syncing nic@hogwarts:tank/encrypted/vms!" >> /home/nic/mycron.log
+# syncoid --skip-parent --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms tank/encrypted/vms
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms/pihole tank/encrypted/vms/pihole
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms/homeassistant tank/encrypted/vms/homeassistant
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms/win10 tank/encrypted/vms/win10
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms/block-subnet-router tank/encrypted/vms/block-subnet-router
+
+echo "Syncing nic@hogwarts:tank/encrypted/docker!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/docker tank/encrypted/docker
