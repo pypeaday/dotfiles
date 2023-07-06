@@ -399,6 +399,32 @@ tmux_conf_copy_to_os_clipboard=false
 # move status line to top
 #set -g status-position top
 
+# My Custom
+set-option -sa terminal-overrides ',screen-256color-bce:RGB'
+bind C-u popup -E -h 95% -w 95%  "tmux new-session -A -s remananalytics_wiki 'cd ~/work/remananalytics.wiki && nvim'"
+bind C-i popup -E -h 95% -w 95%  "tmux new-session -A -s dotfiles -d '~/dotfiles' 'nvim'"
+bind C-o popup -E -h 99% -w 99%  "tmux new-session -A -s pype_dev 'cd ~/personal/pype.dev'"  # need to source zsh for copier-gallery command
+bind C-n popup -E ~/.local/bin/ta
+bind C-k display-popup -h 95% -w 95% -d '#{pane_current_path}' -E 'gitui'
+bind C-p display-popup -E -h 60% -w 60% "tmux new-session -A -s prompt 'cd && zsh'"
+# /* todo */
+bind C-t display-popup -E -h 95% -w 95%  "tmux new-session -A -s todos 'cd $HOME/$WHEREAMI/todos  && zsh'"
+bind-key -n M-t if-shell -F '#{==:#{pane_start_command},todo}' {kill-pane} {split-window -bf -l 10 -c '#{pane_current_path}' "todo"}
+
+# overwrite .tmux.conf binding
+# bind C-f display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+# bind s display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+
+# # git diff
+# # bind C-g "tmux new-window -n diff 'git diff ..main | nvim - -R +Diffurcate'"
+# # bind C-g display-popup -h 95% -w 95% -d '#{pane_current_path}' -E 'tmux new-window -n diff 'git diff ..main | nvim - -R +Diffurcate'
+#
+# # copier
+bind-key c-b popup -w 80% -E -d '#{pane_current_path}' "copier-gallery"
+#
+# # last session
+bind -n M-b switch-client -l
+
 
 # -- tpm -----------------------------------------------------------------------
 
@@ -468,3 +494,4 @@ tmux_conf_uninstall_plugins_on_reload=true
 #
 # "$@"
 # # /!\ do not remove the previous line
+#
