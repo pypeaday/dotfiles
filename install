@@ -7,9 +7,7 @@ then
     stow -D work
     stow work
 
-    eval $HOME/dotfiles/work/.local/bin/triple-monitor
     eval $HOME/dotfiles/polybar/launch.sh
-    # eval $HOME/dotfiles/picom/.config/picom/launch_picom
 else
     echo "Stowing stuff for home"
     stow -D personal
