@@ -155,7 +155,7 @@ bindkey -s '^a' 'source auto_proxy \n'
 eval "typeset -U path"
 
 # motd
-hello() { clear && ~/dotfiles/scripts/login.sh }
+hello() { clear && ~/dotfiles/scripts/.local/bin/login.sh }
 bindkey -s '^k' 'hello \n'
 bindkey -s '^l' 'clear \n'
 
