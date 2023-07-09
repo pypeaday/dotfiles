@@ -18,4 +18,4 @@ syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tan
 syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/vms/block-subnet-router tank/encrypted/vms/block-subnet-router
 
 echo "Syncing nic@hogwarts:tank/encrypted/docker!" >> /home/nic/mycron.log
-syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@hogwarts:tank/encrypted/docker tank/encrypted/docker
+syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@hogwarts:tank/encrypted/docker tank/encrypted/docker
