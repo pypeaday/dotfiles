@@ -48,3 +48,6 @@ vim.g.vimtex_compiler_method = "latexmk"
 -- Most VimTeX mappings rely on localleader and this can be changed with the
 -- following line. The default is usually fine and is the symbol "\".
 vim.maplocalleader = ","
+
+-- Codeium
+vim.g.codeium_disable_bindings = 1

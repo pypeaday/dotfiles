@@ -273,3 +273,10 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- codeium
+-- Change '<C-g>' here to any keycode you like.
+keymap('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true })
+keymap('i', '<C-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
+keymap('i', '<C-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
+keymap('i', '<C-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
