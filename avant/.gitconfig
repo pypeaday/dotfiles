@@ -1,0 +1,18 @@
+[user]
+    name = Nicholas Payne
+    email = nic.payne@avant.com
+
+[credential]
+    helper = store
+
+[core]
+    editor = nvim
+
+[includeIf "gitdir:~/personal/"]
+        path = ~/dotfiles/git/.gitconfig
+[includeIf "gitdir:~/dotfiles/"]
+        path = ~/dotfiles/git/.gitconfig
+[init]
+    defaultBranch = main
+[push]
+    default = current

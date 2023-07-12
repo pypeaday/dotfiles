@@ -27,8 +27,9 @@ return {
         mapping = cmp.mapping.preset.insert({
           -- disable completion with tab
           -- this helps with copilot setup
-          ["<Tab>"] = nil,
-          ["<S-Tab>"] = nil,
+          -- using tabby so I want to use Tab to complete
+          -- ["<Tab>"] = nil,
+          -- ["<S-Tab>"] = nil,
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -45,18 +46,29 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
-          { name = "path" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "nvim_lua" },
-          { name = "treesitter" },
-          { name = "tmux" },
-          -- { name = "spell" },
-          { name = "git" },
-          { name = "rg" },
+          { name = "nvim_lsp_signature_help", priority = 1 },
+          { name = "nvim_lsp", priority = 1 },
+          { name = "luasnip", priority = 2 },
+          { name = "buffer", priority = 3 },
+          { name = "path", priority = 4 },
+          { name = "nvim_lua", priority = 5 },
+          { name = "treesitter", priority = 2 },
+          { name = "tmux", priority = 2 },
+          { name = "spell", priority = 3 },
+          { name = "git", priority = 2 },
+          { name = "rg", priority = 2 },
         }),
+        sorting = {
+          priority_weight = 1.0,
+          -- comparators = {
+          --   cmp.config.compare.offset,
+          --   cmp.config.compare.exact,
+          --   cmp.config.compare.score,
+          --   cmp.config.compare.recently_used,
+          --   require("cmp-under-comparator").under,
+          --   cmp.config.compare.kind,
+          -- },
+        },
         formatting = {
           format = function(_, item)
             local icons = require("lazyvim.config").icons.kinds
