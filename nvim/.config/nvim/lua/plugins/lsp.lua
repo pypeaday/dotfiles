@@ -42,7 +42,7 @@ return {
         },
         -- X will be automatically installed with mason and loaded with lspconfig
         -- pyright = {},
-        -- ruff_lsp = {},
+        ruff_lsp = {},
         -- jedi_language_server = {},
         dockerls = {},
         bashls = {},
