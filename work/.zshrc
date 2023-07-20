@@ -34,19 +34,12 @@ export EDITOR=nvim
 # use pyenv global python for pipx
 export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
 
-# export TERM=screen-256color-bce
-# export TERM=xterm-256color
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export ZSH_DISABLE_COMPFIX="true"
-# ZSH_THEME="robbyrussell"
-# ZSH_THEME=random
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-# ZSH_THEME_RANDOM_QUIET=true
 
 plugins=(dotenv ag zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
-# source ~/.zprofile
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -67,10 +60,15 @@ alias vim="nvim"
 alias bim="nvim"
 alias cdw="cd ~/work"
 alias cdp="cd ~/personal"
+alias deac="conda deactivate && conda deactivate"
 alias src="source ~/.zshrc"
 alias envrc="cp $HOME/dotfiles/envrc ./.envrc"
 alias inst="source ~/dotfiles/install"
 
+alias azlogin="az login --allow-no-subscriptions"
+alias azcheckout='az repos pr checkout --id $(az repos pr list --output table | tail -n -2 | fzf | cut -d " " -f1)'
+alias azprojects="az repos list --project RA-Pipelines | vd -f json"
+alias awsrules="aws events list-rules | visidata -f json"
 alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
 alias set_openai='export OPENAI_API_KEY=$(cat ~/.openai/apikey)'
@@ -117,24 +115,15 @@ source "$HOME/.cargo/env"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# autoproxy for work
+eval source auto_proxy
+#
 # Jump into a tmux session
 # if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 #     tmux attach -t base || tmux new -s base
 # fi
 
 eval "$(pyenv init --path)"
-# eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
-# BEGIN ANSIBLE MANAGED BLOCK: pyenv
-if [ -e "$HOME/.pyenv/.pyenvrc" ]; then
-    source $HOME/.pyenv/.pyenvrc
-    if [ -e "$HOME/.pyenv/completions/pyenv.zsh" ]; then
-        source $HOME/.pyenv/completions/pyenv.zsh
-    elif [ -e "/usr/local/opt/pyenv/completions/pyenv.zsh" ]; then
-        source /usr/local/opt/pyenv/completions/pyenv.zsh
-    fi
-fi
-# END ANSIBLE MANAGED BLOCK: pyenv
 
 # shortcuts
 
