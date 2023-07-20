@@ -413,7 +413,7 @@ bind-key -n M-t if-shell -F '#{==:#{pane_start_command},todo}' {kill-pane} {spli
 
 # overwrite .tmux.conf binding
 # bind C-f display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
-# bind s display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+bind s display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
 
 # # git diff
 # # bind C-g "tmux new-window -n diff 'git diff ..main | nvim - -R +Diffurcate'"
