@@ -81,6 +81,8 @@ return {
         nls.builtins.completion.spell,
 
         nls.builtins.code_actions.gitsigns,
+        nls.builtins.formatting.terraform_fmt,
+        nls.builtins.diagnostics.terraform_validate,
       },
     }
   end,
