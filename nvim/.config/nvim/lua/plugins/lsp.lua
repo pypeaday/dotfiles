@@ -4,45 +4,47 @@ return {
     opts = {
       format_notify = true,
       servers = {
-        pylsp = {
-          settings = {
-            pylsp = {
-              -- configurationSources = { "flake8" },
-              --   -- enabled = { false },
-              plugins = {
-                ruff = {
-                  enabled = true,
-                  extendSelect = {
-                    "I",
-                    "A",
-                    "B",
-                    "C",
-                    "E",
-                    "F",
-                    "I",
-                    "N",
-                    "RUF100",
-                    "T",
-                    "W",
-                  },
-                  extendIgnore = { "E501" },
-                  lineLength = 120,
-                },
-                pyflakes = { enabled = false },
-                pycodestyle = { enabled = false },
-                flake8 = { enabled = false },
-                mypy = {
-                  enabled = true,
-                  live_mode = true,
-                  strict = true,
-                },
-              },
-            },
-          },
-        },
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       -- configurationSources = { "flake8" },
+        --       --   -- enabled = { false },
+        --       plugins = {
+        --         ruff = {
+        --           enabled = true,
+        --           extendSelect = {
+        --             "I",
+        --             "A",
+        --             "B",
+        --             "C",
+        --             "E",
+        --             "F",
+        --             "I",
+        --             "N",
+        --             "RUF100",
+        --             "T",
+        --             "W",
+        --           },
+        --           extendIgnore = { "E501" },
+        --           lineLength = 120,
+        --         },
+        --         pyflakes = { enabled = false },
+        --         pycodestyle = { enabled = false },
+        --         flake8 = { enabled = false },
+        --         mypy = {
+        --           enabled = true,
+        --           live_mode = true,
+        --           strict = true,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
         -- X will be automatically installed with mason and loaded with lspconfig
         -- pyright = {},
-        ruff_lsp = {},
+        ruff_lsp = {
+          config = "$HOME/dotfiles/.ruff.toml",
+        },
         -- jedi_language_server = {},
         dockerls = {},
         bashls = {},

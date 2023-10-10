@@ -1,0 +1,49 @@
+target-version = "py310"
+line-length = 120
+select = [
+  "A",  # flake8-builtins
+  "B",  # flake8-bugbear
+  "C",  # flake8-comprehensions
+  # "D",  # pydocstyle
+  "E",  # pycodestyle errors
+  "F",  # pyflakes
+  "I",  # isort
+  "N",  # pep8-naming
+  "RUF100",
+  # "Q",  # flake8-quotes
+  "T",
+  "W",  # pycodestyle warnings
+]
+
+extend-ignore = [
+  "A002",  # Argument `id` is shadowing a Python builtin | needed for table column id
+  "A003",  # Class attribute `id` is shadowing a Python builtin | needed for table column id
+  "N805",  # First argument of a method should be named `self` | clashes with pydantic @validators
+  "N815",  # Variable `dependsOn` in class scope should not be mixedCase | this is done to match aws
+  "B008",  # function calls in argument default needed for fastapi Depends
+  "E501",  # too long line
+  "D100",  # checks for missing docstring in public modules
+  "D203",  # one blank line before class
+  "D212",  # multiline summary first line
+# # todo: revisit these - ignored to get develop to go
+#   "B904",
+#   "F811",
+#   "T201",
+#   "A001",
+  # These two are ignored for pydantic
+  "N815",
+  "N805",
+#   "N804",
+#   "B026",
+#   "E402",
+#   "B018",
+#   "F821",
+  ]
+
+[per-file-ignores]
+"__*__.py" = ["D100", "D104"]
+# B905 flags not using `strict=` with `zip()`
+"tests/**/*.py" = ["A002", "B905"]
+
+[isort]
+force-single-line = true
