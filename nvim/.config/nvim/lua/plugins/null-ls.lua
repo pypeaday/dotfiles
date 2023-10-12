@@ -68,7 +68,7 @@ return {
         nls.builtins.formatting.trim_whitespace,
         nls.builtins.formatting.trim_newlines,
         nls.builtins.formatting.json_tool,
-        nls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
+        -- nls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
         -- nls.builtins.formatting.tidy_import,
         nls.builtins.formatting.ruff,
         nls.builtins.formatting.isort.with({ extra_args = { "--sl" } }),
@@ -76,9 +76,8 @@ return {
         -- diagnostics
         nls.builtins.diagnostics.markdownlint,
         nls.builtins.diagnostics.hadolint,
-
         -- completions
-        nls.builtins.completion.spell,
+        -- nls.builtins.completion.spell,
 
         nls.builtins.code_actions.gitsigns,
         nls.builtins.formatting.terraform_fmt,
