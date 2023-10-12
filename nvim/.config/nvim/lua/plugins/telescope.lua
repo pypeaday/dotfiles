@@ -18,7 +18,7 @@ return {
             layout_config = { height = 0.8 },
             prompt_prefix = " >",
             color_devicons = true,
-            file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+            file_previewer = previewers.vim_buffer_cat.new,
             -- find_command = { "rg", "--files", "--no-ignore", "--hidden", "--iglob", "!.venv", "-g", "!.git" },
             -- find_command = {
             --     'rg',
@@ -42,8 +42,8 @@ return {
               "--smart-case",
               "-u",
             },
-            grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-            qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+            grep_previewer = previewers.vim_buffer_vimgrep.new,
+            qflist_previewer = previewers.vim_buffer_qflist.new,
             file_ignore_patterns = {
               "markout/",
               ".markata.cache/",
@@ -67,7 +67,7 @@ return {
           pickers = {
             find_files = {
               hidden = true,
-              -- theme = "dropdown"
+              -- theme = "dropdown",
             },
           },
           extensions = {},
