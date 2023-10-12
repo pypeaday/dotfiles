@@ -27,8 +27,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           -- disable completion with tab
           -- this helps with copilot setup
-          ["<Tab>"] = nil,
-          ["<S-Tab>"] = nil,
+          -- ["<Tab>"] = nil,
+          -- ["<S-Tab>"] = nil,
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
