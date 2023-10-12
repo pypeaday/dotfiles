@@ -77,6 +77,7 @@ return {
         html = {},
         terraformls = {},
         marksman = {},
+        sqlls = {},
       },
     },
     setup = {
