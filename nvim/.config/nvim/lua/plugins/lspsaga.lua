@@ -1,6 +1,6 @@
 return {
-
-  "glepnir/lspsaga.nvim",
+  "nvimdev/lspsaga.nvim",
+  enabled = true,
   event = "LspAttach",
   config = function()
     local saga = require("lspsaga")
