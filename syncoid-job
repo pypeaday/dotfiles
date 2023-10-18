@@ -13,7 +13,7 @@ echo "Syncing nic@ghost:tank/encrypted/10Fold!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w --no-privilege-elevation nic@ghost:tank/encrypted/10Fold tank/encrypted/10Fold
 
 echo "Syncing nic@ghost:tank/encrypted/nas! excluding tank/encrypted/nas/media" >> /home/nic/mycron.log
-syncoid --no-sync-snap --sendoptions=w -r --exclude tank/encrypted/nas/media --no-privilege-elevation nic@ghost:tank/encrypted/nas tank/encrypted/nas
+syncoid --no-sync-snap --sendoptions=w -r --exclude="tank/encrypted/nas/media" --exclude="paperless/consume" --no-privilege-elevation nic@ghost:tank/encrypted/nas tank/encrypted/nas
 
 echo "Syncing nic@ghost:tank/encrypted/fs!" >> /home/nic/mycron.log
 syncoid --no-sync-snap --sendoptions=w -r --no-privilege-elevation nic@ghost:tank/encrypted/fs tank/encrypted/fs
