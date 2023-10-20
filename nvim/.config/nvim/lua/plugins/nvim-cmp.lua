@@ -8,9 +8,43 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-emoji",
     },
-    opts = function()
+    opts = function(_, opts)
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+      end
+      local luasnip = require("luasnip")
       local cmp = require("cmp")
+      -- override nvim-cmp and add cmp-emoji
+      table.insert(opts.sources, { name = "emoji" })
+      opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+            cmp.select_next_item()
+          -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+          -- this way you will only jump inside the snippet region
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif has_words_before() then
+            cmp.complete()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      })
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -27,9 +61,8 @@ return {
         mapping = cmp.mapping.preset.insert({
           -- disable completion with tab
           -- this helps with copilot setup
-          -- using tabby so I want to use Tab to complete
-          -- ["<Tab>"] = nil,
-          -- ["<S-Tab>"] = nil,
+          ["<Tab>"] = nil,
+          ["<S-Tab>"] = nil,
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
@@ -49,11 +82,11 @@ return {
           { name = "nvim_lsp_signature_help", priority = 1 },
           { name = "nvim_lsp", priority = 1 },
           { name = "luasnip", priority = 2 },
-          { name = "buffer", priority = 3 },
+          { name = "buffer", priority = 10 },
           { name = "path", priority = 4 },
           { name = "nvim_lua", priority = 5 },
-          { name = "treesitter", priority = 2 },
-          { name = "tmux", priority = 2 },
+          -- { name = "treesitter", priority = 2 },
+          -- { name = "tmux", priority = 2 },
           { name = "spell", priority = 3 },
           { name = "git", priority = 2 },
           { name = "rg", priority = 2 },
