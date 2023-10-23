@@ -55,12 +55,14 @@ alias envrc="cp $HOME/dotfiles/envrc ./.envrc"
 alias rconfig="cp $HOME/dotfiles/avant/.ruff.toml ./.ruff.toml"
 
 alias otp="bash ~/dotfiles/avant/.local/bin/one-password-copy"
+alias otw="bash ~/dotfiles/avant/.local/bin/one-password-copy-pw"
 
 alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
 alias set_openai='export OPENAI_API_KEY=$(cat ~/.openai/apikey)'
 
 bindkey -s '^o' 'otp \n'
+bindkey -s '^p' 'otw \n'
 
 # interactively destroy tmux sessions
 destroy() {
