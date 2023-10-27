@@ -1,22 +1,12 @@
-# example
 # Enable flake8-bugbear (`B`) rules.
-select = ["E", "F", "B",
-  "I",
-  "A",
-  "B",
-  "C",
-  "F",
-  "I",
-  "N",
-  "RUF100",
-  "T",
-  "W",
-]
+select = ["E", "F", "B", "T", "W"]
 
 line-length = 120
 
 # Never enforce `E501` (line length violations).
-extend-ignore = ["E501"]
+# E402 is top level imports
+# I001 throws errors when my imports are sorted by isort with --sl
+extend-ignore = ["E402","E501", "I001"]
 
 # Avoid trying to fix flake8-bugbear (`B`) violations.
 unfixable = ["B"]
