@@ -52,6 +52,6 @@ vim.maplocalleader = ","
 -- tabby: self-hosted copilot alternative
 -- 0.0.0.0 for alignment with docker
 -- vim.g.tabby_server_url = "http://0.0.0.0:8080"
-vim.g.tabby_server_url = "https://tabbyml.paynepride.com"
-vim.g.tabby_accept_binding = "<C-g>"
-vim.g.tabby_dismiss_binding = "<C-]>"
+-- vim.g.tabby_server_url = "https://tabbyml.paynepride.com"
+-- vim.g.tabby_accept_binding = "<C-g>"
+-- vim.g.tabby_dismiss_binding = "<C-]>"
