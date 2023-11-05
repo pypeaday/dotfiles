@@ -67,7 +67,7 @@ return {
           pickers = {
             find_files = {
               hidden = true,
-              -- theme = "dropdown"
+              theme = "dropdown",
             },
           },
           extensions = {},
