@@ -52,5 +52,5 @@ vim.maplocalleader = ","
 -- tabby: self-hosted copilot alternative
 -- local on Mac -- using ~/.tabby-client/agent/config.toml
 -- vim.g.tabby_server_url = "https://tabbyml.paynepride.com"
-vim.g.tabby_accept_binding = "<C-g>"
-vim.g.tabby_dismiss_binding = "<C-]>"
+-- vim.g.tabby_accept_binding = "<C-g>"
+-- vim.g.tabby_dismiss_binding = "<C-]>"
