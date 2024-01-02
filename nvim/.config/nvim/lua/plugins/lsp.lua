@@ -10,7 +10,7 @@ return {
             pylsp = {
               enabled = true,
               plugins = {
-                ruff = {},
+                ruff = { enabled = true },
                 pyflakes = { enabled = false },
                 pycodestyle = { enabled = false },
                 flake8 = { enabled = false },
@@ -24,7 +24,9 @@ return {
           },
         },
         -- X will be automatically installed with mason and loaded with lspconfig
-        ruff_lsp = {},
+        pyright = { enabled = false },
+        -- enabling this doubles lsp warnings from pylsp plugin
+        ruff_lsp = { enabled = true },
         dockerls = {},
         bashls = {},
         sqlls = {},

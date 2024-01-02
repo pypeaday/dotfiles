@@ -114,16 +114,16 @@ return {
       nls.builtins.formatting.json_tool,
       nls.builtins.formatting.jq,
       -- nls.builtins.formatting.lua_ls,
-      -- nls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
+      nls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
       nls.builtins.formatting.tidy_import,
-      nls.builtins.formatting.ruff,
       -- nls.builtins.formatting.my_ruff,
+      nls.builtins.formatting.ruff,
       nls.builtins.formatting.isort.with({ extra_args = { "--sl" } }),
 
       -- diagnostics
       nls.builtins.diagnostics.markdownlint,
       nls.builtins.diagnostics.hadolint,
-      nls.builtins.diagnostics.ruff,
+      -- nls.builtins.diagnostics.ruff,
 
       nls.builtins.code_actions.proselint,
 
