@@ -199,3 +199,11 @@ eval "$(atuin init zsh)"
 # Spacelift stuff
 alias get-space-stack='export MY_STACK_ID=$(spacectl stack list | fzf | awk -F"|" "{print \$1}" | awk "{\$1=\$1};1")'
 alias space-stack-lp='spacectl stack local-preview --id $MY_STACK_ID'
+alias space-stack-auto-local-preview='get-space-stack && space-stack-lp'
+
+
+spacelift-commands () {
+    echo "get-space-stack"
+    echo "space-stack-lp"
+    echo 'space-stack-auto-local-preview'
+}
