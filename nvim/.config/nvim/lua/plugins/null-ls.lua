@@ -27,7 +27,7 @@ return {
           "--add-missing",
           "--replace",
           "--separate-from-imports",
-          "--remove-unused",
+          -- "--remove-unused",
           "$FILENAME",
         },
         to_stdin = false,
