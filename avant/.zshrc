@@ -141,6 +141,8 @@ compinit
 # Created by `pipx` on 2023-07-12 20:56:34
 export PATH="$PATH:/Users/npayne81/Library/Python/3.9/bin"
 
+# nvim
+export YAMLFIX_SEQUENCE_STYLE="block_style"
 
 # From Dylan
 # https://www.notion.so/avant/Aliases-c0d1dad2b9f24ad980702bee39a98f00
@@ -194,16 +196,18 @@ eks-commands () {
 
 # vault
 vlogin='vault login -method ldap -no-print'
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # Spacelift stuff
 alias get-space-stack='export MY_STACK_ID=$(spacectl stack list | fzf | awk -F"|" "{print \$1}" | awk "{\$1=\$1};1")'
 alias space-stack-lp='spacectl stack local-preview --id $MY_STACK_ID'
 alias space-stack-auto-local-preview='get-space-stack && space-stack-lp'
 
-
 spacelift-commands () {
     echo "get-space-stack"
     echo "space-stack-lp"
     echo 'space-stack-auto-local-preview'
 }
+
+# Terraform
+alias tint='terraform init'
