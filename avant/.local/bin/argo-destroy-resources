@@ -1,0 +1,18 @@
+#!/bin/bash
+
+kind="Deployment"
+output=$(argocd app list --grpc-web)
+app=$(echo "$output" | gawk '{print $1}' | fzf)
+output2=$(echo $app | xargs -I{} argocd app resources {} --grpc-web | grep $kind | gawk '{print $4}'| fzf)
+
+echo "Are you sure you want to destroy $output2? (yes/no)"
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    echo "Executing the command..."
+    echo "argocd app delete-resource $app --kind $kind --resource-name $output2"
+    # argocd app delete-resource $app --kind $kind --resource-name $output2
+else
+    echo "Exiting..."
+    exit
+fi
