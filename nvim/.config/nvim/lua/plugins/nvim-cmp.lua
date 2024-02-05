@@ -18,8 +18,6 @@ return {
       end
       local luasnip = require("luasnip")
       local cmp = require("cmp")
-      -- override nvim-cmp and add cmp-emoji
-      table.insert(opts.sources, { name = "emoji" })
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -62,18 +60,18 @@ return {
       })
       -- source
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "emoji" },
         { name = "nvim_lsp_signature_help", priority = 1 },
         { name = "nvim_lsp", priority = 1 },
-        { name = "luasnip", priority = 2 },
+        { name = "luasnip", priority = 3 },
         { name = "buffer", priority = 10 },
         { name = "path", priority = 4 },
         { name = "nvim_lua", priority = 5 },
         -- { name = "treesitter", priority = 2 },
         -- { name = "tmux", priority = 2 },
-        { name = "spell", priority = 3 },
+        { name = "spell", priority = 4 },
         { name = "git", priority = 2 },
         { name = "rg", priority = 2 },
+        { name = "emoji" },
       }))
       -- others
       -- opts.completion = cmp.config.completion(vim.list_extend(opts.completion, {

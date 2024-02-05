@@ -4,6 +4,8 @@ return {
     opts = {
       format_notify = true,
       servers = {
+        docker_compose_language_service = { enabled = true },
+        helm_ls = { enabled = true },
         pylsp = {
           enabled = true,
           settings = {
