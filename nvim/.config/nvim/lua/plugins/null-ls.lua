@@ -2,7 +2,7 @@ return {
   "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "mason.nvim" },
-  enabled = true,
+  enabled = false,
   lazy = false,
   init = function()
     local Util = require("lazyvim.util")
