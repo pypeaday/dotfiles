@@ -2,7 +2,7 @@ return {
   "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "mason.nvim" },
-  enabled = true,
+  enabled = false,
   lazy = false,
   init = function()
     local Util = require("lazyvim.util")
@@ -105,8 +105,8 @@ return {
       nls.builtins.formatting.stylua,
       nls.builtins.formatting.prettier,
       -- nls.builtins.formatting.yamlfmt,
-      -- avant using yamlfix
       nls.builtins.formatting.yamlfix,
+      -- avant using yamlfix
       nls.builtins.formatting.sqlformat,
       nls.builtins.formatting.beautysh,
       nls.builtins.formatting.trim_whitespace,

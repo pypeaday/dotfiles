@@ -78,8 +78,8 @@ nnoremap("<leader>c", "<cmd>ToggleCoverage<CR>")
 
 -- " Work
 nnoremap("gec", "<cmd>e ~/.caterpillar/credentials.yml<CR>")
--- " nnoremap <leader><leader>vd <cmd>lua require'telegraph'.telegraph({cmd='pipx run visidata {cWORD}', how='tmux'})<CR>
 nnoremap(
+  -- " nnoremap <leader><leader>vd <cmd>lua require'telegraph'.telegraph({cmd='pipx run visidata {cWORD}', how='tmux'})<CR>
   "<leader><leader>vd",
   "<cmd>lua require'telegraph'.telegraph({cmd='tmux display-popup  -h 95% -w 95% -E \"visidata {cWORD}\"', how='subprocess'})<CR>"
 )
