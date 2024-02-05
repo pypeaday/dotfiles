@@ -1,16 +1,17 @@
-# Enable flake8-bugbear (`B`) rules.
-select = ["E", "F", "B", "T", "W"]
-
 line-length = 120
+
+[lint]
+# Enable flake8-bugbear (`B`) rules.
+select = ["E", "F", "B", "T", "W", "I"]
 
 # Never enforce `E501` (line length violations).
 # E402 is top level imports
 # I001 throws errors when my imports are sorted by isort with --sl
-extend-ignore = ["E402","E501", "I001"]
+extend-ignore = ["E402", "I001"]
 
 # Avoid trying to fix flake8-bugbear (`B`) violations.
 unfixable = ["B"]
-
 # Ignore `E402` (import violations) in all `__init__.py` files
-[per-file-ignores]
+
+[lint.per-file-ignores]
 "__init__.py" = ["E402"]
