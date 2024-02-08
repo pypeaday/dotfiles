@@ -13,6 +13,8 @@
         path = ~/dotfiles/git/.gitconfig
 [includeIf "gitdir:~/dotfiles/"]
         path = ~/dotfiles/git/.gitconfig
+[includeIf "gitdir:~/work/"]
+        path = ~/dotfiles/avant/.gitconfig-avant
 [init]
     defaultBranch = main
 [push]
