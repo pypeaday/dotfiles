@@ -9,5 +9,4 @@ venvenvnew() {
 
 }
 echo $(basename $PWD) | lolcat
-# source activate $(basename $PWD) || condanew
 source $envname/bin/activate || venvenvnew
