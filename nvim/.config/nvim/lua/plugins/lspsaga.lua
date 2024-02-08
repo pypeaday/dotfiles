@@ -1,5 +1,7 @@
 return {
-  "glepnir/lspsaga.nvim",
+  "nvimdev/lspsaga.nvim",
+  enabled = true,
+  -- event = "LspAttach",
   vscode = true,
   event = "LspAttach",
   config = function()

@@ -3,12 +3,14 @@
     email = github@pype.aleeas.com
 
 [credential]
-    helper = store
+	  helper = store
 
 [core]
     editor = nvim
 
 [includeIf "gitdir:~/work/"]
+        path = ~/.gitconfig-work
+[includeIf "gitdir:/mnt/DATA/"]
         path = ~/.gitconfig-work
 [includeIf "gitdir:~/personal/"]
         path = ~/.gitconfig-personal
@@ -18,3 +20,5 @@
     defaultBranch = main
 [push]
     default = current
+[credential "https://dev.azure.com"]
+	useHttpPath = true
