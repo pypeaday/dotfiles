@@ -9,3 +9,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="$PATH:/Users/npayne81/Library/Python/3.9/bin"
 autoload -Uz compinit
 compinit
+
+export SLICE_HOME=/Users/npayne81/work/slice/
+alias slice="${SLICE_HOME}/slice.sh"

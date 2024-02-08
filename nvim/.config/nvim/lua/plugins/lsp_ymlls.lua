@@ -24,6 +24,10 @@ return {
           -- end,
           settings = {
             schemas = {
+              -- K8s
+              -- ["https://kubernetesjsonschema.dev/v1.14.0-standalone/pod-v1.json"] = {"???"},
+              -- CUSTOM
+              ["/Users/npayne81/work/helm-charts/airflow2/values.schema.json"] = { "**/values.yaml" },
               -- GH Actions
               -- ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
               ["/Users/npayne81/dotfiles/avant/.avant-hidden-though-stowed/github-workflow.json"] = {

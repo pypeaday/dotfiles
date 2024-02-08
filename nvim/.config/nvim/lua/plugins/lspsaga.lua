@@ -2,13 +2,15 @@ return {
   "nvimdev/lspsaga.nvim",
   enabled = true,
   -- event = "LspAttach",
+  vscode = true,
+  event = "LspAttach",
   config = function()
     local saga = require("lspsaga")
 
     saga.setup({
       lightbulb = {
         enable = false,
-        enable_in_insert = true,
+        enable_in_insert = false,
         sign = true,
         sign_priority = 40,
         virtual_text = true,

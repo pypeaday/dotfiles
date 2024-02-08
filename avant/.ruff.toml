@@ -1,27 +1,16 @@
-# example
-# Enable flake8-bugbear (`B`) rules.
-select = ["E", "F", "B"]
-extendSelect = [
-  "I",
-  "A",
-  "B",
-  "C",
-  "F",
-  "I",
-  "N",
-  "RUF100",
-  "T",
-  "W",
-]
+line-length = 40
 
-lineLength = 120
+[lint]
+# Enable flake8-bugbear (`B`) rules.
+select = ["E", "F", "B", "T", "W", "I"]
 
 # Never enforce `E501` (line length violations).
-extgend-ignore = ["E501"]
+# E402 is top level imports
+extend-ignore = ["E402", "E501"]
 
 # Avoid trying to fix flake8-bugbear (`B`) violations.
-unfixable = ["B"]
-
+unfixable = ["B", "F401"]
 # Ignore `E402` (import violations) in all `__init__.py` files
-[per-file-ignores]
+
+[lint.per-file-ignores]
 "__init__.py" = ["E402"]
