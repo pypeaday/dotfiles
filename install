@@ -1,23 +1,21 @@
 #!/usr/bin/env bash
-#
+# TODO: work on this
 pushd $DOTFILES
-if [[ $USER == "paynen3" ]]
-then
-    echo "Stowing stuff for work"
-    stow -D work
-    stow work
+if [[ $USER == "paynen3" ]]; then
+	echo "Stowing stuff for work"
+	stow -D caterpillar
+	stow caterpillar
 
-    eval $HOME/dotfiles/polybar/launch.sh
+	eval $HOME/dotfiles/polybar/launch.sh
 else
-    echo "Stowing stuff for home"
-    stow -D personal
-    stow personal
+	echo "Stowing stuff for home"
+	stow -D personal
+	stow personal
 fi
 
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
-    stow -D $folder
-    stow $folder
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
+	stow -D $folder
+	stow $folder
 done
 
 popd
