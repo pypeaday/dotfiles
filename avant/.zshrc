@@ -106,3 +106,34 @@ spacelift-commands () {
 
 # Terraform
 alias tint='terraform init'
+
+get_stack_env_vars() {
+    # Define your stack ID
+    MY_STACK_ID=`spacectl stack list | fzf | awk -F'|' '{print $1}' | awk '{$1=$1};1'`
+
+    # Save the output of the spacectl and awk commands to a variable
+    output=$(spacectl stack environment list --id $MY_STACK_ID | awk '{ gsub(/\x1b\[[0-9;]*m/, ""); gsub(/ +/, " "); print }')
+    echo $output
+ # Pass the output as an argument to the Python script
+    python -c "
+import sys
+import json
+
+data = {}
+
+for line in sys.argv[1].splitlines():
+    parts = line.split('|')
+    if len(parts) >= 3:
+        key = parts[0].strip().replace('TF_VAR_', '')
+        try:
+            value = json.loads(parts[2].strip())
+        except json.JSONDecodeError:
+            print(key)
+            continue
+        data[key] = value
+
+with open('spacelift.tf.vars.json', 'w') as f:
+    json.dump(data, f, indent=4)
+" "$output"
+}
+get_stack_env_vars
