@@ -102,4 +102,4 @@ show_always = true
 [custom.zsh]
 when = '[[ ! -n "${VIRTUAL_ENV}" ]]'
 style = "bold red"
-format = '[ NO PYTHON VENV SET ]($style)'
+format = '[󱔎 NO PYTHON ENVIORNMENT SET ]($style)'
