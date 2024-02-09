@@ -27,7 +27,7 @@ set_proxy() {
     export http_proxy=http://proxy.cat.com:80
     export https_proxy=http://proxy.cat.com:80
     export no_proxy=localhost,127.0.0.1,cat.com
-    export proxy_set=proxy on
+    export proxy_set="on"
 
 }
 
@@ -38,6 +38,7 @@ unset_proxy() {
     unset HTTP_PROXY
     unset HTTPS_PROXY
     unset proxy_set
+    export proxy_set="off"
 }
 
 auto_proxy() {
