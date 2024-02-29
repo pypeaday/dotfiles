@@ -22,7 +22,7 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 set_proxy() {
 
-    echo "setting proxies"
+    # echo "setting proxies"
     export HTTP_PROXY=http://proxy.cat.com:80
     export HTTPS_PROXY=http://proxy.cat.com:80
     export NO_PROXY=localhost,127.0.0.1,cat.com
@@ -55,3 +55,5 @@ destroy() {
     tmux list-sessions -F '#{session_name}' | fzf -m | xargs -I{} tmux kill-session -t {}
 }
 bindkey -s '^d' 'destroy \n'
+
+auto_proxy
