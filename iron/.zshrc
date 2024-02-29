@@ -1,6 +1,8 @@
 # Source my normal one
 source $HOME/dotfiles/zsh/.zshrc
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 # fuzzy find to directories with fzf
 # from phind.com refactored for mac
 # brew install fd
@@ -47,3 +49,9 @@ auto_proxy() {
 }
 bindkey -s '^a' 'auto_proxy \n'
 # alias aproxy="source ~/.local/bin/auto_proxy"
+
+# interactively destroy tmux sessions
+destroy() {
+    tmux list-sessions -F '#{session_name}' | fzf -m | xargs -I{} tmux kill-session -t {}
+}
+bindkey -s '^d' 'destroy \n'
