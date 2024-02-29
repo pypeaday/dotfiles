@@ -105,9 +105,12 @@ eval "$(direnv hook zsh)"
 if [ -d "$HOME/.linuxbrew" ]; then
     export HOMEBREW_PREFIX="$HOME/.linuxbrew"
     export PATH="$HOME/.linuxbrew/bin:$PATH"
-else
+elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
     export PATH="home/linuxbrew/.linuxbrew/bin:$PATH"
+else
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export PATH="/opt/homebrew/bin:$PATH"
 fi
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 

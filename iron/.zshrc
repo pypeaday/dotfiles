@@ -1,6 +1,8 @@
 # Source my normal one
 source $HOME/dotfiles/zsh/.zshrc
 
+export PATH="/opt/homebrew/bin:$PATH"
+
 # fuzzy find to directories with fzf
 # from phind.com refactored for mac
 # brew install fd
@@ -20,7 +22,7 @@ eval "$(atuin init zsh --disable-up-arrow)"
 
 set_proxy() {
 
-    echo "setting proxies"
+    # echo "setting proxies"
     export HTTP_PROXY=http://proxy.cat.com:80
     export HTTPS_PROXY=http://proxy.cat.com:80
     export NO_PROXY=localhost,127.0.0.1,cat.com
@@ -47,3 +49,11 @@ auto_proxy() {
 }
 bindkey -s '^a' 'auto_proxy \n'
 # alias aproxy="source ~/.local/bin/auto_proxy"
+
+# interactively destroy tmux sessions
+destroy() {
+    tmux list-sessions -F '#{session_name}' | fzf -m | xargs -I{} tmux kill-session -t {}
+}
+bindkey -s '^d' 'destroy \n'
+
+auto_proxy
