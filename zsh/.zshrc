@@ -166,3 +166,9 @@ function gi() { curl -sLw n https://www.toptal.com/developers/gitignore/api/$@ ;
 if [ -e "$HOME/.alias.local" ]; then
     source $HOME/.alias.local
 fi
+
+# completion scripts
+source $HOME/dotfiles/zsh/completion/.kind
+source $HOME/dotfiles/zsh/completion/.pixi
+
+eval "$(pyenv virtualenv-init -)"
