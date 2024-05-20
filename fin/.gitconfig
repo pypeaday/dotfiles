@@ -1,6 +1,7 @@
 [user]
     name = Nicholas Payne
     email = nic.payne@avant.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZTXS4lNQTAKIFgIa3pVtJ0H3+2G55CHkpA8u6PCRa1
 
 [credential]
     helper = store
@@ -13,9 +14,13 @@
         path = ~/dotfiles/git/.gitconfig
 [includeIf "gitdir:~/dotfiles/"]
         path = ~/dotfiles/git/.gitconfig
-[includeIf "gitdir:~/work/"]
-        path = ~/dotfiles/fin/.gitconfig-avant
 [init]
     defaultBranch = main
 [push]
     default = current
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[commit]
+  gpgsign = true
