@@ -1,7 +1,7 @@
 [user]
     name = Nicholas Payne
     email = nic.payne@avant.com
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZTXS4lNQTAKIFgIa3pVtJ0H3+2G55CHkpA8u6PCRa1
+    # signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZTXS4lNQTAKIFgIa3pVtJ0H3+2G55CHkpA8u6PCRa1
 
 [credential]
     helper = store
@@ -9,18 +9,21 @@
 [core]
     editor = nvim
 [url "ssh://git@github.com:pypeaday/dotfiles.git"]
-  sshCommand = ssh -i ~/.ssh/pypeaday_github
+    sshCommand = ssh -i ~/.ssh/pypeaday_github
 [includeIf "gitdir:~/personal/"]
-        path = ~/dotfiles/git/.gitconfig
+    path = ~/dotfiles/git/.gitconfig
 [includeIf "gitdir:~/dotfiles/"]
-        path = ~/dotfiles/git/.gitconfig
+    path = ~/dotfiles/git/.gitconfig
+    sshCommand = ssh -i /Users/npayne81/.ssh/pypeaday_github -vv
 [init]
     defaultBranch = main
 [push]
     default = current
-[gpg]
-  format = ssh
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-[commit]
-  gpgsign = true
+#[gpg]
+#  format = ssh
+#[gpg "ssh"]
+#  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+#[commit]
+#  gpgsign = true
+[rerere]
+	enabled = true
