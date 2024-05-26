@@ -18,5 +18,3 @@
     defaultBranch = main
 [push]
     default = current
-[credential "https://dev.azure.com"]
-	useHttpPath = true
