@@ -24,6 +24,7 @@ There is a lot of overlap but also some key distinctions -> see notes on each to
 - visidata (terminal-based data viewer)
 - zsh (shell)
 - [fancy-motd](https://github.com/bcyran/fancy-motd)
+- [skm](https://github.com/TimothyYe/skm) for ssh key management
 
 ## Stow
 
