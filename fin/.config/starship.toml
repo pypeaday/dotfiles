@@ -1,5 +1,17 @@
 # ~/.config/starship.toml
 
+format = """
+$username\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$python\
+$all
+"""
+
 # Displays text, typically a single character,
 # based on the status of the previous command.
 [character]
@@ -89,3 +101,18 @@ show_always = true
 when = '[[ ! -n "${VIRTUAL_ENV}" ]]'
 style = "bold red"
 format = '[󱔎 NO PYTHON ENVIORNMENT SET ]($style)'
+
+[kubernetes]
+# format = 'on [⛵ ($user on )($cluster in )$context \($namespace\)](dimmed green) '
+format = 'on [☸ $context ](dimmed cyan)'
+disabled = false
+[[kubernetes.contexts]]
+context_pattern = ".*slice.*"
+context_alias = "LOCAL"
+[[kubernetes.contexts]]
+# Using capture groups
+# Contexts from AWS EKS usually carry additional information, like the region and account ID.
+# The following entry matches on the EKS format (`arn:aws:eks:region:account-id:cluster/cluster-name`)
+# and renames every matching kube context into a more readable format (`eks-cluster-name`):
+context_pattern = "arn:aws:eks:.*:.*:cluster/(?P<cluster>[\\w-]+)"
+context_alias = "eks-$cluster"

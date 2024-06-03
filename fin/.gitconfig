@@ -8,14 +8,21 @@
 [core]
     editor = nvim
 [url "ssh://git@github.com:pypeaday/dotfiles.git"]
-  sshCommand = ssh -i ~/.ssh/pypeaday_github
+    sshCommand = ssh -i ~/.ssh/pypeaday_github
 [includeIf "gitdir:~/personal/"]
-        path = ~/dotfiles/git/.gitconfig
+    path = ~/dotfiles/git/.gitconfig
 [includeIf "gitdir:~/dotfiles/"]
-        path = ~/dotfiles/git/.gitconfig
-[includeIf "gitdir:~/work/"]
-        path = ~/dotfiles/avant/.gitconfig-avant
+    path = ~/dotfiles/git/.gitconfig
+    sshCommand = ssh -i /Users/npayne81/.ssh/pypeaday_github
 [init]
     defaultBranch = main
 [push]
     default = current
+#[gpg]
+#  format = ssh
+#[gpg "ssh"]
+#  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+#[commit]
+#  gpgsign = true
+[rerere]
+	enabled = true
