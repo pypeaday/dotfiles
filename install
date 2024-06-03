@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
-# TODO: work on this
-pushd $DOTFILES
-if [[ $USER == "paynen3" ]]; then
-	echo "Stowing stuff for work"
-	stow -D caterpillar
-	stow caterpillar
+pushd $HOME/dotfiles
 
-	eval $HOME/dotfiles/polybar/launch.sh
-else
-	echo "Stowing stuff for home"
-	stow -D personal
-	stow personal
-fi
-
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
-	stow -D $folder
-	stow $folder
+for package in zsh git gitui ipython nvim pip pyflyby starship ta tmux visidata
+do
+	stow -D $package || true
+	stow $package
 done
+
+if [[ $USER == *"3"* ]]; then
+	stow -D iron
+	stow iron
+elif [[ $USER == *"81"* ]]; then
+	stow -D fin
+	stow fin
+else
+	# pass since I'm at home
+	echo "Skipping..."
+fi
 
 popd
