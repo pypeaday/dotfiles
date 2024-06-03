@@ -13,7 +13,7 @@ def get_branch() -> Tuple[Any, str]:
             subprocess.check_output(
                 "git rev-parse --abbrev-ref HEAD",
                 shell=True,
-                stderr=subprocess.DEVNULL
+                stderr=subprocess.DEVNULL,
                 # "git branch --show-current", shell=True, stderr=subprocess.DEVNULL
             )
             .decode("utf-8")
@@ -46,9 +46,7 @@ class MyPrompt(Prompts):
             (Token.Name.Entity, "ipython"),
             (Token, "\n"),
             (
-                Token.Prompt
-                if self.shell.last_execution_succeeded
-                else Token.Generic.Error,
+                Token.Prompt if self.shell.last_execution_succeeded else Token.Generic.Error,
                 "❯ ",
             ),
         ]

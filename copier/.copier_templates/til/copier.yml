@@ -18,12 +18,8 @@ tag1:
     - linux
     - kedro
     - bash
-    - cli
-    - tmux
-    - webdev
+    - terminal
     - vim
-    - catalytic
-    - data
 
 tag2:
   type: str
@@ -34,9 +30,5 @@ tag2:
     - linux
     - kedro
     - bash
-    - cli
-    - tmux
-    - webdev
+    - terminal
     - vim
-    - catalytic
-    - data

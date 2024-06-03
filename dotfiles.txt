@@ -1,0 +1,1 @@
+zsh git gitui ipython nvim pip pyflyby starship ta tmux visidata

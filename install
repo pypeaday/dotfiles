@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 pushd $HOME/dotfiles
 
-for package in zsh git gitui ipython nvim pip pyflyby starship ta tmux visidata
+for package in $(cat dotfiles.txt)
 do
 	stow -D $package || true
 	stow $package
