@@ -15,9 +15,10 @@ selected=$(echo "$options" | fzf)
 
 # If an option was selected
 if [ -n "$selected" ]; then
-    # Find the corresponding URL
-    url=$(grep "$selected" LINKS.md | awk -F',' '{print $2}')
+	# Find the corresponding URL
+	url=$(grep "$selected" $HOME/work/jira-tickets/LINKS.md | awk -F',' '{print $2}')
 
-    # Open the URL in Google Chrome
-    open -a "Google Chrome" $url
+	# Open the URL in Google Chrome
+	open -a "Google Chrome" $url
 fi
+
