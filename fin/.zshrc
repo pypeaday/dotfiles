@@ -8,13 +8,15 @@ c() {
     cd && cd "$(fd -d 2 | cut -c 1- | fzf )"
 }
 
-alias rconfig="cp $HOME/dotfiles/avant/.ruff.toml ./.ruff.toml"
+alias rconfig="cp $HOME/dotfiles/fin/.ruff.toml ./.ruff.toml"
 
-alias otp="bash ~/dotfiles/avant/.local/bin/one-password-copy"
-alias otw="bash ~/dotfiles/avant/.local/bin/one-password-copy-pw"
+alias otp="bash ~/dotfiles/fin/.local/bin/one-password-copy"
+alias otw="bash ~/dotfiles/fin/.local/bin/one-password-copy-pw"
+alias links="bash ~/dotfiles/fin/.local/bin/links"
 
-bindkey -s '^o' 'otp \n'
+# bindkey -s '^o' 'otp \n'
 bindkey -s '^p' 'otw \n'
+bindkey -s '^o' 'links \n'
 
 # interactively destroy tmux sessions
 destroy() {

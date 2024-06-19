@@ -18,11 +18,13 @@
     defaultBranch = main
 [push]
     default = current
-#[gpg]
-#  format = ssh
-#[gpg "ssh"]
-#  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-#[commit]
-#  gpgsign = true
 [rerere]
 	enabled = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICZTXS4lNQTAKIFgIa3pVtJ0H3+2G55CHkpA8u6PCRa1
