@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script reads a markdown file containing a list of links and opens the selected link in Google Chrome.
+
+# Example LINKS.md file
+# Google,https://www.google.com/
+# Example|Foo,https://foo.example.com
+# Example|Bar,https://bar.example.com
+
+# Read the markdown file and parse it into a format suitable for fzf
+options=$(cat $HOME/work/jira-tickets/LINKS.md | awk -F',' '{print $1}')
+
+# Use fzf to select an option
+selected=$(echo "$options" | fzf)
+
+# If an option was selected
+if [ -n "$selected" ]; then
+	# Find the corresponding URL
+	url=$(grep "$selected" $HOME/work/jira-tickets/LINKS.md | awk -F',' '{print $2}')
+
+	# Open the URL in Google Chrome
+	open -a "Google Chrome" $url
+fi
+
