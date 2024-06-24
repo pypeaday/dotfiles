@@ -88,7 +88,8 @@ disabled = true
 [python]
 format = '[ via ](dimmed white)[${symbol}(${version})(\($virtualenv\) )]($style)'
 style = "fg:#83DCC8"
-python_binary = ["python3", "python"]
+# flop order cause python/python3 resolved to different things on Mac
+python_binary = ["python", "python3"]
 symbol = "[ ](fg:#3776ab) "                                                      # actual python blue
 
 [rust]
