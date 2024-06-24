@@ -153,8 +153,6 @@ hello() { clear && ~/dotfiles/scripts/.local/bin/login.sh }
 bindkey -s '^k' 'hello \n'
 bindkey -s '^l' 'clear \n'
 
-hello \n
-
 # terraform complete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
@@ -173,3 +171,4 @@ source $HOME/dotfiles/zsh/completion/.kind
 source $HOME/dotfiles/zsh/completion/.pixi
 
 eval "$(pyenv virtualenv-init -)"
+hello \n
