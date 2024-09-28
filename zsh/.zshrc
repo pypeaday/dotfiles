@@ -55,12 +55,12 @@ export LC_ALL=en_US.UTF-8
 
 # fuzzy find to directories with fzf
 c() {
-    cd && cd "$(find -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
+    cd "$(find ~ ~/projects -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
 }
 
 # Change backgrounds
 background() {
-    clear && feh --bg-scale "$(find ~/dotfiles/backgrounds ~/personal/anime -mindepth 1 -maxdepth 1 -type f | fzf)"
+    clear && feh --bg-scale "$(find ~/dotfiles/backgrounds ~/projects/personal/anime -mindepth 1 -maxdepth 1 -type f | fzf)"
 }
 
 # aliases
@@ -75,6 +75,14 @@ alias inst="source ~/dotfiles/install"
 alias nrows="awk 'END {print NR}'"
 alias trackme='git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)'
 alias set_openai='export OPENAI_API_KEY=$(cat ~/.openai/apikey)'
+
+hawk() {
+    if [ "$1" = "tuah" ]; then
+        command git push
+    else
+        echo "You forgot the tuah"
+    fi
+}
 
 # interactively destroy tmux sessions
 destroy() {

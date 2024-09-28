@@ -12,6 +12,8 @@ body:
 tag1:
   type: str
   choices:
+    - infrastructure
+    - tech
     - python
     - homelab
     - zfs
@@ -24,6 +26,8 @@ tag1:
 tag2:
   type: str
   choices:
+    - infrastructure
+    - tech
     - python
     - homelab
     - zfs

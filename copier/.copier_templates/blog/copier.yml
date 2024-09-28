@@ -8,6 +8,8 @@ slug:
 tag1:
   type: str
   choices:
+    - infrastructure
+    - tech
     - python
     - homelab
     - zfs
@@ -16,14 +18,14 @@ tag1:
     - bash
     - cli
     - tmux
-    - webdev
     - vim
-    - catalytic
     - data
 
 tag2:
   type: str
   choices:
+    - infrastructure
+    - tech
     - python
     - homelab
     - zfs
@@ -32,7 +34,5 @@ tag2:
     - bash
     - cli
     - tmux
-    - webdev
     - vim
-    - catalytic
     - data
