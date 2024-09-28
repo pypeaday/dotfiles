@@ -55,7 +55,7 @@ export LC_ALL=en_US.UTF-8
 
 # fuzzy find to directories with fzf
 c() {
-    cd "$(find ~ ~/projects -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
+    cd ~/projects && cd "$(find -maxdepth 2 -type d 2>/dev/null  | cut -c 3-  | fzf | awk '{print $1}')"
 }
 
 # Change backgrounds
