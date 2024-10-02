@@ -1,5 +1,14 @@
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-eval "$(pyenv init --path)"
+# FROM AURORA STARTUP
+# this file is installed as ~/.zprofile for newly created users
+
+# prepend ~/.local/bin and ~/bin to $PATH unless it is already there
+if ! [[ "$PATH" =~ "$HOME/bin" ]]
+then
+    PATH="$HOME/bin:$PATH"
+fi
+if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+export PATH
 

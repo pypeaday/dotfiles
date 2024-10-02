@@ -1,1 +1,1 @@
-zsh git gitui ipython nvim pip pyflyby starship ta tmux visidata lazygit lazydocker
+zsh git gitui ipython nvim pip pyflyby starship ta tmux visidata lazygit lazydocker fzf k9s

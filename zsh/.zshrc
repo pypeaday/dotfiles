@@ -1,3 +1,38 @@
+# FROM AURORA STARTUP
+# .zshrc is sourced in interactive shells.
+# It should contain commands to set up aliases,
+# functions, options, key bindings, etc.
+#
+
+autoload -U compinit
+compinit
+
+#allow tab completion in the middle of a word
+setopt COMPLETE_IN_WORD
+
+## keep background processes at full speed
+#setopt NOBGNICE
+## restart running processes on exit
+#setopt HUP
+
+## history
+#setopt APPEND_HISTORY
+## for sharing history between zsh processes
+#setopt INC_APPEND_HISTORY
+#setopt SHARE_HISTORY
+
+## never ever beep ever
+#setopt NO_BEEP
+
+## automatically decide when to page a list of completions
+#LISTMAX=0
+
+## disable mail checking
+#MAILCHECK=0
+
+# autoload -U colors
+#colors
+
 # If you come from bash you might have to change your $PATH.
 export ZSH=$HOME/.oh-my-zsh
 export DOTFILES=$HOME/dotfiles
@@ -6,8 +41,8 @@ export DOTFILES=$HOME/dotfiles
 export OPENAI_API_KEY="SETME"
 
 # add pyenv to path
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
 
 # add appimages to path
 export APPIMAGE_ROOT="$HOME/AppImages:"
@@ -32,7 +67,7 @@ export PYFLYBY_PATH="$HOME/dotfiles/pyflyby/.pyflyby"
 export EDITOR=nvim
 
 # use pyenv global python for pipx
-export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
+# export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
 
 # export TERM=screen-256color-bce
 # export TERM=xterm-256color
@@ -42,9 +77,10 @@ export ZSH_DISABLE_COMPFIX="true"
 # ZSH_THEME=random
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 # ZSH_THEME_RANDOM_QUIET=true
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ffff99,bg=italic,underline"
 
 export K9S_CONFIG_DIR=$HOME/.config/k9s
-plugins=(dotenv ag zsh-autosuggestions)
+plugins=(dotenv zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 # source ~/.zprofile
@@ -134,19 +170,19 @@ source "$HOME/.cargo/env"
 #     tmux attach -t base || tmux new -s base
 # fi
 
-eval "$(pyenv init --path)"
+# eval "$(pyenv init --path)"
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
-# BEGIN ANSIBLE MANAGED BLOCK: pyenv
-if [ -e "$HOME/.pyenv/.pyenvrc" ]; then
-    source $HOME/.pyenv/.pyenvrc
-    if [ -e "$HOME/.pyenv/completions/pyenv.zsh" ]; then
-        source $HOME/.pyenv/completions/pyenv.zsh
-    elif [ -e "/usr/local/opt/pyenv/completions/pyenv.zsh" ]; then
-        source /usr/local/opt/pyenv/completions/pyenv.zsh
-    fi
-fi
-# END ANSIBLE MANAGED BLOCK: pyenv
+# # BEGIN ANSIBLE MANAGED BLOCK: pyenv
+# if [ -e "$HOME/.pyenv/.pyenvrc" ]; then
+#     source $HOME/.pyenv/.pyenvrc
+#     if [ -e "$HOME/.pyenv/completions/pyenv.zsh" ]; then
+#         source $HOME/.pyenv/completions/pyenv.zsh
+#     elif [ -e "/usr/local/opt/pyenv/completions/pyenv.zsh" ]; then
+#         source /usr/local/opt/pyenv/completions/pyenv.zsh
+#     fi
+# fi
+# # END ANSIBLE MANAGED BLOCK: pyenv
 
 # shortcuts
 
@@ -175,8 +211,10 @@ if [ -e "$HOME/.alias.local" ]; then
 fi
 
 # completion scripts
-source $HOME/dotfiles/zsh/completion/.kind
-source $HOME/dotfiles/zsh/completion/.pixi
+source $HOME/dotfiles/zsh/.zsh.completion/.kind
+source $HOME/dotfiles/zsh/.zsh.completion/.pixi
 
-eval "$(pyenv virtualenv-init -)"
-hello \n
+
+eval "$(atuin init zsh --disable-up-arrow)"
+# eval "$(pyenv virtualenv-init -)"
+# hello \n

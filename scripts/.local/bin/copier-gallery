@@ -1,37 +1,34 @@
 #!/bin/bash
 
 # if COPIER_GALLERY_DIR is not set then ue ~/.copier_templates as a default
-if [ -z "$COPIER_GALLERY_DIR" ]
-then
-    COPIER_GALLERY_DIR="$HOME/dotfiles/copier/.copier_templates"
+if [ -z "$COPIER_GALLERY_DIR" ]; then
+  COPIER_GALLERY_DIR="$HOME/dotfiles/copier/.copier_templates"
 fi
 
-template=`ls $COPIER_GALLERY_DIR |\
-    fzf\
-    --preview="tree $COPIER_GALLERY_DIR/{} | lolcat"`
+template=$(ls $COPIER_GALLERY_DIR |
+  fzf --preview="tree $COPIER_GALLERY_DIR/{} | lolcat")
 
 if [[ "$template" = "til" ]]; then
-    save_dir="$HOME/personal/pype.dev/pages/til/"
+  save_dir="$HOME/projects/personal/pype.dev/pages/til/"
 elif [[ "$template" = "blog" ]]; then
-    save_dir="$HOME/personal/pype.dev/pages/blog/"
+  save_dir="$HOME/projects/personal/pype.dev/pages/blog/"
 elif [[ "$template" = "bema" ]]; then
-    save_dir="$HOME/personal/pype.dev/pages/bema/"
+  save_dir="$HOME/projects/personal/pype.dev/pages/bema/"
 elif [[ "$template" = "bible-project" ]]; then
-    save_dir="$HOME/personal/pype.dev/pages/bible-project/"
+  save_dir="$HOME/projects/personal/pype.dev/pages/bible-project/"
 elif [[ "$template" = "faith" ]]; then
-    save_dir="$HOME/personal/pype.dev/pages/faith/"
+  save_dir="$HOME/projects/personal/pype.dev/pages/faith/"
 elif [[ "$template" = "olivet-lyrics" ]]; then
-    save_dir="$HOME/personal/olivet-davinci-resolve-automation/lyrics/01-raw/"
+  save_dir="$HOME/projects/personal/olivet-davinci-resolve-automation/lyrics/01-raw/"
 elif [[ "$template" = "jira" ]]; then
-    save_dir="$HOME/work/jira-tickets/"
+  save_dir="$HOME/projects/work/jira-tickets/"
 else
-    save_dir="."
+  save_dir="."
 
 fi
 
-if [ -z "$template" ]
-then
-    echo "no template was selected"
+if [ -z "$template" ]; then
+  echo "no template was selected"
 else
-    copier copy ${COPIER_GALLERY_DIR}/${template} ${save_dir}
+  uvx copier copy ${COPIER_GALLERY_DIR}/${template} ${save_dir}
 fi
