@@ -1,0 +1,105 @@
+#  $K9S_CONFIG_DIR/plugins.yaml
+plugins:
+  helm-default-values:
+    shortCut: Shift-V
+    confirm: false
+    description: Chart Default Values
+    scopes:
+      - helm
+    command: sh
+    background: false
+    args:
+      - -c
+      - >-
+        revision=$(helm history -n $NAMESPACE --kube-context $CONTEXT $COL-NAME | grep deployed | cut -d$'\t' -f1 | tr -d ' \t');
+        kubectl
+        get secrets
+        --context $CONTEXT
+        -n $NAMESPACE
+        sh.helm.release.v1.$COL-NAME.v$revision -o yaml
+        | yq e '.data.release' -
+        | base64 -d
+        | base64 -d
+        | gunzip
+        | jq -r '.chart.values'
+        | yq -P
+        | less -K
+  helm-values:
+    shortCut: v
+    confirm: false
+    description: Values
+    scopes:
+      - helm
+    command: sh
+    background: false
+    args:
+      - -c
+      - "helm get values $COL-NAME -n $NAMESPACE --kube-context $CONTEXT | less -K"
+  secret-openssl-ca:
+    shortCut: Ctrl-O
+    confirm: false
+    description: Openssl ca.crt
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl get secret --context $CONTEXT -n $NAMESPACE $NAME -o jsonpath='{.data.ca\.crt}' | base64 -d | openssl storeutl -noout -text -certs /dev/stdin |& less
+  secret-openssl-tls:
+    shortCut: Shift-O
+    confirm: false
+    description: Openssl tls.crt
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl get secret --context $CONTEXT -n $NAMESPACE $NAME -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl storeutl -noout -text -certs /dev/stdin |& less
+  # Removes all finalizers from the selected resource. Finalizers are namespaced keys that tell Kubernetes to wait
+  # until specific conditions are met before it fully deletes resources marked for deletion.
+  # Before deleting an object you need to ensure that all finalizers has been removed. Usually this would be done
+  # by the specific controller but under some circumstances it is possible to encounter a set of objects blocked
+  # for deletion.
+  # This plugins makes this task easier by providing a shortcut to directly removing them all.
+  # Be careful when using this plugin as it may leave dangling resources or instantly deleting resources that were
+  # blocked by the finalizers.
+  # Author: github.com/jalvarezit
+  remove_finalizers:
+    shortCut: Ctrl-F
+    confirm: true
+    dangerous: true
+    scopes:
+      - all
+    description: |
+      Removes all finalizers from selected resource. Be careful when using it,
+      it may leave dangling resources or delete them
+    command: kubectl
+    background: true
+    args:
+      - patch
+      - --context
+      - $CONTEXT
+      - --namespace
+      - $NAMESPACE
+      - $RESOURCE_NAME
+      - $NAME
+      - -p
+      - '{"metadata":{"finalizers":null}}'
+      - --type
+      - merge
+  #--- Create debug container for selected pod in current namespace
+  # See https://kubernetes.io/docs/tasks/debug/debug-application/debug-running-pod/#ephemeral-container
+  debug:
+    shortCut: Shift-D
+    description: Add debug container
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.12 --share-processes -- bash"
