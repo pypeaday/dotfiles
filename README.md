@@ -3,10 +3,11 @@
 ## Tools
 
 - nvim/vscode (PDE/IDE)
-- I use LazyVim as an nvim distro and customize it a bit more to my liking
+  - I use LazyVim as an nvim distro and customize it a bit more to my liking
+- VS Code (IDE)
 - tmux (session manager)
-- pop_os! 22.04 (home: OS and DE)
-- OBS 
+- Aurora by Universal Blue: OS
+- OBS
 - stow (dotfiles management)
 - starship (beautiful prompt)
 - JetBrainsMono Nerd Font (font)
