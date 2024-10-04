@@ -102,8 +102,8 @@ background() {
 # aliases
 alias vim="nvim"
 alias bim="nvim"
-alias cdw="cd ~/work"
-alias cdp="cd ~/personal"
+alias cdw="cd ~/projects/work"
+alias cdp="cd ~/projects/personal"
 alias src="source ~/.zshrc"
 alias envrc="cp $HOME/dotfiles/envrc ./.envrc"
 alias inst="source ~/dotfiles/install"
