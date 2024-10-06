@@ -214,6 +214,8 @@ fi
 source $HOME/dotfiles/zsh/.zsh.completion/.kind
 source $HOME/dotfiles/zsh/.zsh.completion/.pixi
 
+# get weather
+wttr () { curl "wttr.in/$1?u" }
 
 eval "$(atuin init zsh --disable-up-arrow)"
 # eval "$(pyenv virtualenv-init -)"
