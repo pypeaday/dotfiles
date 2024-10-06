@@ -13,8 +13,10 @@ elif [[ $USER == *"81"* ]]; then
 	stow -D fin
 	stow fin
 else
-	# pass since I'm at home
-	echo "Skipping..."
+	stow -D zsh
+	stow zsh
+	stow -D git
+	stow git
 fi
 
 popd
