@@ -216,6 +216,7 @@ source $HOME/dotfiles/zsh/.zsh.completion/.pixi
 
 # get weather
 wttr () { curl "wttr.in/$1?u" }
+wttrd () { curl "v2d.wttr.in/$1?u" }
 
 eval "$(atuin init zsh --disable-up-arrow)"
 # eval "$(pyenv virtualenv-init -)"
