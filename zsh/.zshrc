@@ -33,6 +33,8 @@ setopt COMPLETE_IN_WORD
 # autoload -U colors
 #colors
 
+export GSK_RENDERER=ngl
+
 # If you come from bash you might have to change your $PATH.
 export ZSH=$HOME/.oh-my-zsh
 export DOTFILES=$HOME/dotfiles
@@ -59,15 +61,12 @@ export PATH="$PATH:$MASON_PATH"
 # make sure npm packages are on path
 export NPM_PACKAGES_ROOT="$HOME/.local/.npm-global"
 export NPM_PACKAGES="$NPM_PACKAGES_ROOT/bin"
-export PATH="$NPM_PACKAGES:$PATH"
+export PATH="$PATH:$NPM_PACKAGES"
 
 # make sure brew is on path
 
 export PYFLYBY_PATH="$HOME/dotfiles/pyflyby/.pyflyby"
 export EDITOR=nvim
-
-# use pyenv global python for pipx
-# export PIPX_DEFAULT_PYTHON="$HOME/.pyenv/shims/python"
 
 # export TERM=screen-256color-bce
 # export TERM=xterm-256color
@@ -149,13 +148,13 @@ eval "$(direnv hook zsh)"
 # homebrew
 if [ -d "$HOME/.linuxbrew" ]; then
     export HOMEBREW_PREFIX="$HOME/.linuxbrew"
-    export PATH="$HOME/.linuxbrew/bin:$PATH"
+    export PATH="$PATH:$HOME/.linuxbrew/bin"
 elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-    export PATH="home/linuxbrew/.linuxbrew/bin:$PATH"
+    export PATH="$PATH:home/linuxbrew/.linuxbrew/bin"
 else
     export HOMEBREW_PREFIX="/opt/homebrew"
-    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="$PATH:/opt/homebrew/bin"
 fi
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 

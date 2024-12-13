@@ -12,3 +12,4 @@ then
 fi
 export PATH
 
+PATH=$PATH:~/.linuxbrew/bin
