@@ -12,27 +12,25 @@ body:
 tag1:
   type: str
   choices:
+    - homelab
     - infrastructure
     - tech
     - python
-    - homelab
     - zfs
     - linux
-    - kedro
-    - bash
-    - terminal
     - vim
+    - reflection
+    - cooking
 
 tag2:
   type: str
   choices:
+    - homelab
     - infrastructure
     - tech
     - python
-    - homelab
     - zfs
     - linux
-    - kedro
-    - bash
-    - terminal
     - vim
+    - reflection
+    - cooking

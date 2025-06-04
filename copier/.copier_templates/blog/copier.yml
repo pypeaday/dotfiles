@@ -8,31 +8,25 @@ slug:
 tag1:
   type: str
   choices:
+    - homelab
     - infrastructure
     - tech
     - python
-    - homelab
     - zfs
     - linux
-    - kedro
-    - bash
-    - cli
-    - tmux
     - vim
-    - data
+    - reflection
+    - cooking
 
 tag2:
   type: str
   choices:
+    - homelab
     - infrastructure
     - tech
     - python
-    - homelab
     - zfs
     - linux
-    - kedro
-    - bash
-    - cli
-    - tmux
     - vim
-    - data
+    - reflection
+    - cooking
