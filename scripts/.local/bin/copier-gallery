@@ -9,7 +9,7 @@ fi
 if [ "$USER" = "nic" ]; then
   save_dir_prefix="$HOME/projects/personal/pype.dev/pype.dev/content/"
 else
-  save_dir_prefix="$HOME/projects/work/working-notes/"
+  save_dir_prefix="$HOME/projects/work/working-notes/pages"
 fi
 
 template=$(ls $COPIER_GALLERY_DIR |
@@ -26,7 +26,7 @@ elif [[ "$template" = "project" ]]; then
 elif [[ "$template" = "note" ]]; then
   save_dir="$save_dir_prefix/notes/"
 elif [[ "$template" = "ra-ticket" ]]; then
-  save_dir="$save_dir_prefix/ra-ticket/"
+  save_dir="$save_dir_prefix/tickets/"
 elif [[ "$template" = "blog" ]]; then
   save_dir="$save_dir_prefix/blog/"
 elif [[ "$template" = "bema" ]]; then
