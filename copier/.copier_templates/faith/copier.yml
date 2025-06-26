@@ -4,8 +4,7 @@ title:
 slug:
   type: str
   default: "{{  title.lower().replace(' ', '-')  }}"
-
-tag1:
+tag:
   type: str
-  choices:
-    - books
+body:
+  type: str

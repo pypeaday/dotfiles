@@ -1,10 +1,10 @@
 _min_copier_version: v6.0.0b0
+note:
+  type: str
 title:
   type: str
 slug:
   type: str
   default: "{{  title.lower().replace(' ', '-').replace('.', '-')  }}"
 tag:
-  type: str
-body:
   type: str

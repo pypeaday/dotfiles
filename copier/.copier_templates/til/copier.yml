@@ -4,33 +4,7 @@ title:
 slug:
   type: str
   default: "{{  title.lower().replace(' ', '-')  }}"
-
-body:
+tag:
   type: str
-  default: "TODO: Write a description"
-
-tag1:
+til:
   type: str
-  choices:
-    - homelab
-    - infrastructure
-    - tech
-    - python
-    - zfs
-    - linux
-    - vim
-    - reflection
-    - cooking
-
-tag2:
-  type: str
-  choices:
-    - homelab
-    - infrastructure
-    - tech
-    - python
-    - zfs
-    - linux
-    - vim
-    - reflection
-    - cooking

@@ -6,5 +6,3 @@ slug:
   default: "{{  title.lower().replace(' ', '-').replace('.', '-')  }}"
 tag:
   type: str
-body:
-  type: str

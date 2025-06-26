@@ -4,4 +4,5 @@ title:
 slug:
   type: str
   default: "{{  title.lower().replace(' ', '-')  }}"
-
+body:
+  type: str

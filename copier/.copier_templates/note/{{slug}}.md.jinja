@@ -1,12 +1,12 @@
 ---
 date: {{ '%Y-%m-%d %H:%M:%S' | strftime }}
-templateKey: blog-post
+templateKey: note
 title: {{ title }}
-published: True
+published: False
 tags:
-  - bema
-  - faith
+  - {{ tag }}
+  - note
 
 ---
 
-{{ body }}
+{{ note }}
