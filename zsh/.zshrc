@@ -63,6 +63,10 @@ export NPM_PACKAGES_ROOT="$HOME/.local/.npm-global"
 export NPM_PACKAGES="$NPM_PACKAGES_ROOT/bin"
 export PATH="$PATH:$NPM_PACKAGES"
 
+# fly
+export FLYCTL_INSTALL="$HOME/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
 # make sure brew is on path
 
 export PYFLYBY_PATH="$HOME/dotfiles/pyflyby/.pyflyby"
@@ -156,7 +160,7 @@ else
     export HOMEBREW_PREFIX="/opt/homebrew"
     export PATH="$PATH:/opt/homebrew/bin"
 fi
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+# eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 # rust
 source "$HOME/.cargo/env"
