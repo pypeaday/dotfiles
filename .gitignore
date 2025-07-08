@@ -13,3 +13,6 @@ avant/spacelift_apikey.json
 avant/.avant-hidden-though-stowed/spacelift_apikey.json
 caterpillar/.caterpillar/emails
 iron/.caterpillar/emails
+luarocks-3.11.1
+.webui_secret_key
+luarocks-3.11.1.tar.gz
