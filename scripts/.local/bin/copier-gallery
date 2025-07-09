@@ -7,44 +7,13 @@ fi
 
 # set the path depending on who I am
 if [ "$USER" = "nic" ]; then
-  save_dir_prefix="$HOME/projects/personal/pype.dev/pages/"
+  save_dir="$HOME/projects/personal/pype.dev"
 else
-  save_dir_prefix="$HOME/projects/work/working-notes/pages"
+  save_dir="$HOME/projects/work/working-notes"
 fi
 
 template=$(ls $COPIER_GALLERY_DIR |
   fzf --preview="tree $COPIER_GALLERY_DIR/{} | lolcat")
-
-if [[ "$template" = "til" ]]; then
-  save_dir="$save_dir_prefix/til/"
-elif [[ "$template" = "contact" ]]; then
-  save_dir="$save_dir_prefix/contact/"
-elif [[ "$template" = "jira" ]]; then
-  save_dir="$save_dir_prefix/jira/"
-elif [[ "$template" = "project" ]]; then
-  save_dir="$save_dir_prefix/projects/"
-elif [[ "$template" = "note" ]]; then
-  save_dir="$save_dir_prefix/notes/"
-elif [[ "$template" = "ra-ticket" ]]; then
-  save_dir="$save_dir_prefix/tasks/"
-elif [[ "$template" = "task" ]]; then
-  save_dir="$save_dir_prefix/tasks/"
-elif [[ "$template" = "daily" ]]; then
-  save_dir="$save_dir_prefix/daily/"
-elif [[ "$template" = "blog" ]]; then
-  save_dir="$save_dir_prefix/blog/"
-elif [[ "$template" = "bema" ]]; then
-  save_dir="$save_dir_prefix/bema/"
-elif [[ "$template" = "bible-project" ]]; then
-  save_dir="$save_dir_prefix/bible-project/"
-elif [[ "$template" = "faith" ]]; then
-  save_dir="$save_dir_prefix/faith/"
-elif [[ "$template" = "olivet-lyrics" ]]; then
-  save_dir="$save_dir_prefix/olivet-lyrics/"
-else
-  save_dir="."
-
-fi
 
 if [ -z "$template" ]; then
   echo "no template was selected"
