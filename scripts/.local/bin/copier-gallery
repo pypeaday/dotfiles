@@ -7,7 +7,7 @@ fi
 
 # set the path depending on who I am
 if [ "$USER" = "nic" ]; then
-  save_dir_prefix="$HOME/projects/personal/pype.dev/pype.dev/content/"
+  save_dir_prefix="$HOME/projects/personal/pype.dev/pages/"
 else
   save_dir_prefix="$HOME/projects/work/working-notes/pages"
 fi
