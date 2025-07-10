@@ -337,6 +337,9 @@ local function setup_pypeaday_keymaps()
   
   -- Find backlinks
   map("n", "<leader>dl", daily.find_backlinks, { desc = "Find backlinks" })
+  
+  -- Copy previous daily note wikilink
+  map("n", "<leader>dy", daily.copy_previous_daily_wikilink, { desc = "Copy previous daily note wikilink" })
 end
 
 -- -----------------------------------------------------------------------------
