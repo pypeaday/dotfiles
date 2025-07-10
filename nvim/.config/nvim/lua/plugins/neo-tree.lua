@@ -24,7 +24,7 @@ return {
   opts = {
     filesystem = {
       bind_to_cwd = false,
-      follow_current_file = true,
+      follow_current_file = { enabled = true },
       filtered_items = {
         -- visible to see hidden files
         visible = true,
