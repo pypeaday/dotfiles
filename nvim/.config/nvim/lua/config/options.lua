@@ -114,7 +114,7 @@ function M.check_and_open_daily_note()
 
   if vim.tbl_isempty(files) then
     -- Create new note via copier
-    os.execute("uvx copier copy ~/dotfiles/copier/.copier_templates/daily .")
+    os.execute("copier copy ~/dotfiles/copier/.copier_templates/daily .")
 
     -- Re-glob to get the new file (may need to wait a moment for creation)
     vim.wait(500, function()
@@ -146,24 +146,24 @@ local function get_link_or_word()
 end
 
 --- Create a new task using copier and use the full word or wiki link under cursor as title.
-function M.CreateTask()
-  local word = get_link_or_word()
-  if word == nil or word == "" then
-    print("No word under cursor to use as task title.")
-    return
-  end
-
-  local clean_word = word:gsub("[%-_%s]+$", ""):gsub('"', '\\"')
-  local safe_word = clean_word:gsub('"', '\\"')
-  local cmd = string.format('copier copy ~/.copier-templates/todo . -d "title=%s"', safe_word)
-  local result = os.execute(cmd)
-  if result ~= 0 then
-    print("Failed to create task with copier.")
-  else
-    print("Task created with title: " .. word)
-  end
-  vim.cmd("mode")
-end
+-- function M.CreateTask()
+--   local word = get_link_or_word()
+--   if word == nil or word == "" then
+--     print("No word under cursor to use as task title.")
+--     return
+--   end
+--
+--   local clean_word = word:gsub("[%-_%s]+$", ""):gsub('"', '\\"')
+--   local safe_word = clean_word:gsub('"', '\\"')
+--   local cmd = string.format('copier copy ~/dotfiles/copier/.copier_templates/todo . -d "title=%s"', safe_word)
+--   local result = os.execute(cmd)
+--   if result ~= 0 then
+--     print("Failed to create task with copier.")
+--   else
+--     print("Task created with title: " .. word)
+--   end
+--   vim.cmd("mode")
+-- end
 
 vim.api.nvim_create_user_command("DailyNote", function()
   M.check_and_open_daily_note()
@@ -180,9 +180,9 @@ vim.api.nvim_create_user_command("DailyFiles", function()
   })
 end, {})
 
-vim.api.nvim_create_user_command("CreateTask", function()
-  M.CreateTask()
-end, {})
+-- vim.api.nvim_create_user_command("CreateTask", function()
+--   M.CreateTask()
+-- end, {})
 
 vim.keymap.set("n", "<leader>dn", M.check_and_open_daily_note)
 vim.keymap.set("n", "<leader>df", function()
