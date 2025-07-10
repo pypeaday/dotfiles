@@ -1,6 +1,20 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+
+---@diagnostic disable: undefined-global
+-- vim is a global in Neovim Lua scripts
+
+-- This file contains:
+-- 1. Core keymaps for basic editing and navigation
+-- 2. Plugin-specific keymaps extracted from lazy specs
+--    - Neo-tree (file explorer)
+--    - Symbols Outline (code navigation)
+--    - Telescope (fuzzy finding)
+--    - Pypeaday (daily notes)
+--    - Codeium (AI code completion)
+--    - SuperTab/LuaSnip (snippet and completion navigation)
+
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -61,107 +75,88 @@ local function neovimMappings()
   map("n", "<leader>bc", "<cmd>BufferLinePick<CR>", { noremap = false, silent = true, desc = "pick buffer" })
   map("n", "-", require("oil").open, { desc = "Open parent directory" })
   -- force/replace already used keymaps
-  vim.api.nvim_set_keymap(
-    "n",
-    "<leader>cs",
-    "<cmd>AerialNavOpen<CR>",
-    { noremap = true, silent = true, desc = "Symbols Outline(Aerial)" }
-  )
+  map("n", "<leader>cs", "<cmd>AerialNavOpen<CR>", { noremap = true, silent = true, desc = "Symbols Outline(Aerial)" })
   -- my old keymaps go here I think just for nvim - so as to not be in vscode
 
-  local map = vim.keymap.set
-
-  local function bind(op, outer_opts)
-    outer_opts = outer_opts or { noremap = true }
-    return function(lhs, rhs, opts)
-      opts = vim.tbl_extend("force", outer_opts, opts or {})
-      map(op, lhs, rhs, opts)
-      -- vim.api.nvim_set_keymap(op, lhs, rhs, opts)
-    end
-  end
-
-  local nmap = bind("n", { noremap = false })
-  local nnoremap = bind("n")
-  local vnoremap = bind("v")
-  local xnoremap = bind("x")
-  local inoremap = bind("i")
-
   -- " Be faster
-  xnoremap("W", "w")
+  map("x", "W", "w", { noremap = true })
 
   -- " Behave Vim
-  --
-  nnoremap("Y", "y$")
+  map("n", "Y", "y$", { noremap = true })
 
-  -- " yank text to first regiter then when you paste it the yanked text is still first in the register
-  -- " vnoremap <Leader>p "_P
-  vnoremap("<leader>p", '"0p')
+  -- " yank text to first register then when you paste it the yanked text is still first in the register
+  map("v", "<leader>p", '"0p', { noremap = true })
 
   -- " ESC
-  inoremap("jk", "<esc>")
+  map("i", "jk", "<esc>", { noremap = true })
 
   -- "" Keep everything centered
-  nnoremap("n", "nzzzv")
-  nnoremap("N", "Nzzzv")
-  nnoremap("J", "mzJ`z")
+  map("n", "n", "nzzzv", { noremap = true })
+  map("n", "N", "Nzzzv", { noremap = true })
+  map("n", "J", "mzJ`z", { noremap = true })
 
-  nnoremap("<c-d>", "<c-d>zz")
-  nnoremap("<c-u", "<c-u>zz")
+  map("n", "<c-d>", "<c-d>zz", { noremap = true })
+  map("n", "<c-u", "<c-u>zz", { noremap = true })
 
   -- " Undo Breakpoints
-  inoremap(",", ",<c-g>u")
-  inoremap(".", ".<c-g>u")
-  inoremap("!", "!<c-g>u")
-  inoremap("?", "?<c-g>u")
-  inoremap("[", "[<c-g>u")
-  inoremap(";", "[<c-g>u")
+  map("i", ",", ",<c-g>u", { noremap = true })
+  map("i", ".", ".<c-g>u", { noremap = true })
+  map("i", "!", "!<c-g>u", { noremap = true })
+  map("i", "?", "?<c-g>u", { noremap = true })
+  map("i", "[", "[<c-g>u", { noremap = true })
+  map("i", ";", "[<c-g>u", { noremap = true })
 
   -- " Jumplist
-  nnoremap("<expr> k", "(v:count > 5 ? 'm'' . v:count : '') . 'k' ")
-  nnoremap("<expr> j", "(v:count > 5 ? 'm'' . v:count : '') . 'j' ")
+  map("n", "<expr> k", "(v:count > 5 ? 'm'' . v:count : '') . 'k' ", { noremap = true })
+  map("n", "<expr> j", "(v:count > 5 ? 'm'' . v:count : '') . 'j' ", { noremap = true })
 
   -- " Moving text
-  vnoremap("J", "<cmd>m '>+1<CR>gv=gv")
-  vnoremap("K", "<cmd>m '<-2<CR>gv=gv")
-  inoremap("<C-j>", "<esc><cmd>m .+1<CR>==")
-  inoremap("<C-k>", "<esc><cmd>m .-2<CR>==")
+  map("v", "J", "<cmd>m '>+1<CR>gv=gv", { noremap = true })
+  map("v", "K", "<cmd>m '<-2<CR>gv=gv", { noremap = true })
+  map("i", "<C-j>", "<esc><cmd>m .+1<CR>==", { noremap = true })
+  map("i", "<C-k>", "<esc><cmd>m .-2<CR>==", { noremap = true })
 
-  -- " copy to clipbord
-  vnoremap("<Leader>y", ' "+y')
+  -- " copy to clipboard
+  map("v", "<Leader>y", ' "+y', { noremap = true })
 
-  nnoremap("get", "<cmd>e ~/.tmux.conf.local<CR>")
-  nnoremap("gez", "<cmd>e ~/.zshrc<CR>")
+  map("n", "get", "<cmd>e ~/.tmux.conf.local<CR>", { noremap = true })
+  map("n", "gez", "<cmd>e ~/.zshrc<CR>", { noremap = true })
 
-  nnoremap("<leader>x", "<cmd>!chmod +x %<CR>")
+  map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true })
 
   -- " Open the current file in the default program
-  -- " using double leader since I kept accidently opening things
-  nmap("<leader>o", "<cmd>!xdg-open %<cr><cr>", { desc = "open natively" })
+  -- " using double leader since I kept accidentally opening things
+  map("n", "<leader>o", "<cmd>!xdg-open %<cr><cr>", { noremap = false, desc = "open natively" })
 
   -- " Coverage navigation
-  nnoremap("[C", "<cmd><C-U>PrevUncovered<CR>")
-  nnoremap("]C", "<cmd><C-U>NextUncovered<CR>")
-  -- nnoremap("<leader>c", "<cmd>ToggleCoverage<CR>")
+  map("n", "[C", "<cmd><C-U>PrevUncovered<CR>", { noremap = true })
+  map("n", "]C", "<cmd><C-U>NextUncovered<CR>", { noremap = true })
+  -- map("n", "<leader>c", "<cmd>ToggleCoverage<CR>", { noremap = true })
 
   -- Telescope
-  nnoremap("gen", "<cmd>Telescope find_files cwd=~/.config/nvim <CR>")
-  nnoremap(
+  map("n", "gen", "<cmd>Telescope find_files cwd=~/.config/nvim <CR>", { noremap = true })
+  map(
+    "n",
     "<leader>ps",
-    "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>"
+    "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>",
+    { noremap = true }
   )
-  nnoremap(
+  map(
+    "n",
     "<leader>pf",
-    "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>"
-    -- "<cmd>lua require'telescope.builtin'.find_files()<cr>"
+    "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files','--no-ignore', '--hidden',  '--iglob', '!.venv','-g' ,'!.git' }})<cr>",
+    { noremap = true }
   )
-  nnoremap("<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
-  nnoremap(
+  map("n", "<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", { noremap = true })
+  map(
+    "n",
     "<leader>pw",
-    "<cmd>lua require('telescope.builtin').grep_string { search =  vim.fn.expand(\"<cword>\") }<CR>"
+    "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>",
+    { noremap = true }
   )
-  nnoremap("<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<CR>")
-  nnoremap("<leader>pl", "<cmd>lua require('telescope.builtin').loclist()<CR>")
-  nnoremap("<leader>ch", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
+  map("n", "<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<CR>", { noremap = true })
+  map("n", "<leader>pl", "<cmd>lua require('telescope.builtin').loclist()<CR>", { noremap = true })
+  map("n", "<leader>ch", "<cmd>lua require('telescope.builtin').help_tags()<CR>", { noremap = true })
 end
 
 local function vscodeMappings()
@@ -267,4 +262,138 @@ if vim.g.vscode then
   vscodeMappings()
 else
   neovimMappings()
+end
+
+-- ============================================================================
+-- Plugin-specific keymaps (extracted from lazy specs)
+-- ============================================================================
+
+-- -----------------------------------------------------------------------------
+-- Neo-tree keymaps
+-- File explorer functionality
+-- -----------------------------------------------------------------------------
+local function setup_neotree_keymaps()
+  -- Toggle file explorer in current working directory
+  map("n", "<leader>fe", function()
+    require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+  end, { desc = "Explorer NeoTree (cwd)" })
+  
+  -- Toggle file explorer in root directory
+  map("n", "<leader>fE", function()
+    require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
+  end, { desc = "Explorer NeoTree (root dir)" })
+  
+  -- Alias for quick access to file explorer
+  map("n", "<leader>e", "<leader>fe", { desc = "Explorer NeoTree (cwd)", remap = true })
+  
+  -- Alias for quick access to root directory explorer
+  map("n", "<leader>E", "<leader>fE", { desc = "Explorer NeoTree (root dir)", remap = true })
+end
+
+-- -----------------------------------------------------------------------------
+-- Symbols Outline keymaps
+-- Code navigation and structure visualization
+-- -----------------------------------------------------------------------------
+local function setup_symbols_outline_keymaps()
+  -- Open symbols outline panel
+  map("n", "<leader>cs", "<cmd>SymbolsOutline<cr>", { desc = "Symbols Outline" })
+end
+
+-- -----------------------------------------------------------------------------
+-- Telescope keymaps
+-- Fuzzy finding and search functionality
+-- -----------------------------------------------------------------------------
+local function setup_telescope_keymaps()
+  -- Note: Some telescope keymaps are already defined in the neovimMappings function
+  -- This disables the keymap to grep files that's defined in LazyVim
+  -- map("n", "<leader>/", false)
+  
+  -- Find files using Telescope
+  -- map("n", "<leader>pf", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+  
+  -- The following keymaps are already defined in neovimMappings but are included here for reference:
+  -- map("n", "<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>")
+  -- map("n", "<leader>pf", "<cmd>lua require'telescope.builtin'.find_files()<cr>")
+  -- map("n", "<Leader>pg", "<cmd>lua require('telescope.builtin').live_grep()<CR>")
+  -- map("n", "<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>")
+  -- map("n", "<leader>pb", "<cmd>lua require('telescope.builtin').buffers()<CR>")
+  -- map("n", "<leader>pl", "<cmd>lua require('telescope.builtin').loclist()<CR>")
+  -- map("n", "<leader>ch", "<cmd>lua require('telescope.builtin').help_tags()<CR>")
+  -- map("n", "gen", "<cmd>Telescope find_files cwd=~/.config/nvim <CR>")
+end
+
+-- -----------------------------------------------------------------------------
+-- Pypeaday keymaps
+-- Daily notes and personal plugin functionality
+-- -----------------------------------------------------------------------------
+local function setup_pypeaday_keymaps()
+  local daily = require("pypeaday.daily")
+  
+  -- Open daily note
+  map("n", "<leader>dn", daily.check_and_open_daily_note, { desc = "Open daily note" })
+  
+  -- Find daily files
+  map("n", "<leader>df", daily.find_daily_files, { desc = "Find daily files" })
+  
+  -- Find backlinks
+  map("n", "<leader>dl", daily.find_backlinks, { desc = "Find backlinks" })
+end
+
+-- -----------------------------------------------------------------------------
+-- Codeium keymaps
+-- AI code completion functionality
+-- -----------------------------------------------------------------------------
+local function setup_codeium_keymaps()
+  -- Accept suggestion
+  map("i", "<C-l>", function()
+    return vim.fn["codeium#Accept"]()
+  end, { expr = true })
+  
+  -- Cycle to next suggestion
+  map("i", "<c-;>", function()
+    return vim.fn["codeium#CycleCompletions"](1)
+  end, { expr = true })
+  
+  -- Cycle to previous suggestion
+  map("i", "<c-,>", function()
+    return vim.fn["codeium#CycleCompletions"](-1)
+  end, { expr = true })
+  
+  -- Clear suggestions
+  map("i", "<c-x>", function()
+    return vim.fn["codeium#Clear"]()
+  end, { expr = true })
+end
+
+-- -----------------------------------------------------------------------------
+-- SuperTab and LuaSnip keymaps
+-- Snippet and completion navigation
+-- -----------------------------------------------------------------------------
+local function setup_snippet_keymaps()
+  -- These keymaps are implemented in the nvim-cmp configuration
+  -- They're included here for documentation and organization purposes
+  
+  -- Tab key behavior:
+  -- 1. If completion menu is visible: select item
+  -- 2. If snippet is expandable/jumpable: expand/jump
+  -- 3. If text before cursor: trigger completion
+  -- 4. Otherwise: normal Tab behavior
+  
+  -- Shift-Tab key behavior:
+  -- 1. If completion menu is visible: select previous item
+  -- 2. If snippet is jumpable backwards: jump backwards
+  -- 3. Otherwise: normal Shift-Tab behavior
+  
+  -- Note: The actual implementation is in the superTab.lua plugin config
+  -- This is just for documentation purposes
+end
+
+-- Setup plugin keymaps when not in VSCode mode
+if not vim.g.vscode then
+  setup_neotree_keymaps()
+  setup_symbols_outline_keymaps()
+  setup_telescope_keymaps()
+  setup_pypeaday_keymaps()
+  setup_codeium_keymaps()
+  setup_snippet_keymaps()
 end
