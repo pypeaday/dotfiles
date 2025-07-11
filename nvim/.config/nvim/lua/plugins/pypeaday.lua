@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+-- vim is a global in Neovim Lua scripts
 return {
   "pypeaday",
   dir = vim.fn.stdpath("config") .. "/lua/pypeaday",

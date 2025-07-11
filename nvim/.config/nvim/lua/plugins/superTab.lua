@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+-- vim is a global in Neovim Lua scripts
 return {
   {
     "L3MON4D3/LuaSnip",

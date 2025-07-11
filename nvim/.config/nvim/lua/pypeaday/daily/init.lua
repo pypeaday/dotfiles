@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-global
+-- vim is a global in Neovim Lua scripts
 local M = {}
 
 function M.check_and_open_daily_note()
