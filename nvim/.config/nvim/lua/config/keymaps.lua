@@ -277,15 +277,15 @@ local function setup_neotree_keymaps()
   map("n", "<leader>fe", function()
     require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
   end, { desc = "Explorer NeoTree (cwd)" })
-  
+
   -- Toggle file explorer in root directory
   map("n", "<leader>fE", function()
     require("neo-tree.command").execute({ toggle = true, dir = require("lazyvim.util").get_root() })
   end, { desc = "Explorer NeoTree (root dir)" })
-  
+
   -- Alias for quick access to file explorer
   map("n", "<leader>e", "<leader>fe", { desc = "Explorer NeoTree (cwd)", remap = true })
-  
+
   -- Alias for quick access to root directory explorer
   map("n", "<leader>E", "<leader>fE", { desc = "Explorer NeoTree (root dir)", remap = true })
 end
@@ -307,10 +307,10 @@ local function setup_telescope_keymaps()
   -- Note: Some telescope keymaps are already defined in the neovimMappings function
   -- This disables the keymap to grep files that's defined in LazyVim
   -- map("n", "<leader>/", false)
-  
+
   -- Find files using Telescope
   -- map("n", "<leader>pf", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-  
+
   -- The following keymaps are already defined in neovimMappings but are included here for reference:
   -- map("n", "<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For > ')})<CR>")
   -- map("n", "<leader>pf", "<cmd>lua require'telescope.builtin'.find_files()<cr>")
@@ -328,18 +328,20 @@ end
 -- -----------------------------------------------------------------------------
 local function setup_pypeaday_keymaps()
   local daily = require("pypeaday.daily")
-  
+
   -- Open daily note
   map("n", "<leader>dn", daily.check_and_open_daily_note, { desc = "Open daily note" })
-  
+
   -- Find daily files
   map("n", "<leader>df", daily.find_daily_files, { desc = "Find daily files" })
-  
+
   -- Find backlinks
   map("n", "<leader>dl", daily.find_backlinks, { desc = "Find backlinks" })
-  
+
   -- Copy previous daily note wikilink
   map("n", "<leader>dy", daily.copy_previous_daily_wikilink, { desc = "Copy previous daily note wikilink" })
+  -- Open now slash
+  map("n", "<leader>dw", daily.open_now_slash, { desc = "Open now slash page" })
 end
 
 -- -----------------------------------------------------------------------------
@@ -351,17 +353,17 @@ local function setup_codeium_keymaps()
   map("i", "<C-l>", function()
     return vim.fn["codeium#Accept"]()
   end, { expr = true })
-  
+
   -- Cycle to next suggestion
   map("i", "<c-;>", function()
     return vim.fn["codeium#CycleCompletions"](1)
   end, { expr = true })
-  
+
   -- Cycle to previous suggestion
   map("i", "<c-,>", function()
     return vim.fn["codeium#CycleCompletions"](-1)
   end, { expr = true })
-  
+
   -- Clear suggestions
   map("i", "<c-x>", function()
     return vim.fn["codeium#Clear"]()
@@ -375,18 +377,18 @@ end
 local function setup_snippet_keymaps()
   -- These keymaps are implemented in the nvim-cmp configuration
   -- They're included here for documentation and organization purposes
-  
+
   -- Tab key behavior:
   -- 1. If completion menu is visible: select item
   -- 2. If snippet is expandable/jumpable: expand/jump
   -- 3. If text before cursor: trigger completion
   -- 4. Otherwise: normal Tab behavior
-  
+
   -- Shift-Tab key behavior:
   -- 1. If completion menu is visible: select previous item
   -- 2. If snippet is jumpable backwards: jump backwards
   -- 3. Otherwise: normal Shift-Tab behavior
-  
+
   -- Note: The actual implementation is in the superTab.lua plugin config
   -- This is just for documentation purposes
 end
