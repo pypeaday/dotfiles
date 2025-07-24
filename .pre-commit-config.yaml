@@ -1,10 +1,10 @@
 repos:
-  - repo: https://git.iamthefij.com/iamthefij/ansible-pre-commit
-    rev: 432d5e1242767157c3df5089bbeffd8055198be4 
-    hooks:
-      - id: encryption-check
-        name: Ansible Vault Encryption Check
-        description: Checks that vault files are encrypted
-        entry: encryption-check.sh
-        files: (ssh/is_rsa)
-        language: script
+- repo: https://github.com/pypeaday/ansible-vault-pre-commit
+  rev: main
+  hooks:
+  - id: encryption-check
+    name: Ansible Vault Encryption Check
+    description: Checks that vault files are encrypted
+    entry: encryption-check.sh
+    files: (private)
+    language: script
