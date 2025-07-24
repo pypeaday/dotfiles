@@ -1,9 +1,0 @@
-#!/bin/bash
-if [[ -z "$1" ]]
-    then
-        /opt/cisco/anyconnect/bin/vpnui
-else
-        /opt/cisco/anyconnect/bin/vpn "$@"
-fi
-
-

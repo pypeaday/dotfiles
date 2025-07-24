@@ -5,7 +5,7 @@ source $HOME/dotfiles/zsh/.zshrc
 # from phind.com refactored for mac
 # brew install fd
 c() {
-    cd && cd "$(fd -d 2 | cut -c 1- | fzf )"
+    cd ~/projects && cd "$(fd -d 2 | cut -c 1- | fzf )"
 }
 
 alias rconfig="cp $HOME/dotfiles/fin/.ruff.toml ./.ruff.toml"
@@ -113,7 +113,7 @@ get_stack_env_vars() {
     # check if SPACELIFT_STACK_ID exists
     if [ -z ${SPACELIFT_STACK_ID+x} ]; then
         # Define your stack ID
-        SPACELIFT_STACK_ID=`spacectl stack list | fzf | awk -F'|' '{print $1}' | awk '{$1=$1};1'`
+        export SPACELIFT_STACK_ID=`spacectl stack list | fzf | awk -F'|' '{print $1}' | awk '{$1=$1};1'`
     fi
 
     # Save the output of the spacectl and awk commands to a variable
@@ -126,7 +126,6 @@ import os
 
 data = {}
 _id = os.environ.get('SPACELIFT_STACK_ID')
-
 for line in sys.argv[1].splitlines():
     parts = line.split('|')
     if len(parts) >= 3:
@@ -141,10 +140,11 @@ for line in sys.argv[1].splitlines():
         data[key] = value
 
 with open(f'spacelift.{_id}.tf.vars.json', 'w') as f:
-    json.dump(data, f, indent=4)
 " "$output"
+    json.dump(data, f, indent=4)
 }
 
+export K9S_CONFIG_DIR=$HOME/.config/k9s
 #compdef k9s
 compdef _k9s k9s
 
@@ -357,3 +357,6 @@ _k9s()
 if [ "$funcstack[1]" = "_k9s" ]; then
     _k9s
 fi
+
+# Added by Windsurf
+export PATH="/Users/npayne81/.codeium/windsurf/bin:$PATH"

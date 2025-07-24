@@ -16,4 +16,3 @@ iron/.caterpillar/emails
 luarocks-3.11.1
 .webui_secret_key
 luarocks-3.11.1.tar.gz
-nas-backup/docker/.restic-password

@@ -9,7 +9,7 @@
     editor = nvim
 [url "ssh://git@github.com:pypeaday/dotfiles.git"]
     sshCommand = ssh -i ~/.ssh/pypeaday_github
-[includeIf "gitdir:~/personal/"]
+[includeIf "gitdir:~/projects/personal/"]
     path = ~/dotfiles/git/.gitconfig
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/dotfiles/git/.gitconfig
@@ -20,6 +20,7 @@
     default = current
 [rerere]
 	enabled = true
+	enable = true
 [gpg]
 	format = ssh
 [gpg "ssh"]

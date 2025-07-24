@@ -1,7 +1,0 @@
-#!/bin/bash
-if [[ "$(/opt/cisco/anyconnect/bin/vpn status)" == *"state: Connected"* ]]; then
-    echo "%{T5}%{F#ffcc00} 旅 %{F-}%{T-}"
-else
-    echo "%{T5}%{F#00ff00}  %{F-}%{T-}"
-fi
-
