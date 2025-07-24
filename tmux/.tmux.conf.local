@@ -332,6 +332,64 @@ tmux_conf_copy_to_os_clipboard=true
 # Add your custom overrides below this line
 # These will take precedence over the default settings
 
+# =============================================================================
+# CUSTOM KEYBINDINGS
+# =============================================================================
+set-option -sa terminal-overrides ',screen-256color-bce:RGB'
+bind C-u popup -E -h 95% -w 95%  "tmux new-session -A -s remananalytics_wiki 'cd ~/work/projects/remananalytics.wiki && nvim'"
+bind C-i popup -E -h 95% -w 95%  "tmux new-session -A -s dotfiles -d '~/dotfiles' 'nvim'"
+bind C-o popup -E -h 99% -w 99%  "tmux new-session -A -s pype_dev 'cd ~/projects/personal/pype.dev'"  # need to source zsh for copier-gallery command
+bind C-n popup -E ~/.local/bin/ta
+# bind C-k display-popup -h 95% -w 95% -d '#{pane_current_path}' -E 'gitui'
+bind C-p display-popup -E -h 60% -w 60% "tmux new-session -A -s prompt 'cd && zsh'"
+
+# overwrite .tmux.conf binding
+# bind C-f display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+bind s display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+
+# # copier
+bind-key c-b popup -w 80% -E -d '#{pane_current_path}' "$HOME/dotfiles/scripts/.local/bin/copier-gallery"
+#
+# # last session
+bind -n M-b switch-client -l
+
+# =============================================================================
+# MACOS SPECIFIC CONFIGURATIONS
+# =============================================================================
+
+# MacOS clipboard integration
+# Fix for MacOS clipboard when using tmux
+if-shell "uname | grep -q Darwin" \
+  "set -g default-command 'reattach-to-user-namespace -l $SHELL'"
+
+# MacOS specific copy mode settings
+if-shell "uname | grep -q Darwin" \
+  "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'"
+
+if-shell "uname | grep -q Darwin" \
+  "bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'"
+
+# MacOS mouse support improvements
+if-shell "uname | grep -q Darwin" \
+  "set -g mouse on"
+
+# =============================================================================
+# ADDITIONAL USEFUL KEYBINDINGS
+# =============================================================================
+
+# Quick pane switching with Alt+arrow (works on both Linux and MacOS)
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Quick window switching with Shift+arrow
+bind -n S-Left previous-window
+bind -n S-Right next-window
+
+# Reload config with prefix + r (enhanced)
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded!"
+
 # Example: Force Vi mode
 # set -g status-keys vi
 # set -g mode-keys vi
