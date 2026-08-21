@@ -1,0 +1,241 @@
+
+# ~/.config/starship.toml
+
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$hg_state\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$fortran\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$direnv\
+$env_var\
+$aws\
+$custom\
+$kubernetes\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$mise\
+$crystal\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$netns\
+$shell\
+$character"""
+
+# Displays text, typically a single character,
+# based on the status of the previous command.
+[character]
+success_symbol = "[❯](fg:#a3be8c)" # normal prompt
+error_symbol = "[✗](bold fg:#bf616a)"     # used if previous command failed
+
+[env_var.proxy_set]
+default = ""
+# format = '[$env_value]($style)'
+format = ' [$symbol(\($env_value\) )]($style)'
+style = "dimmed fg:#b48ead"
+symbol = "󰒄 "
+# format= "[$symbol](dimmed red)"
+
+[aws]
+format = ' [$symbol($profile )(\($region\))]($style)'
+style = "dimmed fg:#81a1c1"
+symbol = " "
+
+[kubernetes]
+disabled = false
+format = " [$symbol$context( @$namespace)]($style) "
+symbol = "⎈ "
+style = "dimmed fg:#8fbcbb"
+context_aliases = { "^kind-(.*)$" = "kind:$1", "^arn:aws:eks:us-east-1:300617891119:cluster/ics-v1-dev-eks-cluster$" = "eks:ics-dev" }
+
+[custom.aws_default]
+when = "test -f ~/.aws/config"
+format = " [$symbol$output]($style)"
+symbol = "aws "
+style = "dimmed fg:#88c0d0"
+command = '''
+python3 - <<'PY'
+import configparser
+import pathlib
+import sys
+
+config = configparser.RawConfigParser()
+config.read(pathlib.Path.home() / ".aws/config")
+
+section = "default"
+name = config.get(section, "sso_account_name", fallback="")
+account_id = config.get(section, "sso_account_id", fallback="")
+role = config.get(section, "sso_role_name", fallback="")
+region = config.get(section, "region", fallback="")
+
+out = ""
+if name and account_id:
+    out = f"{name} ({account_id})"
+elif name:
+    out = name
+elif account_id:
+    out = f"default ({account_id})"
+elif role:
+    out = role
+elif region:
+    out = f"default ({region})"
+
+sys.stdout.write(out)
+PY
+'''
+
+[cmd_duration]
+min_time = 5_000                     # Show command duration over 5,000 milliseconds (=5 sec)
+format = " took [$duration]($style)"
+
+[directory]
+truncation_length = 10
+format = "[$path]($style)[$lock_symbol]($lock_style) "
+style = "bold fg:#e5e9f0"
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
+
+[git_branch]
+format = " [$symbol](bold fg:#b48ead)[$branch]($style) "
+symbol = " "
+#symbol = "🌱 " 
+style = "bold fg:#b48ead"
+
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+format = "$all_status$ahead_behind"
+conflicted = "  "
+ahead = "  ×${count}"
+behind = "  ×${count}"
+diverged = "  < ×${ahead_count}  ×${behind_count}>"
+untracked = "  ×${count}"
+stashed = "  ×${count}"
+modified = "  ×${count}"
+staged = "  ×${count}"
+renamed = "   ×${count}"
+deleted = "  ×${count}"
+style = "bright-white"
+
+[hostname]
+ssh_only = true
+ssh_symbol = '🌐 '
+format = '[$ssh_symbol$hostname]($style) in '
+trim_at = "-"
+style = "fg:#4c566a"
+disabled = false
+
+[golang]
+format = "via [$symbol($version )]($style)"
+symbol = "[](fg:#03fce8)"
+style = "bold cyan"
+
+[julia]
+format = "[$symbol$version]($style) "
+symbol = "ஃ "
+style = "bold green"
+
+[package]
+disabled = true
+
+[python]
+format = '[ via ](dimmed white)[${symbol}(${version})(\($virtualenv\) )]($style)'
+style = "fg:#88c0d0"
+# flop order cause python/python3 resolved to different things on Mac
+python_binary = ["python", "python3"]
+symbol = "[ ](fg:#81a1c1) "                                                      # actual python blue
+
+[rust]
+format = "[$symbol$version]($style) "
+style = "bold green"
+
+[username]
+style_user = "bold fg:#88c0d0"
+show_always = true
+
+[custom.zsh]
+when = '[[ ! -n "${VIRTUAL_ENV}" ]]'
+style = "bold red"
+format = '[󱔎 NO PYTHON ENVIORNMENT SET ]($style)'

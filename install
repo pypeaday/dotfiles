@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+pushd $HOME/dotfiles
+
+for package in $(cat dotfiles.txt); do
+	stow -D $package || true
+	stow $package
+done
+
+if [[ $USER == *"3"* ]]; then
+	stow -D iron
+	stow iron
+elif [[ $USER == *"81"* ]]; then
+	stow -D fin
+	stow fin
+else
+	stow -D zsh
+	stow zsh
+	stow -D git
+	stow git
+fi
+
+popd

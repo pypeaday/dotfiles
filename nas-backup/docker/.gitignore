@@ -1,0 +1,7 @@
+# Ignore sensitive environment variables and password files
+.env
+*.password
+
+# Ignore persistent container data
+.ssh/
+.cache/

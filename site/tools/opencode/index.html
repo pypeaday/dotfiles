@@ -1,0 +1,1870 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A site for my dotfiles">
+      
+      
+        <meta name="author" content="Nic Payne">
+      
+      
+      
+        <link rel="prev" href="../copilot/">
+      
+      
+        <link rel="next" href="../vscode/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.56">
+    
+    
+      
+        <title>OpenCode - Le Dots</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.20815dad.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.dfe2e883.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navigation"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#opencode" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Le Dots" class="md-header__button md-logo" aria-label="Le Dots" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navigation">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Le Dots
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OpenCode
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Search">
+  <button type="button" class="md-search__button">
+    Search
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Le Dots" class="md-nav__button md-logo" aria-label="Le Dots" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    Le Dots
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Le Dots
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Getting Started
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick-start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Quick Start Guide
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  System Requirements
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../terminal/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Terminal
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Terminal
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminal/neovim/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Neovim
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminal/starship/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Starship Prompt Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminal/tmux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tmux Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminal/workspaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Workspace Manager (ws)
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminal/zsh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Zsh Configuration
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  Tools
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+  Tools
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../copilot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  GitHub Copilot
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OpenCode
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  OpenCode
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Structure
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Model Providers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-copilot-iron-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        GitHub Copilot (<code>iron</code> package)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen-home-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        OpenCode Zen (<code>home</code> package)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen-models-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        OpenCode Zen Models Reference
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Agents
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-agents-user-facing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Primary Agents (User-Facing)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subagents-delegated-via-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Subagents (Delegated via Task)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Model Strategy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Permissions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permission-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Permission Levels
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Skills
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nexus-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nexus Skills
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MCP Servers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slash-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Slash Commands
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tips
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Customization
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        See Also
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  VS Code
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Installation
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Structure
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Model Providers
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Model Providers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#github-copilot-iron-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        GitHub Copilot (<code>iron</code> package)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen-home-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        OpenCode Zen (<code>home</code> package)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencode-zen-models-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        OpenCode Zen Models Reference
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Agents
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primary-agents-user-facing" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Primary Agents (User-Facing)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subagents-delegated-via-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Subagents (Delegated via Task)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Model Strategy
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Permissions
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Permissions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#permission-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Permission Levels
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Skills
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nexus-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Nexus Skills
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        MCP Servers
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#slash-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Slash Commands
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Tips
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Customization
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        See Also
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Le Dots
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../copilot/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    Tools
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="opencode">OpenCode<a class="headerlink" href="#opencode" title="Permanent link">&para;</a></h1>
+<p>Terminal-based AI coding assistant. Config managed with stow across multiple packages.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>~/dotfiles
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>stow<span class="w"> </span>opencode<span class="w">  </span><span class="c1"># Base config (permissions, MCP, skills, commands)</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>stow<span class="w"> </span>iron<span class="w">      </span><span class="c1"># Work: GitHub Copilot models (requires subscription)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>stow<span class="w"> </span>home<span class="w">      </span><span class="c1"># Home: OpenCode Zen free models (no subscription needed)</span>
+</span></code></pre></div>
+<p>Symlinks <code>~/.config/opencode/</code> to dotfiles. The <code>iron</code> and <code>home</code> packages overlay agent configs on the base <code>opencode</code> package.</p>
+<h2 id="structure">Structure<a class="headerlink" href="#structure" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>opencode/.config/opencode/
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── opencode.jsonc     # Config (models, permissions, MCP)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── skill/             # Reusable skills
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└── command/           # Slash commands
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>iron/.config/opencode/agent/    # Work agents (GitHub Copilot)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>home/.config/opencode/agent/    # Home agents (OpenCode Zen free)
+</span></code></pre></div>
+<h2 id="model-providers">Model Providers<a class="headerlink" href="#model-providers" title="Permanent link">&para;</a></h2>
+<h3 id="github-copilot-iron-package">GitHub Copilot (<code>iron</code> package)<a class="headerlink" href="#github-copilot-iron-package" title="Permanent link">&para;</a></h3>
+<p>For work environments with GitHub Copilot subscription. Premium models, no per-token cost.</p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Model</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>builder</code></td>
+<td><code>github-copilot/gpt-5.2-codex</code></td>
+<td>Latest code-optimized model for complex implementations</td>
+</tr>
+<tr>
+<td><code>quick-fix</code></td>
+<td><code>github-copilot/claude-haiku-4.5</code></td>
+<td>Fast, efficient for focused single-file edits</td>
+</tr>
+<tr>
+<td><code>researcher</code></td>
+<td><code>github-copilot/claude-sonnet-4.5</code></td>
+<td>Deep reasoning for analysis and debugging</td>
+</tr>
+<tr>
+<td><code>reviewer-ro</code></td>
+<td><code>github-copilot/claude-sonnet-4.5</code></td>
+<td>Thorough code review and security audit</td>
+</tr>
+<tr>
+<td><code>tester</code></td>
+<td><code>github-copilot/gpt-5.2-codex</code></td>
+<td>Code-optimized for test generation</td>
+</tr>
+<tr>
+<td><code>task-orchestrator</code></td>
+<td>(default)</td>
+<td>Coordination and delegation</td>
+</tr>
+<tr>
+<td><code>ideation-ro</code></td>
+<td>(default)</td>
+<td>Creative exploration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="opencode-zen-home-package">OpenCode Zen (<code>home</code> package)<a class="headerlink" href="#opencode-zen-home-package" title="Permanent link">&para;</a></h3>
+<p>For personal environments without paid subscriptions. All models are <strong>free</strong> (cost: $0).</p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Model</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>builder</code></td>
+<td><code>opencode/grok-code</code></td>
+<td>Coding-focused, 256k context, free</td>
+</tr>
+<tr>
+<td><code>quick-fix</code></td>
+<td><code>opencode/gpt-5-nano</code></td>
+<td>Fast, lightweight for simple edits, free</td>
+</tr>
+<tr>
+<td><code>researcher</code></td>
+<td><code>opencode/big-pickle</code></td>
+<td>Reasoning capabilities, 200k context</td>
+</tr>
+<tr>
+<td><code>reviewer-ro</code></td>
+<td><code>opencode/big-pickle</code></td>
+<td>Reasoning capabilities, 200k context</td>
+</tr>
+<tr>
+<td><code>tester</code></td>
+<td><code>opencode/grok-code</code></td>
+<td>Coding-focused for test generation, free</td>
+</tr>
+<tr>
+<td><code>task-orchestrator</code></td>
+<td><code>opencode/big-pickle</code></td>
+<td>Reasoning for coordination/delegation</td>
+</tr>
+<tr>
+<td><code>ideation-ro</code></td>
+<td><code>opencode/big-pickle</code></td>
+<td>Reasoning capabilities for creativity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="opencode-zen-models-reference">OpenCode Zen Models Reference<a class="headerlink" href="#opencode-zen-models-reference" title="Permanent link">&para;</a></h3>
+<p>All available models via <code>opencode/</code> provider (API: <code>https://opencode.ai/zen/v1</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Context</th>
+<th>Pricing</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gpt-5-nano</code></td>
+<td>400k</td>
+<td>Free</td>
+<td>Fast, lightweight tasks</td>
+</tr>
+<tr>
+<td><code>big-pickle</code></td>
+<td>200k</td>
+<td>Free</td>
+<td>General reasoning, analysis</td>
+</tr>
+<tr>
+<td><code>grok-code</code></td>
+<td>256k</td>
+<td>Free</td>
+<td>Coding tasks, large context</td>
+</tr>
+<tr>
+<td><code>minimax-m2.1-free</code></td>
+<td>205k</td>
+<td>Free</td>
+<td>General reasoning</td>
+</tr>
+<tr>
+<td><code>glm-4.7</code></td>
+<td>205k</td>
+<td>Paid</td>
+<td>Advanced reasoning with interleaved thinking</td>
+</tr>
+</tbody>
+</table>
+<p>Note: Invalid model identifiers like <code>glm-4.7-free</code> do not exist in the OpenCode Zen catalog. Always use the format <code>opencode/&lt;model-id&gt;</code> with valid model IDs listed above.</p>
+<h2 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h2>
+<h3 id="primary-agents-user-facing">Primary Agents (User-Facing)<a class="headerlink" href="#primary-agents-user-facing" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ideation</code></td>
+<td>Brainstorming, creative exploration (read-only)</td>
+</tr>
+<tr>
+<td><code>task-orchestrator</code></td>
+<td>Aggressive delegation to builder/reviewer/tester subagents</td>
+</tr>
+</tbody>
+</table>
+<h3 id="subagents-delegated-via-task">Subagents (Delegated via Task)<a class="headerlink" href="#subagents-delegated-via-task" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>builder</code></td>
+<td>Complex multi-file implementations</td>
+</tr>
+<tr>
+<td><code>quick-fix</code></td>
+<td>Small one-off edits (docstrings, renames, imports)</td>
+</tr>
+<tr>
+<td><code>tester</code></td>
+<td>Test writing and validation</td>
+</tr>
+<tr>
+<td><code>researcher</code></td>
+<td>Complex multi-step analysis and debugging</td>
+</tr>
+<tr>
+<td><code>reviewer-ro</code></td>
+<td>Code review, security audit (read-only)</td>
+</tr>
+</tbody>
+</table>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>opencode<span class="w">                            </span><span class="c1"># Default agent</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>opencode<span class="w"> </span>--agent<span class="w"> </span>task-orchestrator<span class="w">  </span><span class="c1"># Specific agent</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Tab to switch during session</span>
+</span></code></pre></div>
+<h2 id="model-strategy">Model Strategy<a class="headerlink" href="#model-strategy" title="Permanent link">&para;</a></h2>
+<p>The model choice per agent follows this philosophy:</p>
+<ul>
+<li><strong>Coding agents</strong> (builder, tester): Use code-optimized models with large context</li>
+<li><strong>Speed agents</strong> (quick-fix): Use fast, lightweight models for focused work</li>
+<li><strong>Reasoning agents</strong> (researcher, reviewer, ideation): Use models with strong reasoning/analysis</li>
+<li><strong>Orchestration agents</strong> (task-orchestrator): Use reasoning models for coordination</li>
+</ul>
+<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
+<p>Defined in <code>opencode.jsonc</code>, but the effective shell surface also depends on the launcher profile. In the hardened work launchers, the default posture is narrower than "bash can do anything": repo inspection and selected local tooling are auto-approved, raw cloud CLIs are blocked, and infra access flows through pinned wrappers.</p>
+<p>Example:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">permission</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">bash</span><span class="p">:</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="s">"git</span><span class="nv"> </span><span class="s">status"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="s">"git</span><span class="nv"> </span><span class="s">diff*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="s">"ls</span><span class="nv"> </span><span class="s">*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="s">"aws</span><span class="nv"> </span><span class="s">*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"deny"</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="s">"kubectl</span><span class="nv"> </span><span class="s">*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"deny"</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="s">"aws-ics-dev</span><span class="nv"> </span><span class="s">ec2</span><span class="nv"> </span><span class="s">describe-*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="s">"aws-ics-prod</span><span class="nv"> </span><span class="s">ec2</span><span class="nv"> </span><span class="s">describe-*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="s">"kubectl-ics-dev</span><span class="nv"> </span><span class="s">get*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="s">"kubectl-ics-prod</span><span class="nv"> </span><span class="s">get*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"allow"</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="s">"git</span><span class="nv"> </span><span class="s">push*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"ask"</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="s">"kubectl-ics-dev</span><span class="nv"> </span><span class="s">apply*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"ask"</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="s">"tofu</span><span class="nv"> </span><span class="s">apply*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"ask"</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="s">"rm</span><span class="nv"> </span><span class="s">*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"deny"</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="s">"sudo</span><span class="nv"> </span><span class="s">*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"deny"</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">  </span><span class="nt">edit</span><span class="p">:</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="s">"**/*.env*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"ask"</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="s">"**/*.key"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"deny"</span>
+</span></code></pre></div>
+<h3 id="permission-levels">Permission Levels<a class="headerlink" href="#permission-levels" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>allow</code></td>
+<td>Execute without asking</td>
+</tr>
+<tr>
+<td><code>ask</code></td>
+<td>Prompt for approval</td>
+</tr>
+<tr>
+<td><code>deny</code></td>
+<td>Block completely</td>
+</tr>
+</tbody>
+</table>
+<p>In the hardened Iron/Copilot launchers, the wrapper commands also scrub ambient AWS credential overrides and reject profile/context override flags. Production wrappers are explicitly read-only and granular—they are not blanket <code>aws-ics-prod *</code> or <code>kubectl-ics-prod *</code> auto-approvals.</p>
+<h2 id="skills">Skills<a class="headerlink" href="#skills" title="Permanent link">&para;</a></h2>
+<p>Reusable knowledge modules loaded by agents:</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>python-uv</code></td>
+<td>PEP 723 scripts, uv-first policy</td>
+</tr>
+<tr>
+<td><code>airflow</code></td>
+<td>DAG patterns, KubernetesPodOperator, version detection</td>
+</tr>
+<tr>
+<td><code>helm</code></td>
+<td>Chart management, bitnami legacy repo, image registry overrides</td>
+</tr>
+<tr>
+<td><code>k8s-troubleshoot</code></td>
+<td>Kubernetes debugging</td>
+</tr>
+<tr>
+<td><code>aws-iam</code></td>
+<td>IAM policy creation and debugging</td>
+</tr>
+<tr>
+<td><code>aws-infra</code></td>
+<td>AWS resource discovery via pinned wrappers and read-only CLI flows</td>
+</tr>
+<tr>
+<td><code>steampipe-aws</code></td>
+<td>AWS resource discovery via SQL</td>
+</tr>
+<tr>
+<td><code>code-review</code></td>
+<td>Ruthless review methodology</td>
+</tr>
+<tr>
+<td><code>minimal-build</code></td>
+<td>Build with minimal code</td>
+</tr>
+<tr>
+<td><code>progress-tracker</code></td>
+<td>SQLite-based task tracking</td>
+</tr>
+<tr>
+<td><code>git</code></td>
+<td>Git operations, commits, worktrees, safety protocols</td>
+</tr>
+<tr>
+<td><code>drawio</code></td>
+<td>Architecture diagrams via draw.io MCP and focused diagram helpers</td>
+</tr>
+<tr>
+<td><code>nexus-orchestrator</code></td>
+<td>Claim epics, decompose into subtasks, delegate to workers</td>
+</tr>
+<tr>
+<td><code>nexus-worker</code></td>
+<td>Claim and execute subtasks from nexus</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nexus-skills">Nexus Skills<a class="headerlink" href="#nexus-skills" title="Permanent link">&para;</a></h3>
+<p>The <code>nexus-orchestrator</code> and <code>nexus-worker</code> skills enable multi-agent task coordination via a local nexus server (port 7001).</p>
+<p><strong>nexus-orchestrator</strong> (for task-orchestrator agent):
+1. Claim high-level issues (epics/features)
+2. Explore scope with <code>explore</code> agent
+3. Decompose into subtasks: <code>nexus issue create --parent &lt;id&gt; --title "..."</code>
+4. Delegate subtasks to builder with <code>NEXUS SUBTASK: &lt;id&gt;</code> in prompt
+5. Verify each subtask, then complete parent</p>
+<p><strong>nexus-worker</strong> (for builder/subagents):
+1. Claim assigned subtask: <code>nexus issue claim &lt;id&gt;</code>
+2. Implement focused changes
+3. Complete when done: <code>nexus issue update &lt;id&gt; --status completed</code></p>
+<p>Key commands:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nexus<span class="w"> </span>status<span class="w">                                    </span><span class="c1"># Check server/claims</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>nexus<span class="w"> </span>next<span class="w"> </span>--claim<span class="w"> </span>--format<span class="w"> </span>json<span class="w">               </span><span class="c1"># Get next issue</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>nexus<span class="w"> </span>issue<span class="w"> </span>create<span class="w"> </span>--title<span class="w"> </span><span class="s2">"..."</span><span class="w"> </span>--parent<span class="w"> </span>&lt;id&gt;<span class="w"> </span><span class="c1"># Create subtask</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>nexus<span class="w"> </span>issue<span class="w"> </span>update<span class="w"> </span>&lt;id&gt;<span class="w"> </span>--status<span class="w"> </span>completed<span class="w">     </span><span class="c1"># Complete issue</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>nexus<span class="w"> </span>issue<span class="w"> </span>renew<span class="w"> </span>&lt;id&gt;<span class="w">                         </span><span class="c1"># Extend claim (20 min)</span>
+</span></code></pre></div></p>
+<h2 id="mcp-servers">MCP Servers<a class="headerlink" href="#mcp-servers" title="Permanent link">&para;</a></h2>
+<p>Disabled by default. Enable per-project in <code>opencode.jsonc</code>:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  "mcp": {
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    "steampipe": { "enabled": true },
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    "PieGPT": { "enabled": true }
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  }
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>}
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Server</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>steampipe</code></td>
+<td>AWS/cloud queries (preferred)</td>
+</tr>
+<tr>
+<td><code>drawio</code></td>
+<td>Architecture diagrams; keep automation draw.io-scoped rather than general shell work</td>
+</tr>
+<tr>
+<td><code>PieGPT</code></td>
+<td>K8s ops (Avant)</td>
+</tr>
+<tr>
+<td><code>spacectl</code></td>
+<td>Spacelift (Avant)</td>
+</tr>
+<tr>
+<td><code>mcp-server-docker</code></td>
+<td>Docker operations</td>
+</tr>
+<tr>
+<td><code>git</code></td>
+<td>Git MCP server</td>
+</tr>
+<tr>
+<td><code>firefox-devtools</code></td>
+<td>Browser automation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slash-commands">Slash Commands<a class="headerlink" href="#slash-commands" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/context</code></td>
+<td>Project discovery and analysis</td>
+</tr>
+<tr>
+<td><code>/commit</code></td>
+<td>Conventional commits with formatting</td>
+</tr>
+<tr>
+<td><code>/worktrees</code></td>
+<td>Git worktree management</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Use <code>@quick-fix</code> for small edits, <code>@builder</code> for complex work</li>
+<li>Use <code>@task-orchestrator</code> for multi-step features requiring coordination</li>
+<li>Check <code>justfile</code> first for project commands</li>
+<li>Use git worktrees for parallel work</li>
+<li>Prefer Steampipe for AWS resource queries; in work launchers, use <code>aws-ics-dev</code>, <code>aws-ics-prod</code>, <code>kubectl-ics-dev</code>, and <code>kubectl-ics-prod</code> instead of raw <code>aws</code>/<code>kubectl</code></li>
+<li>Load skills explicitly when needed (e.g., "load python-uv skill")</li>
+<li>Use <code>drawio</code> skill for architecture diagrams; the task helpers are intentionally draw.io-only, run with runtime safety flags, and do not grant <code>--allow-all-tools</code></li>
+<li>Switch environments: <code>stow -D iron &amp;&amp; stow home</code> (or vice versa) to swap agent configs</li>
+</ol>
+<h2 id="customization">Customization<a class="headerlink" href="#customization" title="Permanent link">&para;</a></h2>
+<p><strong>Add agents:</strong> Create <code>.md</code> files in <code>agent/</code></p>
+<p><strong>Add skills:</strong> Create directories in <code>skill/</code> with <code>SKILL.md</code></p>
+<p><strong>Add commands:</strong> Create <code>.md</code> files in <code>command/</code></p>
+<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../copilot/">Copilot</a> - GitHub Copilot (agent/skill parity for VS Code Copilot Chat)</li>
+<li><a href="../vscode/">VS Code</a> - VS Code setup</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../copilot/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GitHub Copilot">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                GitHub Copilot
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../vscode/" class="md-footer__link md-footer__link--next" aria-label="Next: VS Code">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                VS Code
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copied to clipboard","clipboard.copy":"Copy to clipboard","search.result.more.one":"1 more on this page","search.result.more.other":"# more on this page","search.result.none":"No matching documents","search.result.one":"1 matching document","search.result.other":"# matching documents","search.result.placeholder":"Type to start searching","search.result.term.missing":"Missing","select.version":"Select version"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e886cdf1.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# if COPIER_GALLERY_DIR is not set then ue ~/.copier_templates as a default
+if [ -z "$COPIER_GALLERY_DIR" ]; then
+  COPIER_GALLERY_DIR="$HOME/dotfiles/copier/.copier_templates"
+fi
+
+# set the path depending on who I am
+if [ "$USER" = "nic" ]; then
+  save_dir="$HOME/projects/personal/pype.dev"
+else
+  save_dir="$HOME/projects/work/working-notes"
+fi
+
+template=$(ls $COPIER_GALLERY_DIR |
+  fzf --preview="tree $COPIER_GALLERY_DIR/{} | lolcat")
+
+if [ -z "$template" ]; then
+  echo "no template was selected"
+else
+  uvx copier copy ${COPIER_GALLERY_DIR}/${template} ${save_dir}
+fi

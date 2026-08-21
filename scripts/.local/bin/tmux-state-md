@@ -1,0 +1,101 @@
+#!/bin/bash
+
+set -euo pipefail
+
+tmux_cmd() {
+  if [ "$#" -gt 0 ]; then
+    tmux "$@"
+  else
+    tmux
+  fi
+}
+
+pane_command_line() {
+  local pane_tty=${1-}
+  local pane_current_command=${2-}
+  local pane_start_command=${3-}
+  local short_tty=""
+  local command_line=""
+
+  if [ -n "$pane_tty" ]; then
+    short_tty=${pane_tty#/dev/}
+    command_line=$(
+      ps -ww -t "$short_tty" -o stat= -o args= 2>/dev/null |
+        awk '
+          {
+            line = $0
+            sub(/^[[:space:]]+/, "", line)
+            split(line, parts, /[[:space:]]+/)
+            stat = parts[1]
+            sub(/^[^[:space:]]+[[:space:]]+/, "", line)
+
+            if (index(stat, "+")) {
+              print line
+              found = 1
+              exit
+            }
+
+            if (!first) {
+              first = line
+            }
+          }
+          END {
+            if (!found && first) {
+              print first
+            }
+          }
+        ' || true
+    )
+  fi
+
+  if [ -n "$command_line" ]; then
+    printf '%s\n' "$command_line"
+  elif [ -n "$pane_start_command" ]; then
+    printf '%s\n' "$pane_start_command"
+  elif [ -n "$pane_current_command" ]; then
+    printf '%s\n' "$pane_current_command"
+  fi
+
+  return 0
+}
+
+window_format=$'#{window_index}\t#{window_name}\t#{pane_current_path}'
+pane_format=$'#{pane_index}\t#{pane_id}\t#{pane_current_path}\t#{pane_tty}\t#{pane_current_command}\t#{pane_start_command}'
+
+sessions=$(
+  tmux_cmd "$@" list-sessions -F '#{session_name}' 2>/dev/null || true
+)
+
+echo "# tmux state"
+echo
+
+if [ -z "$sessions" ]; then
+  echo "_No tmux sessions._"
+  exit 0
+fi
+
+while IFS= read -r session; do
+  [ -n "$session" ] || continue
+
+  echo "## Session: $session"
+
+  tmux_cmd "$@" list-windows -t "$session" -F "$window_format" |
+    while IFS=$'\t' read -r window_index window_name window_cwd; do
+      echo "- Window $window_index: $window_name"
+      echo "  - cwd: $window_cwd"
+
+      tmux_cmd "$@" list-panes -t "$session:$window_index" -F "$pane_format" |
+        while IFS=$'\t' read -r pane_index pane_id pane_cwd pane_tty pane_current_command pane_start_command; do
+          pane_command=$(pane_command_line "$pane_tty" "$pane_current_command" "$pane_start_command")
+          echo "  - Pane $pane_index ($pane_id)"
+          echo "    - cwd: $pane_cwd"
+          if [ -n "$pane_command" ]; then
+            echo "    - command: $pane_command"
+          fi
+        done
+    done
+
+  echo
+done <<EOF
+$sessions
+EOF
