@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xinput reattach  "AT Translated Set 2 keyboard" "Virtual core keyboard" | notify-send "laptop keeb reattached"

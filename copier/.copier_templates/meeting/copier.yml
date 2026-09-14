@@ -1,0 +1,14 @@
+_min_copier_version: v6.0.0b0
+ticket:
+  type: int
+title:
+  type: str
+attendees:
+  type: str
+summary:
+  type: str
+slug:
+  type: str
+  default: "{{  title.lower().replace(' ', '-').replace('.', '-')  }}"
+tag:
+  type: str

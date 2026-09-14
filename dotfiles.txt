@@ -1,0 +1,1 @@
+atuin ghostty gnome ipython nvim pip pyflyby starship tmux visidata lazygit lazydocker fzf k9s workspaces
