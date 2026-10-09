@@ -1,0 +1,11 @@
+onboarding = false
+
+[ui]
+window_title = "home · {workspace} · {terminal_title}"
+
+[ui.toast]
+delivery = "herdr"
+
+[theme]
+name = "tokyo-night"
+auto_switch = false

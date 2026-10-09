@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "git": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "mcp/git"
+      ]
+    },
+    "context7": {
+      "command": "/usr/bin/host-spawn",
+      "args": [
+        "-no-pty",
+        "-env",
+        "CONTEXT7_API_KEY",
+        "/bin/bash",
+        "-c",
+        "PATH=/home/linuxbrew/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin exec npx -y @upstash/context7-mcp@1.0.31"
+      ],
+      "env": {
+        "CONTEXT7_API_KEY": "<CONTEXT7_API_KEY>"
+      }
+    },
+    "cloudflare-api": {
+      "url": "https://mcp.cloudflare.com/mcp",
+      "transport": "http"
+    },
+    "cloudflare-docs": {
+      "url": "https://docs.mcp.cloudflare.com/mcp",
+      "transport": "http"
+    },
+    "signoz": {
+      "command": "/bin/bash",
+      "args": [
+        "-c",
+        "token_file=\"$HOME/.local/share/devin/signoz-token\"; [ -f \"$token_file\" ] || { echo \"signoz MCP: missing $token_file\" >&2; exit 1; }; SIGNOZ_API_KEY=$(cat \"$token_file\") SIGNOZ_URL=http://ghost:3301 LOG_LEVEL=error exec /home/nic/.local/bin/signoz-mcp-server"
+      ]
+    }
+  }
+}

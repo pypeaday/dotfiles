@@ -1,0 +1,163 @@
+{
+  "devin": {
+    "org_id": "org-6e7b796b9e914a2eaeb3f9c2f5524751"
+  },
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          },
+          {
+            "command": "bash '/home/nic/.config/devin/scripts/notify-blocked.sh'",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          },
+          {
+            "command": "bash '/home/nic/.config/devin/scripts/skills-update-check.sh'",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          },
+          {
+            "command": "bash '/home/nic/.config/devin/scripts/notify-done.sh'",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "bash '/home/nic/.config/devin/herdr-agent-state.sh' session",
+            "timeout": 10,
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Exec(git status)",
+      "Exec(git diff)",
+      "Exec(git log)",
+      "Exec(git show)",
+      "Exec(git branch)",
+      "Exec(git remote)",
+      "Exec(git fetch)",
+      "Exec(git blame)",
+      "Exec(git rev-parse)",
+      "Exec(git describe)",
+      "Exec(git tag)",
+      "Exec(git stash list)",
+      "Exec(git pull --ff-only)",
+      "Exec(ls)",
+      "Exec(rg)",
+      "Exec(grep)",
+      "Exec(cat)",
+      "Exec(head)",
+      "Exec(tail)",
+      "Exec(find)",
+      "Exec(wc)",
+      "Exec(file)",
+      "Exec(tree)",
+      "Exec(du)",
+      "Exec(df)",
+      "Exec(which)",
+      "Exec(pwd)",
+      "Exec(echo)",
+      "Exec(hostname)",
+      "Exec(uname)",
+      "Exec(date)",
+      "Exec(jq)",
+      "Exec(docker ps)",
+      "Exec(docker images)",
+      "Exec(docker logs)",
+      "Exec(docker inspect)",
+      "Exec(docker stats)",
+      "Exec(docker compose ps)",
+      "Exec(docker compose logs)",
+      "Exec(docker compose config)",
+      "Exec(kubectl get)",
+      "Exec(kubectl describe)",
+      "Exec(kubectl logs)",
+      "Exec(npm test)",
+      "Exec(npm run test)",
+      "Exec(npm run build)",
+      "Exec(npm run lint)",
+      "Exec(pnpm test)",
+      "Exec(pnpm run test)",
+      "Exec(pnpm run build)",
+      "Exec(pnpm run lint)",
+      "Exec(pytest)",
+      "Exec(ruff check)",
+      "Exec(uv run pytest)",
+      "Exec(just test)",
+      "Exec(just build)",
+      "Exec(just lint)",
+      "Exec(markata)",
+      "Exec(tailscale status)",
+      "Exec(herdr agent list)"
+    ]
+  },
+  "shell": {
+    "setup_complete": true
+  },
+  "theme_mode": "dark",
+  "version": 1,
+  "agent": {
+    "model": "swe-2-max",
+    "preferred_family_models": {
+      "swe-2": "swe-2-max"
+    }
+  }
+}

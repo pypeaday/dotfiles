@@ -1,0 +1,17 @@
+[Unit]
+Description=Run Restic backup to NAS using Docker Compose
+# We are running this as a user service, so we assume that the system-level
+# docker.service is already running.
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Set the working directory to where your docker-compose.yml and .env file are located
+WorkingDirectory=/home/nic/dotfiles/nas-backup/docker
+
+# The command to execute. We use the full path to docker-compose for reliability.
+# You may need to adjust this path if 'docker compose' is installed elsewhere.
+ExecStart=/usr/bin/docker compose run --rm backup
+
+[Install]
+WantedBy=default.target

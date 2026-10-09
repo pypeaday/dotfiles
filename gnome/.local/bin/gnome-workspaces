@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+gsettings set org.gnome.mutter dynamic-workspaces false
+gsettings set org.gnome.mutter overlay-key "''"
+gsettings set org.gnome.desktop.wm.preferences num-workspaces 10
+
+# External monitor workflow: make the external display primary when docked, then
+# only that display changes workspaces; laptop stays static for Teams.
+gsettings set org.gnome.mutter workspaces-only-on-primary true
+
+for i in {1..9}; do
+  gsettings set org.gnome.shell.keybindings "switch-to-application-$i" "[]"
+  if gsettings writable org.gnome.shell.extensions.dash-to-dock "app-hotkey-$i" > /dev/null 2>&1; then
+    gsettings set org.gnome.shell.extensions.dash-to-dock "app-hotkey-$i" "[]"
+    gsettings set org.gnome.shell.extensions.dash-to-dock "app-shift-hotkey-$i" "[]"
+    gsettings set org.gnome.shell.extensions.dash-to-dock "app-ctrl-hotkey-$i" "[]"
+  fi
+  gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-$i" "['<Super>$i']"
+  gsettings set org.gnome.desktop.wm.keybindings "move-to-workspace-$i" "['<Super><Shift>$i']"
+  dconf write "/org/gnome/desktop/wm/keybindings/switch-to-workspace-$i" "['<Super>$i']"
+  dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-$i" "['<Shift><Super>$i']"
+done
+
+if gsettings writable org.gnome.shell.extensions.dash-to-dock hot-keys > /dev/null 2>&1; then
+  gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+  gsettings set org.gnome.shell.extensions.dash-to-dock hotkeys-overlay false
+  gsettings set org.gnome.shell.extensions.dash-to-dock hotkeys-show-dock false
+  gsettings set org.gnome.shell.extensions.dash-to-dock app-hotkey-10 "[]"
+  gsettings set org.gnome.shell.extensions.dash-to-dock app-shift-hotkey-10 "[]"
+  gsettings set org.gnome.shell.extensions.dash-to-dock app-ctrl-hotkey-10 "[]"
+fi
+
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-10 "['<Super>0']"
+gsettings set org.gnome.desktop.wm.keybindings move-to-workspace-10 "['<Super><Shift>0']"
+dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-10 "['<Super>0']"
+dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Shift><Super>0']"

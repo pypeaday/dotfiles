@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "steampipe": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@turbot/steampipe-mcp",
+        "postgresql://steampipe@localhost:9193/steampipe"
+      ],
+      "alwaysAllow": ["*"]
+    },
+    "spacectl": {
+      "command": "spacectl",
+      "args": ["mcp", "server"]
+    },
+    "git": {
+      "command": "uvx",
+      "args": ["mcp-server-git"],
+      "alwaysAllow": [
+        "git_status",
+        "git_diff_unstaged",
+        "git_diff_staged",
+        "git_diff",
+        "git_create_branch",
+        "git_show"
+      ]
+    },
+    "drawio": {
+      "disabled": true,
+      "command": "npx",
+      "args": ["@next-ai-drawio/mcp-server@latest"]
+    }
+  }
+}
+

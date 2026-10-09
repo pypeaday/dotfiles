@@ -1,0 +1,23 @@
+#!/bin/bash
+todo () {
+export filter=`basename $PWD`
+
+if [[ "$POLYBAR_BAR" = "home" ]]
+then 
+    todo_dir="$HOME/personal/todos"
+elif [[ "$POLYBAR_BAR" = "work" ]]; then
+    todo_dir="$HOME/work/todos"
+else
+    todo_dir="/tmp"
+fi
+
+export TODO_DIR=$todo_dir
+
+
+(
+cd $TODO_DIR && $TODO_DIR/.venv/todos/bin/markata todoui --global-filter "'$filter' in tags"
+)
+}
+
+
+todo
