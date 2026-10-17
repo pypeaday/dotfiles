@@ -1,0 +1,10 @@
+#!/bin/bash
+# shortcut for creating new venv environments based on the current working directory
+venvenvnew() {
+	uv venv
+	source .venv/bin/activate
+	uv pip install pdbpp pyflyby
+
+}
+echo $(basename $PWD) | uvx lolcat
+source .venv/bin/activate || venvenvnew

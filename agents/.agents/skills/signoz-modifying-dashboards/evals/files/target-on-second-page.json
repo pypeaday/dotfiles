@@ -1,0 +1,47 @@
+{
+  "mode": "offline_mcp_fixture",
+  "instructions": "Use these ordered responses to produce an offline simulated tool trace; do not query a live tenant. The list response carries a top-level total and no pagination block.",
+  "responses": [
+    {
+      "request": {"limit": 50, "offset": 0},
+      "response": {
+        "data": {"dashboards": [{"id": "33333333-3333-4333-8333-333333333333", "name": "platform-api-7b12", "spec": {"display": {"name": "Platform API"}}}], "total": 51}
+      }
+    },
+    {
+      "request": {"limit": 50, "offset": 50},
+      "response": {
+        "data": {"dashboards": [{"id": "44444444-4444-4444-8444-444444444444", "name": "payments-api-3e57", "spec": {"display": {"name": "Payments API"}}}], "total": 51}
+      }
+    },
+    {
+      "request": {"id": "44444444-4444-4444-8444-444444444444"},
+      "response": {
+        "status": "success",
+        "data": {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "name": "payments-api-3e57",
+          "spec": {
+            "display": {"name": "Payments API"},
+            "variables": [],
+            "panels": {
+              "request-rate": {
+                "kind": "Panel",
+                "spec": {
+                  "display": {"name": "Request Rate"},
+                  "plugin": {"kind": "signoz/TimeSeriesPanel", "spec": {}},
+                  "queries": [
+                    {"kind": "time_series", "spec": {"name": "A", "plugin": {"kind": "signoz/BuilderQuery", "spec": {"name": "A", "signal": "traces", "aggregations": [{"expression": "rate()"}], "filter": {"expression": "service.name = 'payments'"}, "order": [{"key": {"name": "rate()"}, "direction": "desc"}], "limit": 100}}}}
+                  ]
+                }
+              }
+            },
+            "layouts": [
+              {"kind": "Grid", "spec": {"display": {"title": "Traffic"}, "items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/request-rate"}}]}}
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

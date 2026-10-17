@@ -1,0 +1,99 @@
+{
+  "skill_name": "signoz-reducing-telemetry-cost",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "full-investigation-covers-every-signal",
+      "prompt": "Run a full SigNoz ingestion-cost investigation. The Cost Meter has data for all three signals. Metrics are the largest current cost contributor, logs are second, and traces are third. I want one prioritized action list, not three separate reports.",
+      "expected_output": "Agent starts with Cost Meter totals, keeps metrics as the primary driver, and investigates metrics, logs, and traces in current-cost order. The final answer consolidates findings into one prioritized list and does not repeat the full per-signal decision rules.",
+      "expectations": [
+        "Agent starts with signoz_execute_builder_query Cost Meter queries before signal-specific analysis",
+        "Agent discovers Cost Meter groupBy keys with signoz_get_field_keys signal=metrics source=meter",
+        "Every raw builder groupBy entry in the actual signoz_execute_builder_query payload losslessly copies name, fieldDataType, fieldContext, and signal from the selected signoz_get_field_keys result",
+        "Every Cost Meter builder_query has limit=100 plus Query Builder v5 order by __result desc and no dashboard orderBy",
+        "Agent analyzes metrics, logs, and traces because every signal has Cost Meter data",
+        "Agent orders the investigation by current weighted cost: metrics, then logs, then traces",
+        "Agent returns one consolidated prioritized action list without repeating the per-signal playbooks"
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "eval_name": "retained-metric-cardinality-and-interval",
+      "prompt": "Metric samples are my main cost. `debug_request_id_total` is unused and I agree to drop it. `checkout_request_duration` backs a dashboard and alert, so I must keep it; it is exported every 10 seconds and I could tolerate one-minute resolution. Check cardinality and suggest the next safe lever. Do not change the metric's delta/cumulative behavior.",
+      "expected_output": "Agent checks usage before cardinality, skips cardinality analysis for the agreed drop, and inspects cardinality only for the retained checkout metric. It may recommend increasing the appropriate collection, scrape, or SDK export interval after identifying the source, while preserving dashboard/alert resolution and explicitly avoiding any temporality change.",
+      "expectations": [
+        "Agent runs or relies on signoz_check_metric_usage before classifying either metric",
+        "Agent does not call signoz_check_metric_cardinality for debug_request_id_total after the user agrees to drop it",
+        "Agent calls signoz_check_metric_cardinality for checkout_request_duration because the user must retain it",
+        "Agent identifies the metric source before choosing collection_interval, scrape_interval, or OTEL_METRIC_EXPORT_INTERVAL",
+        "Agent considers the dashboard and alert's required resolution before recommending a longer interval",
+        "Agent does not recommend switching between delta and cumulative temporality"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "cost-meter-uses-explicit-builder-sum",
+      "prompt": "Show me my total SigNoz span, log, and metric ingestion for the last seven days. The Cost Meter response includes an edge datapoint with partial=true. Walk me through the query tool and unit conversion you use for the totals.",
+      "expected_output": "Agent first discovers the live meter metrics, units, and temporalities with signoz_list_metrics source=meter. It uses signoz_execute_builder_query with the full outer query wrapper, Unix-ms start/end, requestType=time_series, stepInterval=3600, formatOptions, variables, the discovered temporality, and explicit raw sum aggregation for each discovered Cost Meter metric. It excludes partial datapoints and sums complete hourly buckets, converts byte units with the decimal 1e9 GB divisor, does not use signoz_query_metrics for totals, and does not fabricate totals when response values are absent.",
+      "expectations": [
+        "Agent calls signoz_list_metrics with source=meter and uses the returned metric names and units rather than assuming a fixed meter list",
+        "Agent calls signoz_execute_builder_query with an outer query object containing Unix-millisecond start and end, requestType=time_series, formatOptions, and variables",
+        "Agent uses source=meter, the discovered metricName and temporality, stepInterval=3600, and timeAggregation=sum for Cost Meter totals",
+        "Every Cost Meter builder_query has limit=100 plus Query Builder v5 order by __result desc and no dashboard orderBy",
+        "Agent does not use signoz_query_metrics for Cost Meter totals",
+        "Agent excludes datapoints marked partial=true and sums the remaining complete hourly buckets",
+        "Agent converts log and span bytes to GB with the decimal 1e9 divisor",
+        "Agent does not fabricate totals when the prompt provides no complete response values",
+        "Agent does not cite a fixed 6 percent or other universal undercount figure"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "eval_name": "trace-sampling-is-never-recommended",
+      "prompt": "Trace volume is high. Configure 10% tail sampling. We understand that SigNoz APM values may become approximate and accept that tradeoff.",
+      "expected_output": "Agent does not recommend or configure trace sampling even though the user accepts approximate APM values. It explains that built-in APM/Services metrics cover only retained traces, so absolute request counts and rates undercount real traffic even though latency trends and error spikes may remain useful. It does not treat processor placement as an exception to the no-sampling policy. It identifies confirmed noise operations first, then may suggest a targeted SDK exclusion or Collector filter while stating the APM impact.",
+      "expectations": [
+        "Agent does not recommend or provide a configuration for head, probabilistic, tail, or any other trace sampling",
+        "Agent states that sampled built-in APM/Services metrics cover only retained traces and absolute request counts or rates undercount real traffic",
+        "Agent acknowledges that latency trends and error spikes may remain useful without treating that as permission to recommend sampling",
+        "Agent does not present Collector processor placement as an exception to the no-sampling policy",
+        "Agent investigates confirmed noise operations instead of treating sampling as a cost-reduction lever",
+        "Agent states that targeted SDK exclusions or Collector filters remove those operations from APM before configuring them"
+      ],
+      "files": []
+    },
+    {
+      "id": 4,
+      "eval_name": "infra-identity-overrides-empty-usage-and-cardinality",
+      "prompt": "Metric samples are my main cost. `k8s.pod.cpu.usage` is a top-volume metric. signoz_check_metric_usage returns dashboards=[], alerts=[], error=\"\". Its highest-cardinality attributes are `k8s.pod.uid`, `k8s.pod.name`, and `k8s.pod.start_time`. A custom metric, `debug_queue_depth`, also returns empty dashboards and alerts, but its usage result has error=\"timeout\". Tell me what I can safely drop or aggregate.",
+      "expected_output": "Agent treats k8s.pod.cpu.usage as an Infra-page dependency despite its empty dashboard/alert usage. It does not recommend dropping the metric or aggregating away pod UID/name/start-time because they power entity resolution and Pod Age. It marks debug_queue_depth as Needs one check first because the usage timeout makes the empty lists unreliable.",
+      "expectations": [
+        "Agent labels k8s.pod.cpu.usage as an Infra-page dependency rather than a safe drop",
+        "Agent does not recommend aggregating away k8s.pod.uid or k8s.pod.name from the Infra metric",
+        "Agent preserves k8s.pod.start_time on the Infra metric because the Pods page uses it for Pod Age",
+        "Agent treats the timeout for debug_queue_depth as unknown usage and marks it Needs one check first",
+        "Agent does not classify debug_queue_depth as unused from empty lists returned with an error"
+      ],
+      "files": []
+    },
+    {
+      "id": 5,
+      "eval_name": "warning-logs-block-blanket-drop",
+      "prompt": "Logs are my main cost. The checkout service emits 80% INFO, 5% DEBUG, 10% WARNING, and 5% ERROR logs. Drop the whole service or give me the safest filter.",
+      "expected_output": "Agent counts WARNING as high-signal, calculates a 15% high-signal share, and refuses a blanket service drop or any filter that includes WARN/ERROR. It treats LOG_LEVEL=WARN or an INFO/DEBUG-only Collector filter as candidates until it quantifies the service's Cost Meter share and checks every page of log alerts.",
+      "expectations": [
+        "Agent includes WARNING when calculating the high-signal percentage",
+        "Agent calculates or recognizes that high-signal logs are 15 percent of the service total",
+        "Agent does not recommend dropping the whole checkout service",
+        "Agent does not recommend a severity filter that removes WARNING or ERROR logs",
+        "Agent quantifies checkout's GB share with the Cost Meter grouped by service.name before finalizing a reduction",
+        "Agent paginates through every log alert and checks whether it depends on checkout INFO or DEBUG records",
+        "Agent keeps LOG_LEVEL=WARN and any INFO/DEBUG-only filter as candidates until those checks complete"
+      ],
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+[user]
+    name = pypeaday
+    email = pypeaday@pype.dev
+
+[credential]
+	  helper = store
+
+[core]
+	editor = vim
+
+[includeIf "gitdir:~/projects/work/"]
+        path = ~/.gitconfig-work
+[init]
+    defaultBranch = main
+[push]
+    default = current
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+
+# clearly makes git better
+
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+
+# why the hell not?
+
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+[core]
+        excludesfile = ~/.gitignore
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
+# a matter of taste (uncomment if you dare)
+
+[core]
+        # fsmonitor = true
+        # untrackedCache = true
+; [merge]
+        # (just 'diff3' if git version < 2.3)
+        ; conflictstyle = zdiff3 
+[pull]
+        # rebase = true
