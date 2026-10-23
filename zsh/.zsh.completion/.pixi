@@ -1,0 +1,2393 @@
+#compdef pixi
+
+autoload -U is-at-least
+
+_pixi() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_pixi_commands" \
+"*::: :->pixi" \
+&& ret=0
+    case $state in
+    (pixi)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-command-$line[1]:"
+        case $line[1] in
+            (completion)
+_arguments "${_arguments_options[@]}" \
+'-s+[The shell to generate a completion script for (defaults to '\''bash'\'')]:SHELL:(bash elvish fish powershell zsh)' \
+'--shell=[The shell to generate a completion script for (defaults to '\''bash'\'')]:SHELL:(bash elvish fish powershell zsh)' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" \
+'(-i --import)*-c+[Channels to use in the project]:channel: ' \
+'(-i --import)*--channel=[Channels to use in the project]:channel: ' \
+'*-p+[Platforms that the project supports]:platform: ' \
+'*--platform=[Platforms that the project supports]:platform: ' \
+'-i+[Environment.yml file to bootstrap the project]:ENV_FILE:_files' \
+'--import=[Environment.yml file to bootstrap the project]:ENV_FILE:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::path -- Where to place the project (defaults to current path):_files' \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'*-p+[The platform(s) for which the dependency should be added]:PLATFORM: ' \
+'*--platform=[The platform(s) for which the dependency should be added]:PLATFORM: ' \
+'-f+[The feature for which the dependency should be added]:FEATURE: ' \
+'--feature=[The feature for which the dependency should be added]:FEATURE: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--build)--host[The specified dependencies are host dependencies. Conflicts with \`build\` and \`pypi\`]' \
+'(--host)--build[The specified dependencies are build dependencies. Conflicts with \`host\` and \`pypi\`]' \
+'(--host --build)--pypi[The specified dependencies are pypi dependencies. Conflicts with \`host\` and \`build\`]' \
+'(--no-install)--no-lockfile-update[Don'\''t update lockfile, implies the no-install as well]' \
+'--no-install[Don'\''t install the package to the environment, only add the package to the lock-file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::specs -- Specify the dependencies you wish to add to the project:' \
+&& ret=0
+;;
+(run)
+local tasks
+tasks=("${(@s/ /)$(pixi task list --summary 2> /dev/null)}")
+
+if [[ -n "$tasks" ]]; then
+    _values 'task' "${tasks[@]}"
+else
+    return 1
+fi
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-e+[]:ENVIRONMENT: ' \
+'--environment=[]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--locked)--frozen[Don'\''t check or update the lockfile, continue with previously installed environment]' \
+'(--frozen)--locked[Check if lockfile is up to date, aborts when lockfile isn'\''t up to date with the manifest file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::task -- The task you want to run in the projects environment:' \
+&& ret=0
+;;
+(shell)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-e+[]:ENVIRONMENT: ' \
+'--environment=[]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--locked)--frozen[Don'\''t check or update the lockfile, continue with previously installed environment]' \
+'(--frozen)--locked[Check if lockfile is up to date, aborts when lockfile isn'\''t up to date with the manifest file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(shell-hook)
+_arguments "${_arguments_options[@]}" \
+'-s+[Sets the shell, options\: \[\`bash\`,  \`zsh\`,  \`xonsh\`,  \`cmd\`,  \`powershell\`,  \`fish\`,  \`nushell\`\]]:SHELL: ' \
+'--shell=[Sets the shell, options\: \[\`bash\`,  \`zsh\`,  \`xonsh\`,  \`cmd\`,  \`powershell\`,  \`fish\`,  \`nushell\`\]]:SHELL: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-e+[The environment to activate in the script]:ENVIRONMENT: ' \
+'--environment=[The environment to activate in the script]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--locked)--frozen[Don'\''t check or update the lockfile, continue with previously installed environment]' \
+'(--frozen)--locked[Check if lockfile is up to date, aborts when lockfile isn'\''t up to date with the manifest file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(global)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+":: :_pixi__global_commands" \
+"*::: :->global" \
+&& ret=0
+
+    case $state in
+    (global)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-global-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" \
+'*-c+[Represents the channels from which the package will be installed. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'*--channel=[Represents the channels from which the package will be installed. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::package -- Specifies the package(s) that is to be installed:' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::package -- Specifies the package(s) that is to be removed:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" \
+'*-c+[Represents the channels from which to upgrade specified package. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'*--channel=[Represents the channels from which to upgrade specified package. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':package -- Specifies the package that is to be upgraded:' \
+&& ret=0
+;;
+(upgrade-all)
+_arguments "${_arguments_options[@]}" \
+'*-c+[Represents the channels from which to upgrade packages. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'*--channel=[Represents the channels from which to upgrade packages. Multiple channels can be specified by using this field multiple times]:CHANNEL: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__global__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-global-help-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(upgrade-all)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(auth)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__auth_commands" \
+"*::: :->auth" \
+&& ret=0
+
+    case $state in
+    (auth)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-auth-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" \
+'--token=[The token to use (for authentication with prefix.dev)]:TOKEN: ' \
+'--username=[The username to use (for basic HTTP authentication)]:USERNAME: ' \
+'--password=[The password to use (for basic HTTP authentication)]:PASSWORD: ' \
+'--conda-token=[The token to use on anaconda.org / quetz authentication]:CONDA_TOKEN: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':host -- The host to authenticate with (e.g. repo.prefix.dev):' \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':host -- The host to remove authentication for:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__auth__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-auth-help-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(install)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-e+[]:ENVIRONMENT: ' \
+'--environment=[]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--locked)--frozen[Don'\''t check or update the lockfile, continue with previously installed environment]' \
+'(--frozen)--locked[Check if lockfile is up to date, aborts when lockfile isn'\''t up to date with the manifest file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(task)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__task_commands" \
+"*::: :->task" \
+&& ret=0
+
+    case $state in
+    (task)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-task-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+'*--depends-on=[Depends on these other commands]:DEPENDS_ON: ' \
+'-p+[The platform for which the task should be added]:PLATFORM: ' \
+'--platform=[The platform for which the task should be added]:PLATFORM: ' \
+'-f+[The feature for which the task should be added]:FEATURE: ' \
+'--feature=[The feature for which the task should be added]:FEATURE: ' \
+'--cwd=[The working directory relative to the root of the project]:CWD:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':name -- Task name:' \
+'*::commands -- One or more commands to actually execute:' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'-p+[The platform for which the task should be removed]:PLATFORM: ' \
+'--platform=[The platform for which the task should be removed]:PLATFORM: ' \
+'-f+[The feature for which the task should be removed]:FEATURE: ' \
+'--feature=[The feature for which the task should be removed]:FEATURE: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::names -- Task names to remove:' \
+&& ret=0
+;;
+(alias)
+_arguments "${_arguments_options[@]}" \
+'-p+[The platform for which the alias should be added]:PLATFORM: ' \
+'--platform=[The platform for which the alias should be added]:PLATFORM: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':alias -- Alias name:' \
+'*::depends_on -- Depends on these tasks to execute:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'-e+[The environment the list should be generated for If not specified, the default environment is used]:ENVIRONMENT: ' \
+'--environment=[The environment the list should be generated for If not specified, the default environment is used]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'-s[]' \
+'--summary[]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__task__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-task-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(alias)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(info)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--extended[Show cache and environment size]' \
+'--json[Whether to show the output as JSON or not]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(upload)
+_arguments "${_arguments_options[@]}" \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':host -- The host + channel to upload to:' \
+':package_file -- The file to upload:_files' \
+&& ret=0
+;;
+(search)
+_arguments "${_arguments_options[@]}" \
+'*-c+[Channel to specifically search package, defaults to project channels or conda-forge]:CHANNEL: ' \
+'*--channel=[Channel to specifically search package, defaults to project channels or conda-forge]:CHANNEL: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-l+[Limit the number of search results]:LIMIT: ' \
+'--limit=[Limit the number of search results]:LIMIT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':package -- Name of package to search:' \
+&& ret=0
+;;
+(project)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__project_commands" \
+"*::: :->project" \
+&& ret=0
+
+    case $state in
+    (project)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-command-$line[1]:"
+        case $line[1] in
+            (channel)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__project__channel_commands" \
+"*::: :->channel" \
+&& ret=0
+
+    case $state in
+    (channel)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-channel-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+'-f+[The name of the feature to add the channel to]:FEATURE: ' \
+'--feature=[The name of the feature to add the channel to]:FEATURE: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--no-install[Don'\''t update the environment, only add changed packages to the lock-file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::channel -- The channel name or URL:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--urls[Whether to display the channel'\''s names or urls]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'-f+[The name of the feature to remove the channel from]:FEATURE: ' \
+'--feature=[The name of the feature to remove the channel from]:FEATURE: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--no-install[Don'\''t update the environment, only remove the channel(s) from the lock-file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::channel -- The channel name(s) or URL:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__channel__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-channel-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(description)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__project__description_commands" \
+"*::: :->description" \
+&& ret=0
+
+    case $state in
+    (description)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-description-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':description -- The project description:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__description__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-description-help-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(platform)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__project__platform_commands" \
+"*::: :->platform" \
+&& ret=0
+
+    case $state in
+    (platform)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-platform-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+'-f+[The name of the feature to add the platform to]:FEATURE: ' \
+'--feature=[The name of the feature to add the platform to]:FEATURE: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--no-install[Don'\''t update the environment, only add changed packages to the lock-file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::platform -- The platform name(s) to add:' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'-f+[The name of the feature to remove the platform from]:FEATURE: ' \
+'--feature=[The name of the feature to remove the platform from]:FEATURE: ' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--no-install[Don'\''t update the environment, only remove the platform(s) from the lock-file]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::platform -- The platform name(s) to remove:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__platform__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-platform-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(version)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_pixi__project__version_commands" \
+"*::: :->version" \
+&& ret=0
+
+    case $state in
+    (version)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-version-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+':version -- The new project version:' \
+&& ret=0
+;;
+(major)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(minor)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(patch)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__version__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-version-help-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(major)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(minor)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(patch)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-help-command-$line[1]:"
+        case $line[1] in
+            (channel)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__help__channel_commands" \
+"*::: :->channel" \
+&& ret=0
+
+    case $state in
+    (channel)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-help-channel-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(description)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__help__description_commands" \
+"*::: :->description" \
+&& ret=0
+
+    case $state in
+    (description)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-help-description-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(platform)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__help__platform_commands" \
+"*::: :->platform" \
+&& ret=0
+
+    case $state in
+    (platform)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-help-platform-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(version)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__project__help__version_commands" \
+"*::: :->version" \
+&& ret=0
+
+    case $state in
+    (version)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-project-help-version-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(major)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(minor)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(patch)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-p+[The platform for which the dependency should be removed]:PLATFORM: ' \
+'--platform=[The platform for which the dependency should be removed]:PLATFORM: ' \
+'-f+[The feature for which the dependency should be removed]:FEATURE: ' \
+'--feature=[The feature for which the dependency should be removed]:FEATURE: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'(--build)--host[Whether dependency is a host dependency]' \
+'(--host)--build[Whether dependency is a build dependency]' \
+'--pypi[Whether the dependency is a pypi package]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::deps -- List of dependencies you wish to remove from the project:' \
+&& ret=0
+;;
+(self-update)
+_arguments "${_arguments_options[@]}" \
+'--version=[The desired version (to downgrade or upgrade to). Update to the latest version if not specified]:VERSION: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--force[Force the update even if the pixi binary is not found in the default location]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+'--platform=[The platform to list packages for. Defaults to the current platform]:PLATFORM: ' \
+'--sort-by=[Sorting strategy]:SORT_BY:(size name type)' \
+'--manifest-path=[The path to '\''pixi.toml'\'']:MANIFEST_PATH:_files' \
+'-e+[The environment to list packages for. Defaults to the default environment]:ENVIRONMENT: ' \
+'--environment=[The environment to list packages for. Defaults to the default environment]:ENVIRONMENT: ' \
+'--color=[Whether the log needs to be colored]:COLOR:(always never auto)' \
+'--json[Whether to output in json format]' \
+'--json-pretty[Whether to output in pretty json format]' \
+'(--locked)--frozen[Don'\''t check or update the lockfile, continue with previously installed environment]' \
+'(--frozen)--locked[Check if lockfile is up to date, aborts when lockfile isn'\''t up to date with the manifest file]' \
+'--no-install[Don'\''t install the environment for pypi solving, only update the lock-file if it can solve without installing]' \
+'*-v[Increase logging verbosity]' \
+'*--verbose[Increase logging verbosity]' \
+'(-v --verbose)*-q[Decrease logging verbosity]' \
+'(-v --verbose)*--quiet[Decrease logging verbosity]' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::regex -- List only packages matching a regular expression:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-command-$line[1]:"
+        case $line[1] in
+            (completion)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(init)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(run)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(shell)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(shell-hook)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(global)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__global_commands" \
+"*::: :->global" \
+&& ret=0
+
+    case $state in
+    (global)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-global-command-$line[1]:"
+        case $line[1] in
+            (install)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(upgrade-all)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(auth)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__auth_commands" \
+"*::: :->auth" \
+&& ret=0
+
+    case $state in
+    (auth)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-auth-command-$line[1]:"
+        case $line[1] in
+            (login)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(logout)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(install)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(task)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__task_commands" \
+"*::: :->task" \
+&& ret=0
+
+    case $state in
+    (task)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-task-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(alias)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(info)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(upload)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(search)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(project)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__project_commands" \
+"*::: :->project" \
+&& ret=0
+
+    case $state in
+    (project)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-project-command-$line[1]:"
+        case $line[1] in
+            (channel)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__project__channel_commands" \
+"*::: :->channel" \
+&& ret=0
+
+    case $state in
+    (channel)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-project-channel-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(description)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__project__description_commands" \
+"*::: :->description" \
+&& ret=0
+
+    case $state in
+    (description)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-project-description-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(platform)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__project__platform_commands" \
+"*::: :->platform" \
+&& ret=0
+
+    case $state in
+    (platform)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-project-platform-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(version)
+_arguments "${_arguments_options[@]}" \
+":: :_pixi__help__project__version_commands" \
+"*::: :->version" \
+&& ret=0
+
+    case $state in
+    (version)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:pixi-help-project-version-command-$line[1]:"
+        case $line[1] in
+            (get)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(set)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(major)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(minor)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(patch)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(remove)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(self-update)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_pixi_commands] )) ||
+_pixi_commands() {
+    local commands; commands=(
+'completion:Generates a completion script for a shell' \
+'init:Creates a new project' \
+'add:Adds a dependency to the project' \
+'run:Runs task in project' \
+'shell:Start a shell in the pixi environment of the project' \
+'shell-hook:Print the activation script so users can source it in their shell, without needing the pixi executable' \
+'global:Global is the main entry point for the part of pixi that executes on the global(system) level' \
+'auth:Login to prefix.dev or anaconda.org servers to access private channels' \
+'install:Install all dependencies' \
+'task:Command management in project' \
+'info:Information about the system, project and environments for the current machine' \
+'upload:Upload a package to a prefix.dev channel' \
+'search:Search a package, output will list the latest version of package' \
+'project:Modify the project configuration file through the command line' \
+'remove:Remove the dependency from the project' \
+'self-update:Update pixi to the latest version or a specific version. If the pixi binary is not found in the default location (e.g. \`~/.pixi/bin/pixi\`), pixi won'\''t updated to prevent breaking the current installation (Homebrew, etc). The behaviour can be overridden with the \`--force\` flag' \
+'list:List project'\''s packages. Highlighted packages are explicit dependencies' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi commands' commands "$@"
+}
+(( $+functions[_pixi__add_commands] )) ||
+_pixi__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi add commands' commands "$@"
+}
+(( $+functions[_pixi__help__add_commands] )) ||
+_pixi__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help add commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__channel__add_commands] )) ||
+_pixi__help__project__channel__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project channel add commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__platform__add_commands] )) ||
+_pixi__help__project__platform__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project platform add commands' commands "$@"
+}
+(( $+functions[_pixi__help__task__add_commands] )) ||
+_pixi__help__task__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help task add commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__add_commands] )) ||
+_pixi__project__channel__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel add commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__help__add_commands] )) ||
+_pixi__project__channel__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel help add commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__channel__add_commands] )) ||
+_pixi__project__help__channel__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help channel add commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__platform__add_commands] )) ||
+_pixi__project__help__platform__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help platform add commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__add_commands] )) ||
+_pixi__project__platform__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform add commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__help__add_commands] )) ||
+_pixi__project__platform__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform help add commands' commands "$@"
+}
+(( $+functions[_pixi__task__add_commands] )) ||
+_pixi__task__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task add commands' commands "$@"
+}
+(( $+functions[_pixi__task__help__add_commands] )) ||
+_pixi__task__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task help add commands' commands "$@"
+}
+(( $+functions[_pixi__help__task__alias_commands] )) ||
+_pixi__help__task__alias_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help task alias commands' commands "$@"
+}
+(( $+functions[_pixi__task__alias_commands] )) ||
+_pixi__task__alias_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task alias commands' commands "$@"
+}
+(( $+functions[_pixi__task__help__alias_commands] )) ||
+_pixi__task__help__alias_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task help alias commands' commands "$@"
+}
+(( $+functions[_pixi__auth_commands] )) ||
+_pixi__auth_commands() {
+    local commands; commands=(
+'login:Store authentication information for a given host' \
+'logout:Remove authentication information for a given host' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi auth commands' commands "$@"
+}
+(( $+functions[_pixi__help__auth_commands] )) ||
+_pixi__help__auth_commands() {
+    local commands; commands=(
+'login:Store authentication information for a given host' \
+'logout:Remove authentication information for a given host' \
+    )
+    _describe -t commands 'pixi help auth commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__channel_commands] )) ||
+_pixi__help__project__channel_commands() {
+    local commands; commands=(
+'add:Adds a channel to the project file and updates the lockfile' \
+'list:List the channels in the project file' \
+'remove:Remove channel(s) from the project file and updates the lockfile' \
+    )
+    _describe -t commands 'pixi help project channel commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel_commands] )) ||
+_pixi__project__channel_commands() {
+    local commands; commands=(
+'add:Adds a channel to the project file and updates the lockfile' \
+'list:List the channels in the project file' \
+'remove:Remove channel(s) from the project file and updates the lockfile' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project channel commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__channel_commands] )) ||
+_pixi__project__help__channel_commands() {
+    local commands; commands=(
+'add:Adds a channel to the project file and updates the lockfile' \
+'list:List the channels in the project file' \
+'remove:Remove channel(s) from the project file and updates the lockfile' \
+    )
+    _describe -t commands 'pixi project help channel commands' commands "$@"
+}
+(( $+functions[_pixi__completion_commands] )) ||
+_pixi__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi completion commands' commands "$@"
+}
+(( $+functions[_pixi__help__completion_commands] )) ||
+_pixi__help__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help completion commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__description_commands] )) ||
+_pixi__help__project__description_commands() {
+    local commands; commands=(
+'get:Get the project description' \
+'set:Set the project description' \
+    )
+    _describe -t commands 'pixi help project description commands' commands "$@"
+}
+(( $+functions[_pixi__project__description_commands] )) ||
+_pixi__project__description_commands() {
+    local commands; commands=(
+'get:Get the project description' \
+'set:Set the project description' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project description commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__description_commands] )) ||
+_pixi__project__help__description_commands() {
+    local commands; commands=(
+'get:Get the project description' \
+'set:Set the project description' \
+    )
+    _describe -t commands 'pixi project help description commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__description__get_commands] )) ||
+_pixi__help__project__description__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project description get commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version__get_commands] )) ||
+_pixi__help__project__version__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project version get commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__get_commands] )) ||
+_pixi__project__description__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project description get commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__help__get_commands] )) ||
+_pixi__project__description__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project description help get commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__description__get_commands] )) ||
+_pixi__project__help__description__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help description get commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version__get_commands] )) ||
+_pixi__project__help__version__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help version get commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__get_commands] )) ||
+_pixi__project__version__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version get commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__get_commands] )) ||
+_pixi__project__version__help__get_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help get commands' commands "$@"
+}
+(( $+functions[_pixi__global_commands] )) ||
+_pixi__global_commands() {
+    local commands; commands=(
+'install:Installs the defined package in a global accessible location' \
+'remove:Removes a package previously installed into a globally accessible location via \`pixi global install\`' \
+'list:Lists all packages previously installed into a globally accessible location via \`pixi global install\`' \
+'upgrade:Upgrade specific package which is installed globally' \
+'upgrade-all:Upgrade all globally installed packages' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi global commands' commands "$@"
+}
+(( $+functions[_pixi__help__global_commands] )) ||
+_pixi__help__global_commands() {
+    local commands; commands=(
+'install:Installs the defined package in a global accessible location' \
+'remove:Removes a package previously installed into a globally accessible location via \`pixi global install\`' \
+'list:Lists all packages previously installed into a globally accessible location via \`pixi global install\`' \
+'upgrade:Upgrade specific package which is installed globally' \
+'upgrade-all:Upgrade all globally installed packages' \
+    )
+    _describe -t commands 'pixi help global commands' commands "$@"
+}
+(( $+functions[_pixi__auth__help_commands] )) ||
+_pixi__auth__help_commands() {
+    local commands; commands=(
+'login:Store authentication information for a given host' \
+'logout:Remove authentication information for a given host' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi auth help commands' commands "$@"
+}
+(( $+functions[_pixi__auth__help__help_commands] )) ||
+_pixi__auth__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi auth help help commands' commands "$@"
+}
+(( $+functions[_pixi__global__help_commands] )) ||
+_pixi__global__help_commands() {
+    local commands; commands=(
+'install:Installs the defined package in a global accessible location' \
+'remove:Removes a package previously installed into a globally accessible location via \`pixi global install\`' \
+'list:Lists all packages previously installed into a globally accessible location via \`pixi global install\`' \
+'upgrade:Upgrade specific package which is installed globally' \
+'upgrade-all:Upgrade all globally installed packages' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi global help commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__help_commands] )) ||
+_pixi__global__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help help commands' commands "$@"
+}
+(( $+functions[_pixi__help_commands] )) ||
+_pixi__help_commands() {
+    local commands; commands=(
+'completion:Generates a completion script for a shell' \
+'init:Creates a new project' \
+'add:Adds a dependency to the project' \
+'run:Runs task in project' \
+'shell:Start a shell in the pixi environment of the project' \
+'shell-hook:Print the activation script so users can source it in their shell, without needing the pixi executable' \
+'global:Global is the main entry point for the part of pixi that executes on the global(system) level' \
+'auth:Login to prefix.dev or anaconda.org servers to access private channels' \
+'install:Install all dependencies' \
+'task:Command management in project' \
+'info:Information about the system, project and environments for the current machine' \
+'upload:Upload a package to a prefix.dev channel' \
+'search:Search a package, output will list the latest version of package' \
+'project:Modify the project configuration file through the command line' \
+'remove:Remove the dependency from the project' \
+'self-update:Update pixi to the latest version or a specific version. If the pixi binary is not found in the default location (e.g. \`~/.pixi/bin/pixi\`), pixi won'\''t updated to prevent breaking the current installation (Homebrew, etc). The behaviour can be overridden with the \`--force\` flag' \
+'list:List project'\''s packages. Highlighted packages are explicit dependencies' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi help commands' commands "$@"
+}
+(( $+functions[_pixi__help__help_commands] )) ||
+_pixi__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help help commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__help_commands] )) ||
+_pixi__project__channel__help_commands() {
+    local commands; commands=(
+'add:Adds a channel to the project file and updates the lockfile' \
+'list:List the channels in the project file' \
+'remove:Remove channel(s) from the project file and updates the lockfile' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project channel help commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__help__help_commands] )) ||
+_pixi__project__channel__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel help help commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__help_commands] )) ||
+_pixi__project__description__help_commands() {
+    local commands; commands=(
+'get:Get the project description' \
+'set:Set the project description' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project description help commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__help__help_commands] )) ||
+_pixi__project__description__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project description help help commands' commands "$@"
+}
+(( $+functions[_pixi__project__help_commands] )) ||
+_pixi__project__help_commands() {
+    local commands; commands=(
+'channel:Commands to manage project channels' \
+'description:Commands to manage project description' \
+'platform:Commands to manage project channels' \
+'version:Commands to manage project description' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project help commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__help_commands] )) ||
+_pixi__project__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help help commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__help_commands] )) ||
+_pixi__project__platform__help_commands() {
+    local commands; commands=(
+'add:Adds a platform(s) to the project file and updates the lockfile' \
+'list:List the platforms in the project file' \
+'remove:Remove platform(s) from the project file and updates the lockfile' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project platform help commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__help__help_commands] )) ||
+_pixi__project__platform__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform help help commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help_commands] )) ||
+_pixi__project__version__help_commands() {
+    local commands; commands=(
+'get:Get the project version' \
+'set:Set the project version' \
+'major:Bump the project version to MAJOR' \
+'minor:Bump the project version to MINOR' \
+'patch:Bump the project version to PATCH' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project version help commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__help_commands] )) ||
+_pixi__project__version__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help help commands' commands "$@"
+}
+(( $+functions[_pixi__task__help_commands] )) ||
+_pixi__task__help_commands() {
+    local commands; commands=(
+'add:Add a command to the project' \
+'remove:Remove a command from the project' \
+'alias:Alias another specific command' \
+'list:List all tasks' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi task help commands' commands "$@"
+}
+(( $+functions[_pixi__task__help__help_commands] )) ||
+_pixi__task__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task help help commands' commands "$@"
+}
+(( $+functions[_pixi__help__info_commands] )) ||
+_pixi__help__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help info commands' commands "$@"
+}
+(( $+functions[_pixi__info_commands] )) ||
+_pixi__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi info commands' commands "$@"
+}
+(( $+functions[_pixi__help__init_commands] )) ||
+_pixi__help__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help init commands' commands "$@"
+}
+(( $+functions[_pixi__init_commands] )) ||
+_pixi__init_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi init commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__install_commands] )) ||
+_pixi__global__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help install commands' commands "$@"
+}
+(( $+functions[_pixi__global__install_commands] )) ||
+_pixi__global__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global install commands' commands "$@"
+}
+(( $+functions[_pixi__help__global__install_commands] )) ||
+_pixi__help__global__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help global install commands' commands "$@"
+}
+(( $+functions[_pixi__help__install_commands] )) ||
+_pixi__help__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help install commands' commands "$@"
+}
+(( $+functions[_pixi__install_commands] )) ||
+_pixi__install_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi install commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__list_commands] )) ||
+_pixi__global__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help list commands' commands "$@"
+}
+(( $+functions[_pixi__global__list_commands] )) ||
+_pixi__global__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global list commands' commands "$@"
+}
+(( $+functions[_pixi__help__global__list_commands] )) ||
+_pixi__help__global__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help global list commands' commands "$@"
+}
+(( $+functions[_pixi__help__list_commands] )) ||
+_pixi__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help list commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__channel__list_commands] )) ||
+_pixi__help__project__channel__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project channel list commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__platform__list_commands] )) ||
+_pixi__help__project__platform__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project platform list commands' commands "$@"
+}
+(( $+functions[_pixi__help__task__list_commands] )) ||
+_pixi__help__task__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help task list commands' commands "$@"
+}
+(( $+functions[_pixi__list_commands] )) ||
+_pixi__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi list commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__help__list_commands] )) ||
+_pixi__project__channel__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel help list commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__list_commands] )) ||
+_pixi__project__channel__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel list commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__channel__list_commands] )) ||
+_pixi__project__help__channel__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help channel list commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__platform__list_commands] )) ||
+_pixi__project__help__platform__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help platform list commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__help__list_commands] )) ||
+_pixi__project__platform__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform help list commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__list_commands] )) ||
+_pixi__project__platform__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform list commands' commands "$@"
+}
+(( $+functions[_pixi__task__help__list_commands] )) ||
+_pixi__task__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task help list commands' commands "$@"
+}
+(( $+functions[_pixi__task__list_commands] )) ||
+_pixi__task__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task list commands' commands "$@"
+}
+(( $+functions[_pixi__auth__help__login_commands] )) ||
+_pixi__auth__help__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi auth help login commands' commands "$@"
+}
+(( $+functions[_pixi__auth__login_commands] )) ||
+_pixi__auth__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi auth login commands' commands "$@"
+}
+(( $+functions[_pixi__help__auth__login_commands] )) ||
+_pixi__help__auth__login_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help auth login commands' commands "$@"
+}
+(( $+functions[_pixi__auth__help__logout_commands] )) ||
+_pixi__auth__help__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi auth help logout commands' commands "$@"
+}
+(( $+functions[_pixi__auth__logout_commands] )) ||
+_pixi__auth__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi auth logout commands' commands "$@"
+}
+(( $+functions[_pixi__help__auth__logout_commands] )) ||
+_pixi__help__auth__logout_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help auth logout commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version__major_commands] )) ||
+_pixi__help__project__version__major_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project version major commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version__major_commands] )) ||
+_pixi__project__help__version__major_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help version major commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__major_commands] )) ||
+_pixi__project__version__help__major_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help major commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__major_commands] )) ||
+_pixi__project__version__major_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version major commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version__minor_commands] )) ||
+_pixi__help__project__version__minor_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project version minor commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version__minor_commands] )) ||
+_pixi__project__help__version__minor_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help version minor commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__minor_commands] )) ||
+_pixi__project__version__help__minor_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help minor commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__minor_commands] )) ||
+_pixi__project__version__minor_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version minor commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version__patch_commands] )) ||
+_pixi__help__project__version__patch_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project version patch commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version__patch_commands] )) ||
+_pixi__project__help__version__patch_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help version patch commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__patch_commands] )) ||
+_pixi__project__version__help__patch_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help patch commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__patch_commands] )) ||
+_pixi__project__version__patch_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version patch commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__platform_commands] )) ||
+_pixi__help__project__platform_commands() {
+    local commands; commands=(
+'add:Adds a platform(s) to the project file and updates the lockfile' \
+'list:List the platforms in the project file' \
+'remove:Remove platform(s) from the project file and updates the lockfile' \
+    )
+    _describe -t commands 'pixi help project platform commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__platform_commands] )) ||
+_pixi__project__help__platform_commands() {
+    local commands; commands=(
+'add:Adds a platform(s) to the project file and updates the lockfile' \
+'list:List the platforms in the project file' \
+'remove:Remove platform(s) from the project file and updates the lockfile' \
+    )
+    _describe -t commands 'pixi project help platform commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform_commands] )) ||
+_pixi__project__platform_commands() {
+    local commands; commands=(
+'add:Adds a platform(s) to the project file and updates the lockfile' \
+'list:List the platforms in the project file' \
+'remove:Remove platform(s) from the project file and updates the lockfile' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project platform commands' commands "$@"
+}
+(( $+functions[_pixi__help__project_commands] )) ||
+_pixi__help__project_commands() {
+    local commands; commands=(
+'channel:Commands to manage project channels' \
+'description:Commands to manage project description' \
+'platform:Commands to manage project channels' \
+'version:Commands to manage project description' \
+    )
+    _describe -t commands 'pixi help project commands' commands "$@"
+}
+(( $+functions[_pixi__project_commands] )) ||
+_pixi__project_commands() {
+    local commands; commands=(
+'channel:Commands to manage project channels' \
+'description:Commands to manage project description' \
+'platform:Commands to manage project channels' \
+'version:Commands to manage project description' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__remove_commands] )) ||
+_pixi__global__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help remove commands' commands "$@"
+}
+(( $+functions[_pixi__global__remove_commands] )) ||
+_pixi__global__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__global__remove_commands] )) ||
+_pixi__help__global__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help global remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__channel__remove_commands] )) ||
+_pixi__help__project__channel__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project channel remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__platform__remove_commands] )) ||
+_pixi__help__project__platform__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project platform remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__remove_commands] )) ||
+_pixi__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__task__remove_commands] )) ||
+_pixi__help__task__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help task remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__help__remove_commands] )) ||
+_pixi__project__channel__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel help remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__channel__remove_commands] )) ||
+_pixi__project__channel__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project channel remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__channel__remove_commands] )) ||
+_pixi__project__help__channel__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help channel remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__platform__remove_commands] )) ||
+_pixi__project__help__platform__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help platform remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__help__remove_commands] )) ||
+_pixi__project__platform__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform help remove commands' commands "$@"
+}
+(( $+functions[_pixi__project__platform__remove_commands] )) ||
+_pixi__project__platform__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project platform remove commands' commands "$@"
+}
+(( $+functions[_pixi__remove_commands] )) ||
+_pixi__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi remove commands' commands "$@"
+}
+(( $+functions[_pixi__task__help__remove_commands] )) ||
+_pixi__task__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task help remove commands' commands "$@"
+}
+(( $+functions[_pixi__task__remove_commands] )) ||
+_pixi__task__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi task remove commands' commands "$@"
+}
+(( $+functions[_pixi__help__run_commands] )) ||
+_pixi__help__run_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help run commands' commands "$@"
+}
+(( $+functions[_pixi__run_commands] )) ||
+_pixi__run_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi run commands' commands "$@"
+}
+(( $+functions[_pixi__help__search_commands] )) ||
+_pixi__help__search_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help search commands' commands "$@"
+}
+(( $+functions[_pixi__search_commands] )) ||
+_pixi__search_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi search commands' commands "$@"
+}
+(( $+functions[_pixi__help__self-update_commands] )) ||
+_pixi__help__self-update_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help self-update commands' commands "$@"
+}
+(( $+functions[_pixi__self-update_commands] )) ||
+_pixi__self-update_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi self-update commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__description__set_commands] )) ||
+_pixi__help__project__description__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project description set commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version__set_commands] )) ||
+_pixi__help__project__version__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help project version set commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__help__set_commands] )) ||
+_pixi__project__description__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project description help set commands' commands "$@"
+}
+(( $+functions[_pixi__project__description__set_commands] )) ||
+_pixi__project__description__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project description set commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__description__set_commands] )) ||
+_pixi__project__help__description__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help description set commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version__set_commands] )) ||
+_pixi__project__help__version__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project help version set commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__help__set_commands] )) ||
+_pixi__project__version__help__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version help set commands' commands "$@"
+}
+(( $+functions[_pixi__project__version__set_commands] )) ||
+_pixi__project__version__set_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi project version set commands' commands "$@"
+}
+(( $+functions[_pixi__help__shell_commands] )) ||
+_pixi__help__shell_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help shell commands' commands "$@"
+}
+(( $+functions[_pixi__shell_commands] )) ||
+_pixi__shell_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi shell commands' commands "$@"
+}
+(( $+functions[_pixi__help__shell-hook_commands] )) ||
+_pixi__help__shell-hook_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help shell-hook commands' commands "$@"
+}
+(( $+functions[_pixi__shell-hook_commands] )) ||
+_pixi__shell-hook_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi shell-hook commands' commands "$@"
+}
+(( $+functions[_pixi__help__task_commands] )) ||
+_pixi__help__task_commands() {
+    local commands; commands=(
+'add:Add a command to the project' \
+'remove:Remove a command from the project' \
+'alias:Alias another specific command' \
+'list:List all tasks' \
+    )
+    _describe -t commands 'pixi help task commands' commands "$@"
+}
+(( $+functions[_pixi__task_commands] )) ||
+_pixi__task_commands() {
+    local commands; commands=(
+'add:Add a command to the project' \
+'remove:Remove a command from the project' \
+'alias:Alias another specific command' \
+'list:List all tasks' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi task commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__upgrade_commands] )) ||
+_pixi__global__help__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help upgrade commands' commands "$@"
+}
+(( $+functions[_pixi__global__upgrade_commands] )) ||
+_pixi__global__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global upgrade commands' commands "$@"
+}
+(( $+functions[_pixi__help__global__upgrade_commands] )) ||
+_pixi__help__global__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help global upgrade commands' commands "$@"
+}
+(( $+functions[_pixi__global__help__upgrade-all_commands] )) ||
+_pixi__global__help__upgrade-all_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global help upgrade-all commands' commands "$@"
+}
+(( $+functions[_pixi__global__upgrade-all_commands] )) ||
+_pixi__global__upgrade-all_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi global upgrade-all commands' commands "$@"
+}
+(( $+functions[_pixi__help__global__upgrade-all_commands] )) ||
+_pixi__help__global__upgrade-all_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help global upgrade-all commands' commands "$@"
+}
+(( $+functions[_pixi__help__upload_commands] )) ||
+_pixi__help__upload_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi help upload commands' commands "$@"
+}
+(( $+functions[_pixi__upload_commands] )) ||
+_pixi__upload_commands() {
+    local commands; commands=()
+    _describe -t commands 'pixi upload commands' commands "$@"
+}
+(( $+functions[_pixi__help__project__version_commands] )) ||
+_pixi__help__project__version_commands() {
+    local commands; commands=(
+'get:Get the project version' \
+'set:Set the project version' \
+'major:Bump the project version to MAJOR' \
+'minor:Bump the project version to MINOR' \
+'patch:Bump the project version to PATCH' \
+    )
+    _describe -t commands 'pixi help project version commands' commands "$@"
+}
+(( $+functions[_pixi__project__help__version_commands] )) ||
+_pixi__project__help__version_commands() {
+    local commands; commands=(
+'get:Get the project version' \
+'set:Set the project version' \
+'major:Bump the project version to MAJOR' \
+'minor:Bump the project version to MINOR' \
+'patch:Bump the project version to PATCH' \
+    )
+    _describe -t commands 'pixi project help version commands' commands "$@"
+}
+(( $+functions[_pixi__project__version_commands] )) ||
+_pixi__project__version_commands() {
+    local commands; commands=(
+'get:Get the project version' \
+'set:Set the project version' \
+'major:Bump the project version to MAJOR' \
+'minor:Bump the project version to MINOR' \
+'patch:Bump the project version to PATCH' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'pixi project version commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_pixi" ]; then
+    _pixi "$@"
+else
+    compdef _pixi pixi
+fi
+export PATH=$PATH:/home/nic/.pixi/bin

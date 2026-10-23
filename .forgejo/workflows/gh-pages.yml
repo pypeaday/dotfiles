@@ -1,0 +1,22 @@
+name: Build and Push
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+      # TODO: current feature branch
+      - feature/docs
+
+jobs:
+  build-push-pages:
+    runs-on: docker
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: https://git.paynepride.com/nic/homelab-mono/devops/ci/forgejo-actions/build-and-push-to-github-pages@main
+        with:
+          remove: "iron,fin,private"
+          github_repo: pypeaday/dotfiles
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY_FORGEJO_MIRROR_BOT }}
