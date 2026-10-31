@@ -1,0 +1,13 @@
+k9s:
+  ui:
+    #skin: catppuccin-mocha
+    # ...or another flavor:
+    # skin: catppuccin-macchiato
+    # skin: catppuccin-frappe
+    # skin: catppuccin-latte
+
+    # ...or the transparent variants:
+    skin: catppuccin-mocha-transparent
+    # skin: catppuccin-macchiato-transparent
+    # skin: catppuccin-frappe-transparent
+    # skin: catppuccin-latte-transparent

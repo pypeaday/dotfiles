@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "Exec(git status)",
+      "Exec(git log)",
+      "Exec(git diff)",
+      "Exec(git show)",
+      "Exec(git blame)",
+      "Exec(git shortlog)",
+      "Exec(git rev-parse)",
+      "Exec(git ls-files)",
+      "Exec(git ls-remote)",
+      "Exec(git remote -v)",
+      "Exec(git remote get-url)",
+      "Exec(git config --get)",
+      "Exec(ls)",
+      "Exec(grep)",
+      "Exec(rg)",
+      "Exec(cat)",
+      "Exec(head)",
+      "Exec(tail)",
+      "Exec(wc)",
+      "Exec(file)",
+      "Exec(stat)",
+      "Exec(jq)",
+      "Exec(command -v)",
+      "Exec(which)",
+      "Exec(curl -s",
+      "Exec(systemctl --user list",
+      "Exec(systemctl --user status",
+      "Exec(systemctl --user show",
+      "Exec(systemctl --user is-",
+      "Exec(journalctl --user -u",
+      "Exec(journalctl --user-unit"
+    ],
+    "deny": [
+      "Exec(rm)",
+      "Exec(sudo)",
+      "Exec(dd)",
+      "Exec(mkfs)",
+      "Exec(shutdown)",
+      "Exec(reboot)",
+      "Exec(git push)",
+      "Exec(git commit)",
+      "Exec(git reset)",
+      "Exec(git clean)"
+    ]
+  }
+}
