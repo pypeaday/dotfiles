@@ -1,0 +1,4 @@
+#!/bin/bash
+source auto_proxy
+aws sts get-caller-identity &> /dev/null && echo "%{T5}%{F#00ff00}  %{F-}%{T-}"  ||( echo "%{T5}%{F#ff0000} %{F-}%{T-}" )
+

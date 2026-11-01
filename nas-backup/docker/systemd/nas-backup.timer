@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Restic backup job daily
+
+[Timer]
+# Run daily at 2:00 AM
+OnCalendar=daily
+# Or uncomment for a specific time:
+# OnCalendar=*-*-* 02:00:00
+
+# Run the backup immediately if the last scheduled run was missed (e.g., if the computer was off)
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,13 @@
+_min_copier_version: v6.0.0b0
+bible_book:
+  type: str
+section:
+  type: str
+  default: "1.1"
+slug:
+  type: str
+  default: "fwbg-{{  bible_book.lower().replace(' ', '-')  }}-{{ section.replace('.','-') }}"
+tag:
+  type: str
+body:
+  type: str

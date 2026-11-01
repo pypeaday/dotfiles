@@ -1,0 +1,22 @@
+---
+date: {{ '%Y-%m-%d %H:%M:%S' | strftime }}
+templateKey: meeting
+title: {{ title }}
+published: False
+tags:
+  - {{ tag }}
+  - meeting
+
+---
+
+# {{ title }}
+
+Ticket: PIE-{{ ticket }}
+
+## Attendees
+
+{{ attendees }}
+
+## Summary
+
+{{ summary }}

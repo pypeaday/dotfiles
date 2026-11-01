@@ -1,0 +1,11 @@
+[Unit]
+Description=UbuntuDev distrobox container
+After=podman.socket
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/distrobox enter UbuntuDev -- true
+
+[Install]
+WantedBy=default.target

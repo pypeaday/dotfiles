@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+pushd $HOME/dotfiles
+for folder in $(cat dotfiles.txt)
+do
+    stow -D $folder
+done
+popd
