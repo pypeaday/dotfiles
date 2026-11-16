@@ -1,0 +1,8 @@
+_min_copier_version: v6.0.0b0
+title:
+  type: str
+slug:
+  type: str
+  default: "{{  title.lower().replace(' ', '-')  }}"
+body:
+  type: str

@@ -1,0 +1,26 @@
+services:
+  backup:
+    image: restic/restic:latest
+    network_mode: host
+    container_name: restic_backup
+    hostname: restic-backup-runner
+    env_file:
+      - .env
+    environment:
+      # The location of the backup repository inside the container
+      - RESTIC_REPOSITORY=/target
+      # The location of the password file inside the container
+      - RESTIC_PASSWORD_FILE=/password
+    volumes:
+      # --- Source and Config Mounts ---
+      - "${BACKUP_SOURCE}:/source:ro"
+      - "${RESTIC_PASSWORD_FILE}:/password:ro"
+      - "./backup-and-prune.sh:/usr/local/bin/backup-and-prune:ro"
+
+      # --- Persistent Data Mounts ---
+      - "./.ssh:/root/.ssh:rw"
+      - "./.cache:/root/.cache:rw"
+
+    # Set the default entrypoint to our new script. This will be executed when
+    # the container starts, unless overridden.
+    entrypoint: ["/usr/local/bin/backup-and-prune"]

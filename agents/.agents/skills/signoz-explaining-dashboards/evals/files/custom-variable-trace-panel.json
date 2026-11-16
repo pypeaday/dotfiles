@@ -1,0 +1,44 @@
+{
+  "mode": "offline_mcp_fixture",
+  "instructions": "Use these responses to resolve and explain the dashboard offline; do not query a live tenant.",
+  "responses": [
+    {
+      "request": {"limit": 50, "offset": 0},
+      "response": {
+        "data": {"dashboards": [{"id": "88888888-8888-4888-8888-888888888888", "name": "trace-operations-b70e", "spec": {"display": {"name": "Trace Operations"}}}], "total": 1}
+      }
+    },
+    {
+      "request": {"id": "88888888-8888-4888-8888-888888888888"},
+      "response": {
+        "status": "success",
+        "data": {
+          "id": "88888888-8888-4888-8888-888888888888",
+          "name": "trace-operations-b70e",
+          "tags": [{"key": "signal", "value": "traces"}],
+          "spec": {
+            "display": {"name": "Trace Operations", "description": "Recent traces by configured region"},
+            "variables": [
+              {"kind": "ListVariable", "spec": {"name": "region", "display": {"name": "Region"}, "allowMultiple": true, "allowAllValue": true, "plugin": {"kind": "signoz/CustomVariable", "spec": {"customValue": "us-east-1,eu-west-1"}}}}
+            ],
+            "panels": {
+              "recent-checkout-traces": {
+                "kind": "Panel",
+                "spec": {
+                  "display": {"name": "Recent Checkout Traces"},
+                  "plugin": {"kind": "signoz/ListPanel", "spec": {"selectFields": [{"name": "timestamp", "fieldContext": "span", "signal": "traces"}, {"name": "name", "fieldDataType": "string", "fieldContext": "span", "signal": "traces"}]}},
+                  "queries": [
+                    {"kind": "raw", "spec": {"name": "A", "plugin": {"kind": "signoz/BuilderQuery", "spec": {"name": "A", "signal": "traces", "filter": {"expression": "service.name = 'checkout' AND region IN $region"}, "selectFields": [{"name": "timestamp", "fieldContext": "span", "signal": "traces"}, {"name": "name", "fieldDataType": "string", "fieldContext": "span", "signal": "traces"}], "order": [{"key": {"name": "timestamp"}, "direction": "desc"}], "limit": 20}}}}
+                  ]
+                }
+              }
+            },
+            "layouts": [
+              {"kind": "Grid", "spec": {"display": {"title": "Traces"}, "items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/recent-checkout-traces"}}]}}
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

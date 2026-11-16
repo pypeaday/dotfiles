@@ -1,0 +1,486 @@
+# =============================================================================
+# TMUX CONFIGURATION - ORGANIZED FOR EASY CUSTOMIZATION
+# =============================================================================
+# Based on gpakosz/.tmux with custom modifications
+# This file is designed to be easy to understand and modify
+
+# =============================================================================
+# USER-SPECIFIC COLOR CONFIGURATION
+# =============================================================================
+# Set colors based on username for visual identification
+# Since conditionals aren't working with this tmux framework, set colors directly
+# Change these values based on which user/machine you're on
+
+# Blue theme
+# tmux_conf_theme_colour_primary="#5e81ac"     # Nord blue
+# tmux_conf_theme_colour_secondary="#81a1c1"   # Light blue
+# tmux_conf_theme_colour_accent="#88c0d0"      # Cyan blue
+#
+#  Yellow/Gold theme (uncomment to use)
+tmux_conf_theme_colour_primary="#ebcb8b"     # Nord yellow
+tmux_conf_theme_colour_secondary="#d08770"   # Nord orange
+tmux_conf_theme_colour_accent="#e5e9f0"      # Light accent
+
+# Fun purple/pink theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#b48ead"     # Nord purple
+# tmux_conf_theme_colour_secondary="#bf616a"   # Nord red/pink
+# tmux_conf_theme_colour_accent="#a3be8c"      # Nord green
+
+# Production/Warning - Red/Orange theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#bf616a"     # Nord red
+# tmux_conf_theme_colour_secondary="#d08770"   # Nord orange
+# tmux_conf_theme_colour_accent="#ebcb8b"      # Nord yellow
+
+# Development - Green/Teal theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#8fbcbb"     # Nord teal
+# tmux_conf_theme_colour_secondary="#88c0d0"   # Nord cyan
+# tmux_conf_theme_colour_accent="#a3be8c"      # Nord green
+
+# Dracula theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#bd93f9"     # Dracula purple
+# tmux_conf_theme_colour_secondary="#ff79c6"   # Dracula pink
+# tmux_conf_theme_colour_accent="#50fa7b"      # Dracula green
+
+# Tokyo Night theme (uncomment to use)
+tmux_conf_theme_colour_primary="#7aa2f7"     # Tokyo Night blue
+tmux_conf_theme_colour_secondary="#bb9af7"   # Tokyo Night purple
+tmux_conf_theme_colour_accent="#9ece6a"      # Tokyo Night green
+
+# Catppuccin Mocha theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#89b4fa"     # Catppuccin blue
+# tmux_conf_theme_colour_secondary="#f5c2e7"   # Catppuccin pink
+# tmux_conf_theme_colour_accent="#a6e3a1"      # Catppuccin green
+
+# Gruvbox theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#fe8019"     # Gruvbox orange
+# tmux_conf_theme_colour_secondary="#fabd2f"   # Gruvbox yellow
+# tmux_conf_theme_colour_accent="#b8bb26"      # Gruvbox green
+
+# Solarized Dark theme (uncomment to use)
+# tmux_conf_theme_colour_primary="#268bd2"     # Solarized blue
+# tmux_conf_theme_colour_secondary="#2aa198"   # Solarized cyan
+# tmux_conf_theme_colour_accent="#859900"      # Solarized green
+
+# =============================================================================
+# GENERAL SETTINGS
+# =============================================================================
+
+# Increase history size
+set -g history-limit 10000
+
+# Start with mouse mode enabled (uncomment to enable)
+# set -g mouse on
+
+# =============================================================================
+# SESSION CREATION SETTINGS
+# =============================================================================
+
+# Prompt for session name when creating a new session
+# Options: true, false (default), disabled
+tmux_conf_new_session_prompt=false
+
+# =============================================================================
+# WINDOW & PANE CREATION SETTINGS
+# =============================================================================
+
+# New window retains current path
+# Options: true, false (default), disabled
+tmux_conf_new_window_retain_current_path=false
+
+# New window tries to reconnect ssh sessions
+# Options: true, false (default), disabled
+tmux_conf_new_window_reconnect_ssh=false
+
+# New pane retains current path
+# Options: true (default), false, disabled
+tmux_conf_new_pane_retain_current_path=true
+
+# New pane tries to reconnect ssh sessions
+# Options: true, false (default), disabled
+tmux_conf_new_pane_reconnect_ssh=false
+
+# =============================================================================
+# DISPLAY SETTINGS
+# =============================================================================
+
+# RGB 24-bit color support
+# Options: true, false, auto (default)
+tmux_conf_24b_colour=auto
+
+# =============================================================================
+# THEMING SETTINGS
+# =============================================================================
+
+# Enable or disable theming
+# Options: enabled (default), disabled
+tmux_conf_theme=enabled
+
+# Custom color scheme - pseudo vim-airline night own theme
+# These colors control various aspects of the tmux interface
+# Colors are modified based on hostname (see HOST-SPECIFIC COLOR CONFIGURATION above)
+tmux_conf_theme_colour_1="#282c34"                        # gui_black - middle status bar background
+tmux_conf_theme_colour_2="#282c34"                        # gui_black - inactive window bg
+tmux_conf_theme_colour_3="#484e5a"                        # light gray
+tmux_conf_theme_colour_4="$tmux_conf_theme_colour_primary"   # HOST COLOR - active window bg AND inactive window txt
+tmux_conf_theme_colour_5="$tmux_conf_theme_colour_secondary" # HOST COLOR - command bar flash
+tmux_conf_theme_colour_6="#282c34"                        # gui_black - session name text
+tmux_conf_theme_colour_7="$tmux_conf_theme_colour_primary"   # HOST COLOR - uptime text
+tmux_conf_theme_colour_8="#282c34"                        # gui_black
+tmux_conf_theme_colour_9="$tmux_conf_theme_colour_primary"   # HOST COLOR - hostname bg (important visual indicator)
+tmux_conf_theme_colour_10="#484e5a"                       # light gray - uptime bg
+tmux_conf_theme_colour_11="$tmux_conf_theme_colour_accent"   # HOST COLOR - command bar
+tmux_conf_theme_colour_12="$tmux_conf_theme_colour_primary"  # HOST COLOR - time/date
+tmux_conf_theme_colour_13="$tmux_conf_theme_colour_primary"  # HOST COLOR - username text
+tmux_conf_theme_colour_14="#282c34"                       # gui_black - hostname text
+tmux_conf_theme_colour_15="#282c34"                       # gui_black - time/date ribbon bg
+tmux_conf_theme_colour_16="#484e5a"                       # light gray - username bg
+tmux_conf_theme_colour_17="$tmux_conf_theme_colour_primary"  # HOST COLOR - hostname background
+
+# Window style
+tmux_conf_theme_window_fg="default"
+tmux_conf_theme_window_bg="default"
+
+# Highlight focused pane
+# Options: true, false (default)
+tmux_conf_theme_highlight_focused_pane=false
+
+# Focused pane colors
+tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+
+# Pane border style
+# Options: thin (default), fat
+tmux_conf_theme_pane_border_style=thin
+
+# Pane borders colors
+tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
+tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
+%if #{>=:#{version},3.2}
+tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
+%endif
+
+# Pane indicator colors (when you hit <prefix> + q)
+tmux_conf_theme_pane_indicator="$tmux_conf_theme_colour_4"
+tmux_conf_theme_pane_active_indicator="$tmux_conf_theme_colour_4"
+
+# Status line style
+tmux_conf_theme_message_fg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_bg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_message_attr="bold"
+
+# Status line command style (<prefix> : Escape)
+tmux_conf_theme_message_command_fg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_message_command_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_command_attr="bold"
+
+# Window modes style
+tmux_conf_theme_mode_fg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_mode_bg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_mode_attr="bold"
+
+# Status line style
+tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
+tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_status_attr="none"
+
+# Terminal title format
+tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
+
+# Window status style
+tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
+tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_window_status_attr="none"
+tmux_conf_theme_window_status_format="  #I  #W#{?window_zoomed_flag, ,} "
+
+# Window current status style
+tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_window_status_current_bg="$tmux_conf_theme_colour_4"
+tmux_conf_theme_window_status_current_attr="bold"
+tmux_conf_theme_window_status_current_format="  #I  #W#{?window_zoomed_flag, ,} "
+
+# Window activity status style
+tmux_conf_theme_window_status_activity_fg="default"
+tmux_conf_theme_window_status_activity_bg="default"
+tmux_conf_theme_window_status_activity_attr="underscore"
+
+# Window bell status style
+tmux_conf_theme_window_status_bell_fg="$tmux_conf_theme_colour_5"
+tmux_conf_theme_window_status_bell_bg="default"
+tmux_conf_theme_window_status_bell_attr="blink,bold"
+
+# Window last status style
+tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"
+tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_window_status_last_attr="none"
+
+# Status left/right sections separators - Powerline style
+tmux_conf_theme_left_separator_main='\uE0B0'  # 
+tmux_conf_theme_left_separator_sub='\uE0B1'   # 
+tmux_conf_theme_right_separator_main='\uE0B2' # 
+tmux_conf_theme_right_separator_sub='\uE0B3'  # 
+
+# Status left/right content
+tmux_conf_theme_status_left="  #S  #{?client_prefix,, } "
+tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized} %H:%M  %b %d  #{username}  #{hostname} "
+
+# Status left style
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_attr="bold,none,none"
+
+# Status right style
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_attr="none,none,bold"
+
+# =============================================================================
+# INDICATOR SETTINGS
+# =============================================================================
+
+# Pairing indicator
+tmux_conf_theme_pairing="⚇"                 # U+2687
+tmux_conf_theme_pairing_fg="none"
+tmux_conf_theme_pairing_bg="none"
+tmux_conf_theme_pairing_attr="none"
+
+# Prefix indicator
+tmux_conf_theme_prefix="⌨"                  # U+2328
+tmux_conf_theme_prefix_fg="none"
+tmux_conf_theme_prefix_bg="none"
+tmux_conf_theme_prefix_attr="none"
+
+# Mouse indicator
+tmux_conf_theme_mouse="↗"                   # U+2197
+tmux_conf_theme_mouse_fg="none"
+tmux_conf_theme_mouse_bg="none"
+tmux_conf_theme_mouse_attr="none"
+
+# Root indicator
+tmux_conf_theme_root="!"
+tmux_conf_theme_root_fg="none"
+tmux_conf_theme_root_bg="none"
+tmux_conf_theme_root_attr="bold,blink"
+
+# Synchronized indicator
+tmux_conf_theme_synchronized="⚏"            # U+268F
+tmux_conf_theme_synchronized_fg="none"
+tmux_conf_theme_synchronized_bg="none"
+tmux_conf_theme_synchronized_attr="none"
+
+# =============================================================================
+# BATTERY SETTINGS
+# =============================================================================
+
+# Battery bar symbols
+tmux_conf_battery_bar_symbol_full="◼"
+tmux_conf_battery_bar_symbol_empty="◻"
+
+# Battery bar length
+tmux_conf_battery_bar_length="auto"
+
+# Battery bar palette
+tmux_conf_battery_bar_palette="gradient"
+
+# Battery hbar palette
+tmux_conf_battery_hbar_palette="gradient"
+
+# Battery vbar palette
+tmux_conf_battery_vbar_palette="gradient"
+
+# Battery status symbols
+tmux_conf_battery_status_charging="↑"       # U+2191
+tmux_conf_battery_status_discharging="↓"    # U+2193
+
+# =============================================================================
+# CLOCK SETTINGS
+# =============================================================================
+
+# Clock style (when you hit <prefix> + t)
+tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
+tmux_conf_theme_clock_style="24"
+
+# =============================================================================
+# CLIPBOARD SETTINGS
+# =============================================================================
+
+# Copy to OS clipboard in copy mode
+# Options: true, false (default), disabled
+tmux_conf_copy_to_os_clipboard=true
+
+# =============================================================================
+# KEYBINDINGS - CURRENT CONFIGURATION
+# =============================================================================
+# This section documents the current keybindings for reference
+# To revert to defaults, you can comment out or remove these lines
+
+# PREFIX KEYS
+# -----------
+# Default prefix: C-b
+# Additional prefix: C-a (GNU Screen compatible)
+# To use only C-a, uncomment these lines:
+# set -gu prefix2
+# unbind C-a
+# unbind C-b
+# set -g prefix C-a
+# bind C-a send-prefix
+
+# WINDOW NAVIGATION
+# ----------------
+# C-h: previous window (non-default)
+# C-l: next window (non-default)
+# Tab: last active window (non-default)
+# To revert to defaults, uncomment:
+# unbind -r C-h
+# unbind -r C-l
+# unbind Tab
+# bind -r n next-window
+# bind -r p previous-window
+
+# PANE NAVIGATION
+# --------------
+# h, j, k, l: vim-style pane navigation (non-default)
+# >, <: swap panes (non-default)
+# To revert to defaults, uncomment:
+# unbind -r h
+# unbind -r j
+# unbind -r k
+# unbind -r l
+# unbind >
+# unbind <
+# bind Up select-pane -U
+# bind Down select-pane -D
+# bind Left select-pane -L
+# bind Right select-pane -R
+
+# PANE RESIZING
+# ------------
+# H, J, K, L: resize panes (non-default)
+# To revert to defaults, uncomment:
+# unbind -r H
+# unbind -r J
+# unbind -r K
+# unbind -r L
+# bind -r C-Up resize-pane -U 2
+# bind -r C-Down resize-pane -D 2
+# bind -r C-Left resize-pane -L 2
+# bind -r C-Right resize-pane -R 2
+
+# WINDOW SPLITTING
+# --------------
+# -: split horizontally (non-default)
+# _: split vertically (non-default)
+# To revert to defaults, uncomment:
+# unbind -
+# unbind _
+# bind '"' split-window -v
+# bind % split-window -h
+
+# OTHER KEYBINDINGS
+# ---------------
+# +: maximize pane (non-default)
+# m: toggle mouse mode (non-default)
+# e: edit configuration (non-default)
+# r: reload configuration (non-default)
+# U: urlview (non-default)
+# F: Facebook PathPicker (non-default)
+# Enter: enter copy mode (non-default)
+
+# =============================================================================
+# USER CUSTOMIZATIONS
+# =============================================================================
+# Add your custom overrides below this line
+# These will take precedence over the default settings
+
+# =============================================================================
+# CUSTOM KEYBINDINGS
+# =============================================================================
+set-option -sa terminal-overrides ',screen-256color-bce:RGB'
+set-option -sa terminal-features ',xterm-ghostty:RGB'
+set -g mouse on
+bind C-u popup -E -h 95% -w 95%  "tmux new-session -A -s remananalytics_wiki 'cd ~/work/projects/remananalytics.wiki && nvim'"
+bind C-i popup -E -h 95% -w 95%  "tmux new-session -A -s dotfiles -d '~/dotfiles' 'nvim'"
+bind C-o popup -E -h 99% -w 99%  "tmux new-session -A -s pype_dev 'cd ~/projects/personal/pype.dev'"  # need to source zsh for copier-gallery command
+# bind C-n popup -E ~/.local/bin/ta
+bind C-n display-popup -E 'ws open -a'
+bind C-k display-popup -h 95% -w 95% -d '#{pane_current_path}' 'sh -lc "ws worktree git; echo; read -r -p \"Press Enter to close...\""'
+bind C-p display-popup -E -h 60% -w 60% "tmux new-session -A -s prompt 'cd && zsh'"
+bind C-y display-popup -E -h 95% -w 95% "sh -lc 'command -v nexus-tui >/dev/null 2>&1 && exec tmux new-session -A -s nexus-tui nexus-tui; echo nexus-tui not found on PATH; read -r -p \"Press Enter to close...\"'"
+bind C-w display-popup -E -h 95% -w 95% "tmux new-session -A -s working-notes 'cd ~/work/working-notes && nvim'"
+
+# overwrite .tmux.conf binding
+# bind C-f display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+bind s display-popup -E "tmux list-sessions | sed -E 's/:.*$//' | grep -v \"^$(tmux display-message -p '#S')\$\" | fzf --reverse | xargs tmux switch-client -t"
+
+# # copier
+bind-key c-b popup -w 80% -E -d '#{pane_current_path}' "$HOME/dotfiles/scripts/.local/bin/copier-gallery"
+#
+# Session switching with Alt keys
+bind -n M-b switch-client -l  # Alt+b: switch to last session
+bind -n M-s switch-client -l  # Alt+s: switch to last session (alternative)
+
+# =============================================================================
+# MACOS SPECIFIC CONFIGURATIONS
+# =============================================================================
+# NOTE: These configurations only apply on macOS systems
+# They are safely ignored on Linux systems
+
+# MacOS clipboard integration - requires 'reattach-to-user-namespace'
+# Install with: brew install reattach-to-user-namespace
+if-shell "command -v reattach-to-user-namespace >/dev/null 2>&1 && uname | grep -q Darwin" \
+  "set -g default-command 'reattach-to-user-namespace -l \$SHELL'"
+
+# MacOS specific copy mode settings
+# DISABLED: Using native pbcopy instead
+# if-shell "command -v reattach-to-user-namespace >/dev/null 2>&1 && uname | grep -q Darwin" \
+#   "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'"
+
+# if-shell "command -v reattach-to-user-namespace >/dev/null 2>&1 && uname | grep -q Darwin" \
+#   "bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'"
+
+# Use native pbcopy on macOS (doesn't require reattach-to-user-namespace on modern macOS)
+if-shell "uname | grep -q Darwin" \
+  "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'pbcopy'"
+
+if-shell "uname | grep -q Darwin" \
+  "bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'pbcopy'"
+
+if-shell "command -v wl-copy >/dev/null 2>&1" \
+  "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'wl-copy'; bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'wl-copy'"
+
+if-shell "command -v xclip >/dev/null 2>&1" \
+  "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -i -selection clipboard'; bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xclip -i -selection clipboard'"
+
+if-shell "command -v xsel >/dev/null 2>&1" \
+  "bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xsel -i -b'; bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel 'xsel -i -b'"
+
+# MacOS mouse support improvements
+if-shell "uname | grep -q Darwin" \
+  "set -g mouse on"
+
+# MacOS Alt key handling - some terminals send different sequences
+# Add alternative bindings for common Alt key issues on macOS
+if-shell "uname | grep -q Darwin" \
+  "bind -n ß switch-client -l"  # Alt+s on some Mac keyboards produces ß
+
+# =============================================================================
+# ADDITIONAL USEFUL KEYBINDINGS
+# =============================================================================
+
+# Quick pane switching with Alt+arrow (works on both Linux and MacOS)
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Quick window switching with Shift+arrow
+bind -n S-Left previous-window
+bind -n S-Right next-window
+
+# Reload config with prefix + r (enhanced)
+bind r source-file ~/.tmux.conf \; display-message "Config reloaded!"
+
+# Example: Force Vi mode
+# set -g status-keys vi
+# set -g mode-keys vi
+
+# Example: Move status line to top
+# set -g status-position top

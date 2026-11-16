@@ -1,0 +1,1 @@
+/Users/paynen3/projects/personal/nexus/opencode/command/workspace-worktree-create.md

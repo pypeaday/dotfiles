@@ -1,0 +1,54 @@
+{
+  "mode": "offline_mcp_fixture",
+  "instructions": "Use the ordered reads and stubbed dry-runs to produce an offline simulated tool trace. Do not query a live tenant or call a dashboard write tool.",
+  "responses": [
+    {
+      "tool": "signoz_list_dashboards",
+      "request": {"limit": 50, "offset": 0},
+      "response": {
+        "data": {"dashboards": [{"id": "88888888-8888-4888-8888-888888888888", "name": "prometheus-overview-0f3a", "spec": {"display": {"name": "Prometheus Overview"}}}], "total": 1}
+      }
+    },
+    {
+      "tool": "signoz_get_dashboard",
+      "request": {"id": "88888888-8888-4888-8888-888888888888"},
+      "response": {
+        "status": "success",
+        "data": {
+          "id": "88888888-8888-4888-8888-888888888888",
+          "name": "prometheus-overview-0f3a",
+          "tags": [{"key": "source", "value": "prometheus"}],
+          "spec": {
+            "display": {"name": "Prometheus Overview", "description": "Prometheus scrape health"},
+            "variables": [],
+            "panels": {
+              "scrape-rate": {
+                "kind": "Panel",
+                "spec": {
+                  "display": {"name": "Scrape Rate"},
+                  "plugin": {"kind": "signoz/TimeSeriesPanel", "spec": {}},
+                  "queries": [
+                    {"kind": "time_series", "spec": {"name": "A", "plugin": {"kind": "signoz/PromQLQuery", "spec": {"name": "A", "query": "sum(rate(prometheus_tsdb_head_samples_appended_total[5m]))", "disabled": false, "legend": "Samples"}}}}
+                  ]
+                }
+              }
+            },
+            "layouts": [
+              {"kind": "Grid", "spec": {"display": {"title": "Scrape health"}, "items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/scrape-rate"}}]}}
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "stubbed_tools": [
+    {
+      "tool": "signoz_execute_builder_query",
+      "response": {"isError": true, "code": "UPSTREAM_ERROR", "message": "context deadline exceeded"}
+    },
+    {
+      "tool": "signoz_execute_builder_query",
+      "response": {"status": "success", "data": {"result": [{"value": 12}]}}
+    }
+  ]
+}

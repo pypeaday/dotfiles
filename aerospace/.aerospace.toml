@@ -1,0 +1,166 @@
+# AeroSpace configuration translated from i3 config
+# i3 uses Mod4 (Windows/Cmd key) as the primary modifier
+# AeroSpace uses 'cmd' for the Command key on macOS
+
+# After that, you can edit ~/.aerospace.toml to your liking
+
+# You can use it to add commands that run after login to macOS user session.
+# 'start-at-login' needs to be 'true' for 'after-login-command' to work
+# Available commands: https://nikitabobko.github.io/AeroSpace/commands
+start-at-login = true
+after-login-command = []
+
+# You can use it to add commands that run after AeroSpace startup.
+# 'after-startup-command' is run after 'after-login-command'
+# Available commands : https://nikitabobko.github.io/AeroSpace/commands
+after-startup-command = [
+  'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
+]
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+# The 'accordion-padding' specifies the size of accordion padding
+# You can set 0 to disable the padding feature
+accordion-padding = 0
+
+# Gaps configuration (similar to i3's gaps inner 20, gaps outer 10)
+[gaps]
+inner.horizontal = 20
+inner.vertical = 20
+outer.left = 4
+outer.bottom = 4
+outer.top = 4
+outer.right = 4
+
+# 'main' mode is the default mode
+[mode.main.binding]
+
+# Focus movement (i3: $mod+h/j/k/l and arrow keys)
+cmd-h = 'focus left'
+cmd-j = 'focus down'
+cmd-k = 'focus up'
+cmd-l = 'focus right'
+
+cmd-left = 'focus left'
+cmd-down = 'focus down'
+cmd-up = 'focus up'
+cmd-right = 'focus right'
+
+# Window movement (i3: $mod+Shift+h/j/k/l and arrow keys)
+cmd-shift-h = 'move left'
+cmd-shift-j = 'move down'
+cmd-shift-k = 'move up'
+cmd-shift-l = 'move right'
+
+cmd-shift-left = 'move left'
+cmd-shift-down = 'move down'
+cmd-shift-up = 'move up'
+cmd-shift-right = 'move right'
+
+# Split orientation (i3: $mod+i for horizontal, $mod+v for vertical)
+# cmd-i = 'split horizontal'
+# cmd-v = 'split vertical'
+
+# Fullscreen
+cmd-shift-f = 'fullscreen'
+
+# Layout changes (i3: $mod+s stacking, $mod+w tabbed, $mod+e toggle split)
+cmd-s = 'layout v_accordion' # Stacking in i3 -> vertical accordion in AeroSpace
+cmd-w = 'layout h_accordion' # Tabbed in i3 -> horizontal accordion in AeroSpace
+cmd-e = 'layout tiles'       # Toggle split -> tiles layout
+
+# Toggle floating (i3: $mod+Shift+space)
+cmd-shift-space = 'layout floating'
+
+# Focus mode toggle between tiling/floating (i3: $mod+space)
+# Note: AeroSpace doesn't have exact equivalent, using focus cycling instead
+cmd-b = 'focus-back-and-forth'
+
+# Balance window sizes in current workspace
+cmd-shift-b = 'balance-sizes'
+
+# Focus parent (i3: $mod+a) - No direct equivalent in AeroSpace
+# Using focus cycling as alternative
+# cmd-a = 'focus dfs-prev'
+
+# Workspace switching (i3: $mod+1-9)
+cmd-1 = 'workspace 1' # Terminal
+cmd-2 = 'workspace 2' # Code Editor
+cmd-3 = 'workspace 3' # Browser (email, calendar, tabs)
+cmd-4 = 'workspace 4' # Coms (Slack, Signal, etc.)
+cmd-5 = 'workspace 5' # OBS
+cmd-6 = 'workspace 6' # Management (Notion, Outlook, etc.)
+cmd-7 = 'workspace 7' # Misc.
+cmd-8 = 'workspace 8'
+cmd-9 = 'workspace 9'
+
+# Move window to workspace (i3: $mod+Shift+1-9,0)
+cmd-shift-1 = 'move-node-to-workspace 1'
+cmd-shift-2 = 'move-node-to-workspace 2'
+cmd-shift-3 = 'move-node-to-workspace 3'
+cmd-shift-4 = 'move-node-to-workspace 4'
+cmd-shift-5 = 'move-node-to-workspace 5'
+cmd-shift-6 = 'move-node-to-workspace 6'
+cmd-shift-7 = 'move-node-to-workspace 7'
+cmd-shift-8 = 'move-node-to-workspace 8'
+cmd-shift-9 = 'move-node-to-workspace 9'
+
+# Reload config (i3: $mod+Shift+c)
+cmd-shift-c = 'reload-config'
+
+# Kill focused window (i3: $mod+Shift+q)
+cmd-shift-q = 'close'
+
+# Resize mode (i3: $mod+r)
+cmd-r = 'mode resize'
+
+# Move workspace to different monitor (i3: $mod+p)
+cmd-p = 'move-workspace-to-monitor next'
+
+# Application launchers (i3 uses rofi)
+# Note: AeroSpace doesn't have built-in launcher integration
+# You'll need to use macOS shortcuts or third-party tools like Raycast/Alfred
+# cmd-d would conflict with macOS bookmark shortcut
+
+# Workspace to monitor assignments
+# Uncomment and configure based on your monitor setup
+# NOTE: secondary is my primary monitor
+[workspace-to-monitor-force-assignment]
+1 = 'secondary'
+2 = 'secondary'
+3 = 'secondary'
+4 = 'main'      # built-in
+5 = 'main'      # built-in
+6 = 'secondary'
+7 = 'secondary'
+# 8 = 'secondary'
+# 9 = 'secondary'
+
+
+# Resize mode configuration
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+
+# Return to main mode
+enter = 'mode main'
+esc = 'mode main'
+
+# Window detection callbacks (similar to i3's assign and for_window)
+# Note: You'll need to find the correct app-id for Microsoft Teams on macOS
+# Use 'aerospace list-apps' command to find the exact app-id
+
+# Example for Microsoft Teams (you'll need to verify the actual app-id)
+# [[on-window-detected]]
+# if.app-id = 'com.microsoft.teams'
+# run = 'move-node-to-workspace 3'

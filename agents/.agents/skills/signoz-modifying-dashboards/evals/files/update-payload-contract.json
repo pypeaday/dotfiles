@@ -1,0 +1,54 @@
+{
+  "mode": "offline_mcp_fixture",
+  "instructions": "Use the ordered reads and stubbed writes to produce an offline simulated tool trace. The write endpoints are stubs; make the actual tool call so its payload can be inspected.",
+  "responses": [
+    {
+      "tool": "signoz_list_dashboards",
+      "request": {"limit": 50, "offset": 0},
+      "response": {
+        "data": {"dashboards": [{"id": "66666666-6666-4666-8666-666666666666", "name": "error-explorer-9a17", "spec": {"display": {"name": "Error Explorer"}}}], "total": 1}
+      }
+    },
+    {
+      "tool": "signoz_get_dashboard",
+      "request": {"id": "66666666-6666-4666-8666-666666666666"},
+      "response": {
+        "status": "success",
+        "data": {
+          "id": "66666666-6666-4666-8666-666666666666",
+          "name": "error-explorer-9a17",
+          "tags": [{"key": "signal", "value": "traces"}],
+          "spec": {
+            "display": {"name": "Error Explorer", "description": "Recent error traces"},
+            "variables": [],
+            "panels": {
+              "recent-errors": {
+                "kind": "Panel",
+                "spec": {
+                  "display": {"name": "Recent Errors"},
+                  "plugin": {"kind": "signoz/ListPanel", "spec": {"selectFields": [{"name": "service.name", "fieldDataType": "string", "fieldContext": "resource", "signal": "traces"}, {"name": "name", "fieldDataType": "string", "fieldContext": "span", "signal": "traces"}]}},
+                  "queries": [
+                    {"kind": "raw", "spec": {"name": "A", "plugin": {"kind": "signoz/BuilderQuery", "spec": {"name": "A", "signal": "traces", "filter": {"expression": "has_error = true"}, "selectFields": [{"name": "service.name", "fieldDataType": "string", "fieldContext": "resource", "signal": "traces"}, {"name": "name", "fieldDataType": "string", "fieldContext": "span", "signal": "traces"}], "order": [{"key": {"name": "timestamp"}, "direction": "desc"}], "limit": 10}}}}
+                  ]
+                }
+              }
+            },
+            "layouts": [
+              {"kind": "Grid", "spec": {"display": {"title": "Errors"}, "items": [{"x": 0, "y": 0, "width": 12, "height": 6, "content": {"$ref": "#/spec/panels/recent-errors"}}]}}
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "stubbed_tools": [
+    {
+      "tool": "signoz_execute_builder_query",
+      "response": {"status": "success", "data": {"result": [{"service.name": "checkout", "name": "POST /checkout"}]}}
+    },
+    {
+      "tool": "signoz_patch_dashboard",
+      "response": "dashboard patched"
+    }
+  ]
+}
